@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'reactstrap';
 
 const CampaignRow = ({ campaign }) => {
   return (
@@ -7,7 +8,7 @@ const CampaignRow = ({ campaign }) => {
       <td>{campaign.name}</td>
       <td>{campaign.status}</td>
       <td>{campaign.created_at}</td>
-      <td>button</td>
+      <td><Button color="info" href={`/campaigns/${campaign.id}`}>Details</Button></td>
     </tr>
   )
 }
