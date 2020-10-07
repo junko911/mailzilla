@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
-import ControlledEditor from './ControlledEditor'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Navbar from './Nav/Navbar'
+import Campaigns from './Campaign/Campaigns'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <ControlledEditor/>
-      </header>
+    <BrowserRouter>
+    <div className="header">
+      <Navbar/>
+      <Switch>
+        <Route path="/campaigns" component={Campaigns}/>
+      </Switch>
     </div>
+    <div className="container"></div>
+    </BrowserRouter>
   );
 }
 
