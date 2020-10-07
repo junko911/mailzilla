@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'reactstrap';
 
-const CampaignRow = ({ campaign }) => {
+const Row = ({ campaign }) => {
   return (
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{campaign.id}</th>
       <td>{campaign.name}</td>
       <td>{campaign.status}</td>
       <td>{campaign.created_at}</td>
@@ -13,4 +13,4 @@ const CampaignRow = ({ campaign }) => {
   )
 }
 
-export default CampaignRow
+export default Row

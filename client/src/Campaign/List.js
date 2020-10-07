@@ -1,12 +1,12 @@
 import React from 'react'
 import { Table } from 'reactstrap'
-import CampaignRow from './CampaignRow'
+import Row from './Row'
 import { connect } from 'react-redux'
 import { getCampaigns } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
-import CampaignDetail from './CampaignDetails'
+import Detail from './Detail'
 
-class Campaigns extends React.Component {
+class List extends React.Component {
 
   componentDidMount() {
     this.props.fetchCampaigns()
@@ -14,7 +14,7 @@ class Campaigns extends React.Component {
 
   genCampaignRows = () => {
     return this.props.campaigns.map(campaign => {
-      return <CampaignRow key={campaign.id} campaign={campaign} />
+      return <Row key={campaign.id} campaign={campaign} />
     })
   }
 
@@ -25,7 +25,7 @@ class Campaigns extends React.Component {
           <Route path='/campaigns/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
-            return <CampaignDetail campaign={foundCampaign} />
+            return <Detail campaign={foundCampaign} />
           }} />
           <Route path='/campaigns' render={() => {
             return (
@@ -62,4 +62,4 @@ const mdp = dispatch => {
   return { fetchCampaigns: () => dispatch(getCampaigns()) }
 }
 
-export default connect(msp, mdp)(Campaigns)
+export default connect(msp, mdp)(List)

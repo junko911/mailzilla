@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Nav/Navbar'
-import Campaigns from './Campaign/Campaigns'
+import List from './Campaign/List'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <Navbar />
         </div>
         <Switch>
-          <Route path="/campaigns" component={Campaigns} />
+          <Route path="/campaigns" component={List} />
         </Switch>
       </div>
     </BrowserRouter>

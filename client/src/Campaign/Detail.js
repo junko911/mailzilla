@@ -1,7 +1,6 @@
 import React from 'react'
 
-const CampaignDetail = ({ campaign }) => {
-  console.log(campaign)
+const Detail = ({ campaign }) => {
   let details
   if (campaign) {
     details = (
@@ -15,6 +14,7 @@ const CampaignDetail = ({ campaign }) => {
   } else {
     details = null
   }
+  
   return (
     <>
       {details}
@@ -22,4 +22,4 @@ const CampaignDetail = ({ campaign }) => {
   )
 }
 
-export default CampaignDetail
+export default Detail
