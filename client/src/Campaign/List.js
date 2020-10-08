@@ -6,7 +6,7 @@ import { getCampaigns } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
 import Detail from './Detail'
 import { Button } from 'reactstrap'
-import Form from './Form'
+import LayoutForm from './LayoutForm'
 
 class List extends React.Component {
 
@@ -24,7 +24,7 @@ class List extends React.Component {
     return (
       <>
         <Switch>
-          <Route exact path='/campaigns/create' component={Form} />
+          <Route exact path='/campaigns/create' component={LayoutForm} />
           <Route path='/campaigns/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
