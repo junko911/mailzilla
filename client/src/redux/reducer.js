@@ -1,7 +1,17 @@
 import { combineReducers } from 'redux'
 
 const defaultState = {
-  campaigns: []
+  campaigns: [],
+  currentUser: {}
+}
+
+function userReducer(state = defaultState.currentUser, action) {
+  switch (action.type) {
+    case "get_current_user":
+      return action.payload
+    default:
+      return state
+  }
 }
 
 function campaignsReducer(state = defaultState.campaigns, action) {
@@ -16,7 +26,8 @@ function campaignsReducer(state = defaultState.campaigns, action) {
 }
 
 const rootReducer = combineReducers({
-  campaigns: campaignsReducer
+  campaigns: campaignsReducer,
+  currentUser: userReducer
 })
 
 export default rootReducer

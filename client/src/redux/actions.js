@@ -1,3 +1,11 @@
+export const getCurrentUser = id => {
+  return function (dispatch) {
+    fetch(`http://localhost:3000/api/v1/users/${id}`)
+      .then(res => res.json())
+      .then(data => dispatch({ type: "get_current_user", payload: data }))
+  }
+}
+
 export const getCampaigns = () => {
   return function (dispatch) {
     fetch("http://localhost:3000/api/v1/campaigns")
