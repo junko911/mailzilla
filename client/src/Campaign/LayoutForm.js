@@ -1,5 +1,7 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { connect } from 'react-redux'
+import { createCampaign } from '../redux/actions'
 
 class LayoutForm extends React.Component {
   state = {
@@ -13,11 +15,16 @@ class LayoutForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  submitHandler = e => {
+    e.preventDefault()
+    this.props.submitHandler(this.state)
+  }
+
   render() {
     return (
       <>
         <h1>Create New Campaign</h1>
-        <Form>
+        <Form onSubmit={this.submitHandler}>
           <FormGroup>
             <Label for="name">Name</Label>
             <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
@@ -28,7 +35,7 @@ class LayoutForm extends React.Component {
           </FormGroup>
           <FormGroup>
             <Label for="to">To</Label>
-            <Input type="email" name="to" id="campaign-to" placeholder="example@example.com" value={this.state.to} onChange={this.changeHandler}/>
+            <Input type="email" name="to" id="campaign-to" placeholder="example@example.com" value={this.state.to} onChange={this.changeHandler} />
           </FormGroup>
           <FormGroup>
             <Label for="content">Content</Label>
@@ -41,4 +48,8 @@ class LayoutForm extends React.Component {
   }
 }
 
-export default LayoutForm
+const mdp = dispatch => {
+  return { submitHandler: () => dispatch(createCampaign()) }
+}
+
+export default connect(null, mdp)(LayoutForm)

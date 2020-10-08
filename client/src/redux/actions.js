@@ -5,3 +5,9 @@ export const getCampaigns = () => {
       .then(data => dispatch({ type: "get_campaigns", payload: data }))
   }
 }
+
+export const createCampaign = campaignObj => {
+  return function (dispatch) {
+    dispatch({ type: "create_campaign", payload: campaignObj })
+  }
+}
