@@ -4,6 +4,17 @@ class Api::V1::CampaignsController < ApplicationController
     render json: campaigns
   end
 
+  def templates
+    templates = [0, 1].map do |index|
+      {
+        template: File.read("public/templates/index_#{index}.html"),
+        title: "Index #{index}"
+      }
+    end
+
+    render json: templates
+  end
+
   def create
     campaign = Campaign.new(campaign_params)
     campaign.user = User.first

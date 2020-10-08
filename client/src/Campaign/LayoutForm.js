@@ -2,13 +2,28 @@ import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { connect } from 'react-redux'
 import { createCampaign } from '../redux/actions'
+import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg'
+import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
+import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 class LayoutForm extends React.Component {
-  state = {
-    name: "",
-    subject: "",
-    // to: "",
-    content: ""
+
+  constructor(props) {
+    super(props);
+    const html = '<p>Hey this <strong>editor</strong> rocks 😀</p>';
+    const contentBlock = htmlToDraft(html);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      const editorState = EditorState.createWithContent(contentState);
+      this.state = {
+        editorState,
+        name: "",
+        subject: "",
+        content: ""
+      };
+    }
   }
 
   changeHandler = e => {
@@ -20,7 +35,14 @@ class LayoutForm extends React.Component {
     this.props.submitHandler(this.state)
   }
 
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+    });
+  };
+
   render() {
+    const { editorState } = this.state;
     return (
       <>
         <h1>Create New Campaign</h1>
@@ -41,7 +63,19 @@ class LayoutForm extends React.Component {
             <Label for="content">Content</Label>
             <Input type="textarea" name="content" id="campaign-content" value={this.state.content} onChange={this.changeHandler} />
           </FormGroup>
-          <Button color="primary">Send</Button>
+          <div>
+            <Editor
+              editorState={editorState}
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onEditorStateChange={this.onEditorStateChange}
+            />
+            <textarea
+              disabled
+              value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+            />
+          </div>
+          <Button color="primary">Send Test to Myself</Button>
         </Form>
       </>
     )
