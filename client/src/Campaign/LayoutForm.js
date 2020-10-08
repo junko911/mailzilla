@@ -49,7 +49,7 @@ class LayoutForm extends React.Component {
 }
 
 const mdp = dispatch => {
-  return { submitHandler: () => dispatch(createCampaign()) }
+  return { submitHandler: campaignObj => dispatch(createCampaign(campaignObj)) }
 }
 
 export default connect(null, mdp)(LayoutForm)
