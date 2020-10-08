@@ -21,21 +21,13 @@ class LayoutForm extends React.Component {
 
   submitHandler = e => {
     e.preventDefault()
-    this.props.submitHandler(this.state).then(()=>{
-      console.log(this.props.redirectTo.redirectTo)
-      this.props.history.push(this.props.redirectTo.redirectTo)
+    this.props.submitHandler(this.state).then(() => {
+      this.props.history.push(this.props.redirectTo)
     })
-    // const lastId = this.props.campaigns.length > 0 ? this.props.campaigns[this.props.campaigns.length].id : null
   }
-  
+
   render() {
     const { editorState } = this.state;
-
-    // return <Redirect to="/campains/2" />;
-
-    // if(this.props.redirectTo) {
-    //   return <Redirect to={this.props.redirectTo} />;
-    // }
 
     return (
       <Switch>

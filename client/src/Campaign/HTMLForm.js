@@ -34,11 +34,16 @@ class HTMLForm extends React.Component {
 
   submitHandler = e => {
     e.preventDefault()
-    this.props.
-    (this.state.content)
+    const array = this.props.redirectTo.split('/')
+    const id = parseInt(array[array.length-1])
+    console.log(id)
+    this.props.submitHandler(id, this.state.content)
   }
 
   render() {
+    if (this.props.redirectTo){
+      console.log(this.props.redirectTo.split('/'))
+    }
     const { editorState } = this.state;
 
     return (
@@ -63,11 +68,11 @@ class HTMLForm extends React.Component {
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns }
+  return { campaigns: state.campaigns, redirectTo: state.redirectTo }
 }
 
 const mdp = dispatch => {
-  return { submitHandler: content => dispatch(updateCampaign(content)) }
+  return { submitHandler: (id, content) => dispatch(updateCampaign(id, content)) }
 }
 
 export default withRouter(connect(msp, mdp)(HTMLForm))

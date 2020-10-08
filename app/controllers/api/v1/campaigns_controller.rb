@@ -1,4 +1,6 @@
 class Api::V1::CampaignsController < ApplicationController
+  before_action :find_campaign, only: [:update, :send_test]
+
   def index
     campaigns = Campaign.all
     render json: campaigns
@@ -25,15 +27,23 @@ class Api::V1::CampaignsController < ApplicationController
     render json: campaign
   end
 
-  def send_test
-    campaign = Campaign.find(params[:id])
-    campaign.send_test
-    render json: campaign
+  def update
+    @campaign.update(campaign_params)
+    render json: @campaign
   end
 
+  def send_test
+    @campaign.send_test
+    render json: @campaign
+  end
+  
   private
-
+  
   def campaign_params
     params.require(:campaign).permit!
+  end
+  
+  def find_campaign
+    @campaign = Campaign.find(params[:id])
   end
 end

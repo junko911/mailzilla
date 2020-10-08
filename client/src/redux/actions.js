@@ -55,11 +55,11 @@ export const createCampaign = campaignObj => {
   }
 }
 
-export const updateCampaign = content => {
+export const updateCampaign = (id, content) => {
   return function (dispatch, getState) {
-    console.log(getState().campaigns)
-    const foundCampaign = getState().campaigns.find(campaign => campaign.id === 21)
+    const foundCampaign = getState().campaigns.find(campaign => campaign.id === id)
     foundCampaign.content = content
+    console.log("getState: ", getState().campaigns, "foundObj: ", foundCampaign)
     const options = {
       method: 'PATCH',
       headers: {
@@ -70,5 +70,6 @@ export const updateCampaign = content => {
         campaign: foundCampaign
       })
     }
+    fetch(`http://localhost:3000/api/v1/campaigns/${id}`, options)
   }
 }

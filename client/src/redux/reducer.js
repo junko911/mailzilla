@@ -18,7 +18,7 @@ function userReducer(state = defaultState.currentUser, action) {
 function redirectReducer(state = defaultState.redirectTo, action) {
   switch (action.type) {
     case "redirect":
-      return { redirectTo: action.payload };
+      return action.payload
     default:
       return state
   }
