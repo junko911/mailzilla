@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :campaigns
       resources :campaigns do
         member do
-          post 'send_test'
+          patch 'send_test'
         end
       end
     end
