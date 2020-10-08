@@ -8,6 +8,7 @@ import Detail from './Detail'
 import { Button } from 'reactstrap'
 import LayoutForm from './LayoutForm'
 import HTMLForm from './HTMLForm'
+import Preview from './Preview'
 
 class List extends React.Component {
 
@@ -25,6 +26,11 @@ class List extends React.Component {
     return (
       <>
         <Switch>
+          <Route exact path='/campaigns/create/:id/preview' render={({ match }) => {
+            let id = parseInt(match.params.id)
+            let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
+            return <Preview campaign={foundCampaign} />
+          }} />
           <Route exact path='/campaigns/create/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)

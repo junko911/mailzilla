@@ -15,7 +15,6 @@ export const getCampaigns = () => {
 }
 
 export const redirect = link => {
-  console.log("=== REDIRECT ACTION DISPATCHED ===");
   return { type: "redirect", payload: link };
 };
 
@@ -34,7 +33,6 @@ export const createCampaign = campaignObj => {
     return fetch("http://localhost:3000/api/v1/campaigns", options)
       .then(res => res.json())
       .then(data => {
-        console.log("created!")
         dispatch({ type: "create_campaign", payload: data })
         dispatch({ type: "redirect", payload: `/campaigns/create/${data.id}` });
         // this.props.history.push(`/campaigns/create/${data.id}`)

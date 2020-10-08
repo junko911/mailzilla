@@ -28,28 +28,21 @@ class LayoutForm extends React.Component {
 
   render() {
     const { editorState } = this.state;
-
     return (
-      <Switch>
-        <Route exact path='/campaigns/create' render={() => {
-          return (
-            <>
-              <h1>Create New Campaign</h1>
-              <Form onSubmit={this.submitHandler}>
-                <FormGroup>
-                  <Label for="name">Name</Label>
-                  <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="subject">Subject</Label>
-                  <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
-                </FormGroup>
-                <Button color="primary" >Next</Button>
-              </Form>
-            </>)
-        }} />
-      </Switch>
-    )
+      <>
+        <h1>Create New Campaign</h1>
+        <Form onSubmit={this.submitHandler}>
+          <FormGroup>
+            <Label for="name">Name</Label>
+            <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="subject">Subject</Label>
+            <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
+          </FormGroup>
+          <Button color="primary" >Next</Button>
+        </Form>
+      </>)
   }
 }
 
