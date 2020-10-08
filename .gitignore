@@ -17,6 +17,7 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
+.env
 
 # Ignore uploaded files in development.
 /storage/*
@@ -25,6 +26,5 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-sendgrid.env
 
 /client/node_modules

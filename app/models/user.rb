@@ -1,2 +1,2 @@
-class Api::V1::User < ApplicationRecord
+class User < ApplicationRecord
 end
