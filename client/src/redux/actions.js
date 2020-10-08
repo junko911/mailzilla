@@ -14,7 +14,12 @@ export const getCampaigns = () => {
   }
 }
 
-export const createCampaign = ({ name, subject, content }) => {
+export const redirect = link => {
+  console.log("=== REDIRECT ACTION DISPATCHED ===");
+  return { type: "redirect", payload: link };
+};
+
+export const createCampaign = campaignObj => {
   return function (dispatch) {
     const options = {
       method: 'POST',
@@ -23,17 +28,16 @@ export const createCampaign = ({ name, subject, content }) => {
         'Accepts': 'application/json'
       },
       body: JSON.stringify({
-        campaign: {
-          name: name,
-          subject: subject,
-          content: content
-        }
+        campaign: campaignObj
       })
     }
-    fetch("http://localhost:3000/api/v1/campaigns", options)
+    return fetch("http://localhost:3000/api/v1/campaigns", options)
       .then(res => res.json())
       .then(data => {
+        console.log("created!")
         dispatch({ type: "create_campaign", payload: data })
+        dispatch({ type: "redirect", payload: `/campaigns/create/${data.id}` });
+        // this.props.history.push(`/campaigns/create/${data.id}`)
         // const innerOptions = {
         //   method: 'PATCH',
         //   headers: {
@@ -51,3 +55,20 @@ export const createCampaign = ({ name, subject, content }) => {
   }
 }
 
+export const updateCampaign = content => {
+  return function (dispatch, getState) {
+    console.log(getState().campaigns)
+    const foundCampaign = getState().campaigns.find(campaign => campaign.id === 21)
+    foundCampaign.content = content
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify({
+        campaign: foundCampaign
+      })
+    }
+  }
+}

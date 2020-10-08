@@ -3,27 +3,16 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { connect } from 'react-redux'
 import { createCampaign } from '../redux/actions'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
-import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
 import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
 class LayoutForm extends React.Component {
 
-  constructor(props) {
-    super(props);
-    const html = '<p>Hey this <strong>editor</strong> rocks 😀</p>';
-    const contentBlock = htmlToDraft(html);
-    if (contentBlock) {
-      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-      const editorState = EditorState.createWithContent(contentState);
-      this.state = {
-        editorState,
-        name: "",
-        subject: "",
-        content: html
-      };
-    }
+  state = {
+    name: "",
+    subject: "",
   }
 
   changeHandler = e => {
@@ -32,51 +21,52 @@ class LayoutForm extends React.Component {
 
   submitHandler = e => {
     e.preventDefault()
-    this.props.submitHandler(this.state)
+    this.props.submitHandler(this.state).then(()=>{
+      console.log(this.props.redirectTo.redirectTo)
+      this.props.history.push(this.props.redirectTo.redirectTo)
+    })
+    // const lastId = this.props.campaigns.length > 0 ? this.props.campaigns[this.props.campaigns.length].id : null
   }
-
-  onEditorStateChange = (editorState) => {
-    this.setState({
-      editorState,
-    }, () => {
-      this.setState({ content: draftToHtml(convertToRaw(editorState.getCurrentContent())) })
-    });
-  };
-
+  
   render() {
     const { editorState } = this.state;
+
+    // return <Redirect to="/campains/2" />;
+
+    // if(this.props.redirectTo) {
+    //   return <Redirect to={this.props.redirectTo} />;
+    // }
+
     return (
-      <>
-        <h1>Create New Campaign</h1>
-        <Form onSubmit={this.submitHandler}>
-          <FormGroup>
-            <Label for="name">Name</Label>
-            <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="subject">Subject</Label>
-            <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="content">Content</Label>
-            <div style={{ minHeight: "500px", border: "1px solid #ced4da" }}>
-              <Editor
-                editorState={editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.onEditorStateChange}
-              />
-            </div>
-          </FormGroup>
-          <Button color="primary">Next</Button>
-        </Form>
-      </>
+      <Switch>
+        <Route exact path='/campaigns/create' render={() => {
+          return (
+            <>
+              <h1>Create New Campaign</h1>
+              <Form onSubmit={this.submitHandler}>
+                <FormGroup>
+                  <Label for="name">Name</Label>
+                  <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="subject">Subject</Label>
+                  <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
+                </FormGroup>
+                <Button color="primary" >Next</Button>
+              </Form>
+            </>)
+        }} />
+      </Switch>
     )
   }
+}
+
+const msp = state => {
+  return { campaigns: state.campaigns, redirectTo: state.redirectTo }
 }
 
 const mdp = dispatch => {
   return { submitHandler: campaignObj => dispatch(createCampaign(campaignObj)) }
 }
 
-export default connect(null, mdp)(LayoutForm)
+export default withRouter(connect(msp, mdp)(LayoutForm))

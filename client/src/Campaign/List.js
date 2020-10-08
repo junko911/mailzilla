@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import Detail from './Detail'
 import { Button } from 'reactstrap'
 import LayoutForm from './LayoutForm'
+import HTMLForm from './HTMLForm'
 
 class List extends React.Component {
 
@@ -24,6 +25,11 @@ class List extends React.Component {
     return (
       <>
         <Switch>
+          <Route exact path='/campaigns/create/:id' render={({ match }) => {
+            let id = parseInt(match.params.id)
+            let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
+            return <HTMLForm campaign={foundCampaign} />
+          }} />
           <Route exact path='/campaigns/create' component={LayoutForm} />
           <Route path='/campaigns/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
