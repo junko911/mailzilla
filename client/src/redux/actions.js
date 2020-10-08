@@ -14,7 +14,7 @@ export const getCampaigns = () => {
   }
 }
 
-export const createCampaign = campaignObj => {
+export const createCampaign = ({ name, subject, content }) => {
   return function (dispatch) {
     const options = {
       method: 'POST',
@@ -23,26 +23,30 @@ export const createCampaign = campaignObj => {
         'Accepts': 'application/json'
       },
       body: JSON.stringify({
-        campaign: campaignObj
+        campaign: {
+          name: name,
+          subject: subject,
+          content: content
+        }
       })
     }
     fetch("http://localhost:3000/api/v1/campaigns", options)
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "create_campaign", payload: data })
-        const innerOptions = {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accepts': 'application/json'
-          },
-          body: JSON.stringify({
-            status: 2
-          })
-        }
-        fetch(`http://localhost:3000/api/v1/campaigns/${data.id}/send_test`, innerOptions)
-          .then(res => res.json())
-          .then(data => console.log("sent!"))
+        // const innerOptions = {
+        //   method: 'PATCH',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Accepts': 'application/json'
+        //   },
+        //   body: JSON.stringify({
+        //     status: 2
+        //   })
+        // }
+        // fetch(`http://localhost:3000/api/v1/campaigns/${data.id}/send_test`, innerOptions)
+        //   .then(res => res.json())
+        //   .then(data => console.log("sent!"))
       })
   }
 }
