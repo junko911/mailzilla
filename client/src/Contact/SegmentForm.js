@@ -1,9 +1,15 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import { FormGroup, Label, Input } from 'reactstrap'
 
 const SegmentForm = () => {
   return (
-    <h1>Segment form</h1>
+    <FormGroup>
+      <Input
+        type="search"
+        name="segment"
+        placeholder="Segment name"
+      />
+    </FormGroup>
   )
 }
 
