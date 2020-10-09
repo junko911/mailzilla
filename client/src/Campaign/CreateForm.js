@@ -6,7 +6,7 @@ import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { withRouter } from 'react-router-dom'
 import Templates from './Templates'
 
-class LayoutForm extends React.Component {
+class CreateForm extends React.Component {
 
   state = {
     name: "",
@@ -59,4 +59,4 @@ const mdp = dispatch => {
   return { submitHandler: campaignObj => dispatch(createCampaign(campaignObj)) }
 }
 
-export default withRouter(connect(msp, mdp)(LayoutForm))
+export default withRouter(connect(msp, mdp)(CreateForm))

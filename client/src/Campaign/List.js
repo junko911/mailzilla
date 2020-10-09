@@ -6,8 +6,8 @@ import { getCampaigns, getTemplates } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
 import Detail from './Detail'
 import { Button } from 'reactstrap'
-import LayoutForm from './LayoutForm'
-import HTMLForm from './HTMLForm'
+import CreateForm from './CreateForm'
+import EditForm from './EditForm'
 import Preview from './Preview'
 
 class List extends React.Component {
@@ -35,11 +35,11 @@ class List extends React.Component {
             if(this.props.campaigns.length > 0) {
               let id = parseInt(match.params.id)
               let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
-              return <HTMLForm campaign={foundCampaign} />
+              return <EditForm campaign={foundCampaign} />
             }
             return <div>Loading...</div>
           }} />
-          <Route exact path='/campaigns/create' component={LayoutForm} />
+          <Route exact path='/campaigns/create' component={CreateForm} />
           <Route path='/campaigns/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)

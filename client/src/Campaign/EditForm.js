@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { updateCampaign } from '../redux/actions'
 
-class HTMLForm extends React.Component {
+class EditForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -77,4 +77,4 @@ const mdp = dispatch => {
   return { submitHandler: (id, content) => dispatch(updateCampaign(id, content)) }
 }
 
-export default withRouter(connect(msp, mdp)(HTMLForm))
+export default withRouter(connect(msp, mdp)(EditForm))
