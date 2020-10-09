@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_023138) do
     t.string "subject"
     t.string "from"
     t.text "content"
+    t.integer "template_id"
     t.bigint "segment_id"
     t.bigint "user_id"
     t.index ["segment_id"], name: "index_campaigns_on_segment_id"

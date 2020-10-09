@@ -11,7 +11,7 @@ class LayoutForm extends React.Component {
   state = {
     name: "",
     subject: "",
-    selectedTemplate: {}
+    template_id: 0
   }
 
   changeHandler = e => {
@@ -27,7 +27,7 @@ class LayoutForm extends React.Component {
 
   selectHanlder = e => {
     const foundTemplate = this.props.templates.find(template => template.id === parseInt(e.target.id))
-    this.setState({ selectedTemplate: foundTemplate })
+    this.setState({ template_id: foundTemplate.id })
   }
 
   render() {
@@ -43,7 +43,7 @@ class LayoutForm extends React.Component {
             <Label for="subject">Subject</Label>
             <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
           </FormGroup>
-          <Templates templates={this.props.templates} selectedTemplate={this.state.selectedTemplate} selectHanlder={this.selectHanlder} />
+          <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
           <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
         </Form>
       </>)

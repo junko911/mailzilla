@@ -8,7 +8,7 @@ const Templates = props => {
         <Col xs="3" key={template.id}>
           <div
             style={{
-              border: props.selectedTemplate.id === template.id ? "1px solid red" : "1px solid #ced4da",
+              border: props.templateId === template.id ? "1px solid red" : "1px solid #ced4da",
               height: "100px",
               textAlign: "center",
               padding: "28px"
