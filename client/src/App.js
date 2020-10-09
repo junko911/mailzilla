@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Nav/Navbar'
 import CampaignList from './Campaign/List'
 import ContactsList from './Contact/List'
+import Home from './Home'
 import { getCurrentUser } from './redux/actions';
 import { connect } from 'react-redux'
 
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/campaigns" component={CampaignList} />
             <Route path="/contacts" component={ContactsList} />
+            <Route path="/" component={Home} />
           </Switch>
         </div>
       </BrowserRouter>

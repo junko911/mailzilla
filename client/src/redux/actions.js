@@ -68,3 +68,11 @@ export const getTemplates = () => {
       .then(data => dispatch({ type: "get_templates", payload: data }))
   }
 }
+
+export const getContacts = () => {
+  return function (dispatch) {
+    fetch("http://localhost:3000/api/v1/contacts")
+      .then(res => res.json())
+      .then(data => dispatch({ type: "get_contacts", payload: data }))
+  }
+}
