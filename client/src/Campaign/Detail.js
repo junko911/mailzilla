@@ -1,4 +1,5 @@
 import React from 'react'
+import Preview from './Preview'
 
 const Detail = ({ campaign }) => {
   return (
@@ -8,6 +9,7 @@ const Detail = ({ campaign }) => {
         <h4>Name: {campaign.name}</h4>
         <h4>Status: {campaign.status}</h4>
         <h4>Created At: {campaign.created_at}</h4>
+        <Preview id={campaign.id} />
       </> : null}
     </>
   )

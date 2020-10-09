@@ -19,7 +19,6 @@ const Preview = props => {
     }
     fetch(`http://localhost:3000/api/v1/campaigns/${props.id}/send_test`, options)
       .then(() => {
-        console.log("sent!")
         props.history.push(`/campaigns/${props.id}`)
       })
   }
@@ -45,10 +44,20 @@ const Preview = props => {
                       <div>
                         <Button
                           color="secondary"
-                          style={{ marginRight: "10px" }}
+                          className="preview-btn"
+                          style={{ display: "block" }}
+                        >Edit</Button>
+                        <Button
+                          color="success"
                           onClick={clickHandler}
+                          className="preview-btn"
+                          style={{ display: "block" }}
                         >Send Test to Myself</Button>
-                        <Button color="primary">Send to Segment</Button>
+                        <Button
+                          color="primary"
+                          className="preview-btn"
+                          style={{ display: "block" }}
+                        >Send to Segment</Button>
                       </div>
                     </Col>
                   </Row>

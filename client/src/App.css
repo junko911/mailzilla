@@ -11,3 +11,7 @@ body {
 .header {
   border: 1px solid black;
 }
+
+.preview-btn {
+  margin-bottom: 10px;
+}
