@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Nav/Navbar'
-import List from './Campaign/List'
+import CampaignList from './Campaign/List'
+import ContactsList from './Contact/List'
 import { getCurrentUser } from './redux/actions';
 import { connect } from 'react-redux'
 
@@ -20,7 +21,8 @@ class App extends React.Component {
             <Navbar />
           </div>
           <Switch>
-            <Route path="/campaigns" component={List} />
+            <Route path="/campaigns" component={CampaignList} />
+            <Route path="/contacts" component={ContactsList} />
           </Switch>
         </div>
       </BrowserRouter>

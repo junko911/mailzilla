@@ -12,6 +12,9 @@ const NavBar = () => {
         <NavItem>
           <NavLink href="/campaigns">Campaigns</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink href="/contacts">Contacts</NavLink>
+        </NavItem>
       </Nav>
     </div>
   )
