@@ -28,42 +28,42 @@ const Preview = props => {
       {
         foundCampaign ?
           <>
-            {
-              foundCampaign.content ?
-                <>
-                  <h1>Preview</h1>
-                  <h4>Subject: {foundCampaign.subject}</h4>
-                  <Row>
-                    <Col xs="8">
+            <h1>Preview</h1>
+            <>
+              <h4>Subject: {foundCampaign.subject}</h4>
+              <Row>
+                <Col xs="8">
+                  {
+                    foundCampaign.content ?
                       <div
                         dangerouslySetInnerHTML={{ __html: foundCampaign.content }}
                         style={{ border: "1px solid #ced4da", minHeight: "500px" }}
                       ></div>
-                    </Col>
-                    <Col xs="4">
-                      <div>
-                        <Button
-                          color="secondary"
-                          className="preview-btn"
-                          style={{ display: "block" }}
-                        >Edit</Button>
-                        <Button
-                          color="success"
-                          onClick={clickHandler}
-                          className="preview-btn"
-                          style={{ display: "block" }}
-                        >Send Test to Myself</Button>
-                        <Button
-                          color="primary"
-                          className="preview-btn"
-                          style={{ display: "block" }}
-                        >Send to Segment</Button>
-                      </div>
-                    </Col>
-                  </Row>
-                </>
-                : <div>No content</div>
-            }
+                      : <div style={{ border: "1px solid #ced4da", minHeight: "500px" }}>No content</div>
+                  }
+                </Col>
+                <Col xs="4">
+                  <div>
+                    <Button
+                      color="secondary"
+                      className="preview-btn"
+                      style={{ display: "block" }}
+                    >Edit</Button>
+                    <Button
+                      color="success"
+                      onClick={clickHandler}
+                      className="preview-btn"
+                      style={{ display: "block" }}
+                    >Send Test to Myself</Button>
+                    <Button
+                      color="primary"
+                      className="preview-btn"
+                      style={{ display: "block" }}
+                    >Send to Segment</Button>
+                  </div>
+                </Col>
+              </Row>
+            </>
           </>
           : null
       }
