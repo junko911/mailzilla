@@ -3,8 +3,8 @@ import { combineReducers } from 'redux'
 const defaultState = {
   campaigns: [],
   currentUser: {},
-  // newCampaign: {},
-  redirectTo: null
+  redirectTo: null,
+  templates: []
 }
 
 function userReducer(state = defaultState.currentUser, action) {
@@ -38,20 +38,20 @@ function campaignsReducer(state = defaultState.campaigns, action) {
   }
 }
 
-// function newCampaignReducer(state = defaultState.newCampaign, action) {
-//   switch (action.type) {
-//     case "update_campaign":
-//       return action.payload
-//     default:
-//       return state
-//   }
-// }
+function templatesReducer(state=defaultState.templates, action) {
+  switch (action.type) {
+    case "get_templates":
+      return action.payload
+    default:
+      return state
+  }
+}
 
 const rootReducer = combineReducers({
   campaigns: campaignsReducer,
   currentUser: userReducer,
-  // newCampaign: newCampaignReducer,
-  redirectTo: redirectReducer
+  redirectTo: redirectReducer,
+  templates: templatesReducer
 })
 
 export default rootReducer

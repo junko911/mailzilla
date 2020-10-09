@@ -36,6 +36,7 @@ class LayoutForm extends React.Component {
             <Label for="subject">Subject</Label>
             <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
           </FormGroup>
+          <div>Templates:</div>
           <Button color="primary" >Next</Button>
         </Form>
       </>)

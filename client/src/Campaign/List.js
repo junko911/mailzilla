@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from 'reactstrap'
 import Row from './Row'
 import { connect } from 'react-redux'
-import { getCampaigns } from '../redux/actions'
+import { getCampaigns, getTemplates } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
 import Detail from './Detail'
 import { Button } from 'reactstrap'
@@ -14,6 +14,7 @@ class List extends React.Component {
 
   componentDidMount() {
     this.props.fetchCampaigns()
+    this.props.fetchTemplates()
   }
 
   genCampaignRows = () => {
@@ -74,7 +75,7 @@ const msp = state => {
 }
 
 const mdp = dispatch => {
-  return { fetchCampaigns: () => dispatch(getCampaigns()) }
+  return { fetchCampaigns: () => dispatch(getCampaigns()), fetchTemplates: () => dispatch(getTemplates()) }
 }
 
 export default connect(msp, mdp)(List)
