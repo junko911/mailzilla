@@ -9,18 +9,11 @@ import { withRouter } from 'react-router-dom'
 import { updateCampaign } from '../redux/actions'
 
 class HTMLForm extends React.Component {
-
   constructor(props) {
     super(props)
-    const html = '<p>Hey this <strong>editor</strong> rocks 😀</p>';
-    const contentBlock = htmlToDraft(html);
-    if (contentBlock) {
-      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-      const editorState = EditorState.createWithContent(contentState);
-      this.state = {
-        editorState,
-        content: html
-      };
+    this.state = {
+      editorState: null,
+      content: ""
     }
   }
 
@@ -40,9 +33,14 @@ class HTMLForm extends React.Component {
     })
   }
 
-  render() {
-    const { editorState } = this.state;
+  componentDidMount() {
+    const contentBlock = htmlToDraft(this.props.campaign.content)
+    const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
+    const editorState = EditorState.createWithContent(contentState)
+    this.setState({ editorState })
+  }
 
+  render() {
     return (
       <>
         <h1>Content</h1>
@@ -52,7 +50,7 @@ class HTMLForm extends React.Component {
               <FormGroup>
                 <div style={{ minHeight: "500px", border: "1px solid #ced4da" }}>
                   <Editor
-                    editorState={editorState}
+                    editorState={this.state.editorState}
                     wrapperClassName="demo-wrapper"
                     editorClassName="demo-editor"
                     onEditorStateChange={this.onEditorStateChange}
@@ -67,6 +65,7 @@ class HTMLForm extends React.Component {
         </Form>
       </>
     )
+
   }
 }
 

@@ -27,14 +27,17 @@ class List extends React.Component {
     return (
       <>
         <Switch>
-          <Route exact path='/campaigns/edit/:id/preview' render={({ match }) => {
+          <Route exact path='/campaigns/:id/preview' render={({ match }) => {
             let id = parseInt(match.params.id)
             return <Preview id={id} />
           }} />
-          <Route exact path='/campaigns/edit/:id' render={({ match }) => {
-            let id = parseInt(match.params.id)
-            let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
-            return <HTMLForm campaign={foundCampaign} templates={this.props.templates} />
+          <Route exact path='/campaigns/:id/edit' render={({ match }) => {
+            if(this.props.campaigns.length > 0) {
+              let id = parseInt(match.params.id)
+              let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
+              return <HTMLForm campaign={foundCampaign} />
+            }
+            return <div>Loading...</div>
           }} />
           <Route exact path='/campaigns/create' component={LayoutForm} />
           <Route path='/campaigns/:id' render={({ match }) => {

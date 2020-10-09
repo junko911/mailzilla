@@ -47,7 +47,7 @@ const Preview = props => {
                     <Button
                       color="secondary"
                       className="redirect-btn"
-                      href={`/campaigns/edit/${foundCampaign.id}`}
+                      href={`/campaigns/${foundCampaign.id}/edit`}
                     >Edit</Button>
                     <Button
                       color="success"

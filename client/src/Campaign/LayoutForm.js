@@ -46,7 +46,8 @@ class LayoutForm extends React.Component {
           <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
           <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
         </Form>
-      </>)
+      </>
+    )
   }
 }
 

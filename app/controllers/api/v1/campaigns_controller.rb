@@ -24,6 +24,7 @@ class Api::V1::CampaignsController < ApplicationController
     campaign.segment = Segment.first
     campaign.from = User.first.email
     campaign.status = 0
+    campaign.content = File.read("public/templates/index_#{campaign.template_id}.html")
     campaign.save
     render json: campaign
   end
