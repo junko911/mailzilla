@@ -34,7 +34,7 @@ class List extends React.Component {
           <Route exact path='/campaigns/edit/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
-            return <HTMLForm campaign={foundCampaign} />
+            return <HTMLForm campaign={foundCampaign} templates={this.props.templates} />
           }} />
           <Route exact path='/campaigns/create' component={LayoutForm} />
           <Route path='/campaigns/:id' render={({ match }) => {
@@ -71,7 +71,7 @@ class List extends React.Component {
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns }
+  return { campaigns: state.campaigns, templates: state.templates }
 }
 
 const mdp = dispatch => {

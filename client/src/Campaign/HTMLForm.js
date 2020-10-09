@@ -11,7 +11,7 @@ import { updateCampaign } from '../redux/actions'
 class HTMLForm extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     const html = '<p>Hey this <strong>editor</strong> rocks 😀</p>';
     const contentBlock = htmlToDraft(html);
     if (contentBlock) {
@@ -71,7 +71,7 @@ class HTMLForm extends React.Component {
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns, redirectTo: state.redirectTo }
+  return { redirectTo: state.redirectTo }
 }
 
 const mdp = dispatch => {
