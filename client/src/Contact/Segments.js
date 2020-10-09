@@ -1,8 +1,12 @@
-import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import React, { useState } from 'react'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import SegmentForm from './SegmentForm'
 
 const Segments = props => {
-  console.log(props.segments)
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
 
   const genSegmentButton = () => {
     return props.segments.map(segment => {
@@ -13,7 +17,18 @@ const Segments = props => {
   return (
     <>
       <h1>Segments</h1>
+      <Button color="primary" onClick={toggle}>+</Button>
       {genSegmentButton()}
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Find or Create Segment</ModalHeader>
+        <ModalBody>
+          <SegmentForm />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>Do Something</Button>
+          <Button color="secondary" onClick={toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
     </>
   )
 }
