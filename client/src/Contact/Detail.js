@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
-import Tag from './Tag'
+import Segments from './Segments'
 
 const Detail = ({ contact }) => {
   return (
@@ -15,7 +15,7 @@ const Detail = ({ contact }) => {
               <h4>Created At: {contact.created_at}</h4>
             </Col>
             <Col xs="4">
-              <Tag />
+              <Segments segments={contact.segments}/>
             </Col>
           </Row>
         </>
