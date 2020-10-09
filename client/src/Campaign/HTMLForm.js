@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup } from 'reactstrap'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
@@ -34,16 +34,13 @@ class HTMLForm extends React.Component {
 
   submitHandler = e => {
     e.preventDefault()
-    const array = this.props.redirectTo.split('/')
-    const id = parseInt(array[array.length-1])
-    console.log(id)
-    this.props.submitHandler(id, this.state.content)
+    const id = this.props.campaign.id
+    this.props.submitHandler(id, this.state.content).then(() => {
+      this.props.history.push(this.props.redirectTo)
+    })
   }
 
   render() {
-    if (this.props.redirectTo){
-      console.log(this.props.redirectTo.split('/'))
-    }
     const { editorState } = this.state;
 
     return (

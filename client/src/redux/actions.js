@@ -34,7 +34,7 @@ export const createCampaign = campaignObj => {
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "create_campaign", payload: data })
-        dispatch({ type: "redirect", payload: `/campaigns/create/${data.id}` });
+        dispatch({ type: "redirect", payload: `/campaigns/edit/${data.id}` });
         // this.props.history.push(`/campaigns/create/${data.id}`)
         // const innerOptions = {
         //   method: 'PATCH',
@@ -57,7 +57,6 @@ export const updateCampaign = (id, content) => {
   return function (dispatch, getState) {
     const foundCampaign = getState().campaigns.find(campaign => campaign.id === id)
     foundCampaign.content = content
-    console.log("getState: ", getState().campaigns, "foundObj: ", foundCampaign)
     const options = {
       method: 'PATCH',
       headers: {
@@ -68,6 +67,10 @@ export const updateCampaign = (id, content) => {
         campaign: foundCampaign
       })
     }
-    fetch(`http://localhost:3000/api/v1/campaigns/${id}`, options)
+    return fetch(`http://localhost:3000/api/v1/campaigns/${id}`, options)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "redirect", payload: `/campaigns/edit/${data.id}/preview` });
+      })
   }
 }

@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 const defaultState = {
   campaigns: [],
   currentUser: {},
+  // newCampaign: {},
   redirectTo: null
 }
 
@@ -30,14 +31,26 @@ function campaignsReducer(state = defaultState.campaigns, action) {
       return action.payload
     case "create_campaign":
       return [...state, action.payload]
+    case "update_campaign":
+      return state
     default:
       return state
   }
 }
 
+// function newCampaignReducer(state = defaultState.newCampaign, action) {
+//   switch (action.type) {
+//     case "update_campaign":
+//       return action.payload
+//     default:
+//       return state
+//   }
+// }
+
 const rootReducer = combineReducers({
   campaigns: campaignsReducer,
   currentUser: userReducer,
+  // newCampaign: newCampaignReducer,
   redirectTo: redirectReducer
 })
 

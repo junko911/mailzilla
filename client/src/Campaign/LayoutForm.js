@@ -2,11 +2,8 @@ import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { connect } from 'react-redux'
 import { createCampaign } from '../redux/actions'
-import { EditorState, convertToRaw, ContentState } from 'draft-js'
-import draftToHtml from 'draftjs-to-html'
-import htmlToDraft from 'html-to-draftjs'
 import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class LayoutForm extends React.Component {
 
@@ -27,7 +24,6 @@ class LayoutForm extends React.Component {
   }
 
   render() {
-    const { editorState } = this.state;
     return (
       <>
         <h1>Create New Campaign</h1>
