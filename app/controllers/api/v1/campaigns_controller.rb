@@ -7,10 +7,11 @@ class Api::V1::CampaignsController < ApplicationController
   end
 
   def templates
-    templates = [0, 1].map do |index|
+    templates = [1, 2].map do |index|
       {
         template: File.read("public/templates/index_#{index}.html"),
-        title: "Index #{index}"
+        title: "Template #{index}",
+        id: index
       }
     end
 

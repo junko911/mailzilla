@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { createCampaign } from '../redux/actions'
 import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { withRouter } from 'react-router-dom'
+import Templates from './Templates'
 
 class LayoutForm extends React.Component {
 
   state = {
     name: "",
     subject: "",
+    selectedTemplate: {}
   }
 
   changeHandler = e => {
@@ -21,6 +23,11 @@ class LayoutForm extends React.Component {
     this.props.submitHandler(this.state).then(() => {
       this.props.history.push(this.props.redirectTo)
     })
+  }
+
+  selectHanlder = e => {
+    const foundTemplate = this.props.templates.find(template => template.id === parseInt(e.target.id))
+    this.setState({ selectedTemplate: foundTemplate })
   }
 
   render() {
@@ -36,15 +43,15 @@ class LayoutForm extends React.Component {
             <Label for="subject">Subject</Label>
             <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
           </FormGroup>
-          <div>Templates:</div>
-          <Button color="primary" >Next</Button>
+          <Templates templates={this.props.templates} selectedTemplate={this.state.selectedTemplate} selectHanlder={this.selectHanlder} />
+          <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
         </Form>
       </>)
   }
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns, redirectTo: state.redirectTo }
+  return { campaigns: state.campaigns, redirectTo: state.redirectTo, templates: state.templates }
 }
 
 const mdp = dispatch => {
