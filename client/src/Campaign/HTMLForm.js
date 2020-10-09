@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup } from 'reactstrap'
+import { Row, Col, Button, Form, FormGroup } from 'reactstrap'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
@@ -47,17 +47,23 @@ class HTMLForm extends React.Component {
       <>
         <h1>Content</h1>
         <Form onSubmit={this.submitHandler}>
-          <FormGroup>
-            <div style={{ minHeight: "500px", border: "1px solid #ced4da" }}>
-              <Editor
-                editorState={editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.onEditorStateChange}
-              />
-            </div>
-          </FormGroup>
-          <Button color="primary">Preview</Button>
+          <Row>
+            <Col xs="9">
+              <FormGroup>
+                <div style={{ minHeight: "500px", border: "1px solid #ced4da" }}>
+                  <Editor
+                    editorState={editorState}
+                    wrapperClassName="demo-wrapper"
+                    editorClassName="demo-editor"
+                    onEditorStateChange={this.onEditorStateChange}
+                  />
+                </div>
+              </FormGroup>
+            </Col>
+            <Col xs="3">
+              <Button color="primary" className="redirect-btn" >Preview</Button>
+            </Col>
+          </Row>
         </Form>
       </>
     )

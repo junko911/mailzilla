@@ -12,6 +12,7 @@ body {
   border: 1px solid black;
 }
 
-.preview-btn {
+.redirect-btn {
   margin-bottom: 10px;
+  width: 100%;
 }

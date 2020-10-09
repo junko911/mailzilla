@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap'
 import { withRouter } from 'react-router-dom'
 
 const Preview = props => {
@@ -32,7 +32,7 @@ const Preview = props => {
             <>
               <h4>Subject: {foundCampaign.subject}</h4>
               <Row>
-                <Col xs="8">
+                <Col xs="9">
                   {
                     foundCampaign.content ?
                       <div
@@ -42,23 +42,21 @@ const Preview = props => {
                       : <div style={{ border: "1px solid #ced4da", minHeight: "500px" }}>No content</div>
                   }
                 </Col>
-                <Col xs="4">
+                <Col xs="3">
                   <div>
                     <Button
                       color="secondary"
-                      className="preview-btn"
-                      style={{ display: "block" }}
+                      className="redirect-btn"
+                      href={`/campaigns/edit/${foundCampaign.id}`}
                     >Edit</Button>
                     <Button
                       color="success"
                       onClick={clickHandler}
-                      className="preview-btn"
-                      style={{ display: "block" }}
+                      className="redirect-btn"
                     >Send Test to Myself</Button>
                     <Button
                       color="primary"
-                      className="preview-btn"
-                      style={{ display: "block" }}
+                      className="redirect-btn"
                     >Send to Segment</Button>
                   </div>
                 </Col>
