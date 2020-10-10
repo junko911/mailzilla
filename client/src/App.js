@@ -17,10 +17,10 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
+        <div className="header">
+          <Navbar />
+        </div>
         <div className="container">
-          <div className="header">
-            <Navbar />
-          </div>
           <Switch>
             <Route path="/campaigns" component={CampaignList} />
             <Route path="/contacts" component={ContactsList} />

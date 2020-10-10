@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   Nav,
+  Navbar,
   NavItem,
   NavLink,
 } from 'reactstrap'
@@ -8,14 +9,24 @@ import {
 const NavBar = () => {
   return (
     <div className="nav-bar">
-      <Nav horizontal="center">
-        <NavItem>
-          <NavLink href="/campaigns">Campaigns</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href="/contacts">Contacts</NavLink>
-        </NavItem>
-      </Nav>
+      <Navbar
+        color="dark"
+        light
+        expand="md"
+        style={{ height: "100px" }}
+      >
+        <Nav horizontal="center" style={{ fontSize: "25px" }}>
+          <NavItem>
+            <NavLink href="/">Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/campaigns">Campaigns</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/contacts">Contacts</NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>
     </div>
   )
 }

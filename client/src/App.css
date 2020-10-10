@@ -5,11 +5,7 @@ body {
 
 .container {
   width: 80%;
-  margin: auto;
-}
-
-.header {
-  border: 1px solid black;
+  margin: 20px auto;
 }
 
 .redirect-btn {
