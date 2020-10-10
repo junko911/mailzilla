@@ -12,7 +12,7 @@ const Details = ({ contact }) => {
               <h1>Contact Details</h1>
               <h4>Name: {contact.name}</h4>
               <h4>Email: {contact.email}</h4>
-              <h4>Created At: {contact.created_at}</h4>
+              <h4>Created at: {contact.created_at}</h4>
             </Col>
             <Col xs="4">
               <Segments contact={contact} />
