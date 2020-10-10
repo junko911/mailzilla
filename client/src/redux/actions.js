@@ -77,7 +77,7 @@ export const getContacts = () => {
   }
 }
 
-export const updateContact = (contactId, segmentObj) => {
+export const addSegment = (contactId, segmentObj) => {
   return function (dispatch) {
     const options = {
       method: 'POST',

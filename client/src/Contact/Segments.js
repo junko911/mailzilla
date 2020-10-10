@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalFooter, Form, } from 'reactstrap'
 import SegmentForm from './SegmentForm'
-import { updateContact } from '../redux/actions'
+import { addSegment } from '../redux/actions'
 import { connect } from 'react-redux'
 
 const Segments = props => {
@@ -18,7 +18,7 @@ const Segments = props => {
 
   const submitHandler = e => {
     e.preventDefault()
-    props.updateContact(props.contact.id, { name: searchTerm }).then(() => {
+    props.addSegment(props.contact.id, { name: searchTerm }).then(() => {
       toggle()
     })
   }
@@ -33,9 +33,7 @@ const Segments = props => {
           <ModalHeader toggle={toggle}>Find or Create Segment</ModalHeader>
           <SegmentForm changeSearchTerm={changeSearchTerm} />
           <ModalFooter>
-            {/* <Button color="primary" onClick={toggle}>Do Something</Button> */}
             <Button color="primary">Create</Button>
-            {/* <Button color="secondary" onClick={toggle}>Cancel</Button> */}
           </ModalFooter>
         </Form>
       </Modal>
@@ -45,7 +43,7 @@ const Segments = props => {
 }
 
 const mdp = dispatch => {
-  return { updateContact: (contactId, segmentObj) => dispatch(updateContact(contactId, segmentObj)) }
+  return { addSegment: (contactId, segmentObj) => dispatch(addSegment(contactId, segmentObj)) }
 }
 
 export default connect(null, mdp)(Segments)

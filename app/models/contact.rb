@@ -6,6 +6,7 @@ class Contact < ApplicationRecord
       id: id,
       name: name,
       email: email,
+      created_at: created_at,
       segments: segments.map { |segment|
         {
           id: segment.id,
