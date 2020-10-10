@@ -1,5 +1,5 @@
 class Api::V1::CampaignsController < ApplicationController
-  before_action :find_campaign, only: [:update, :send_test]
+  before_action :find_campaign, only: [:update, :send_test, :send_to_segment]
 
   def index
     campaigns = Campaign.all
@@ -33,6 +33,11 @@ class Api::V1::CampaignsController < ApplicationController
 
   def send_test
     @campaign.send_test
+    render json: @campaign
+  end
+
+  def send_to_segment
+    @campaign.send_to_segment
     render json: @campaign
   end
   

@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'reactstrap'
 import Segments from './Segments'
 
-const Detail = ({ contact }) => {
+const Details = ({ contact }) => {
   return (
     <>
       {contact ?
@@ -24,4 +24,4 @@ const Detail = ({ contact }) => {
   )
 }
 
-export default Detail
+export default Details

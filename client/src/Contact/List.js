@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getContacts } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
 import Row from './Row'
-import Detail from './Detail'
+import Details from './Details'
 
 class List extends React.Component {
 
@@ -25,7 +25,7 @@ class List extends React.Component {
           <Route path='/contacts/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundContact = this.props.contacts.find(contact => contact.id === id)
-            return <Detail contact={foundContact} />
+            return <Details contact={foundContact} />
           }} />
           <Route path='/contacts' render={() => {
             return (

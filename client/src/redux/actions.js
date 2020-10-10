@@ -106,7 +106,7 @@ export const addSegment = (contactId, segmentObj) => {
         }
         fetch(`http://localhost:3000/api/v1/contacts/${contactId}/add_segment`, options)
           .then(res => res.json())
-          .then(data => dispatch({ type: "update_contacts", payload: data }))
+          .then(data => dispatch({ type: "update_contact", payload: data }))
       })
   }
 }
@@ -127,6 +127,21 @@ export const removeSegment = (contactId, segmentId) => {
     }
     fetch(`http://localhost:3000/api/v1/contacts/${contactId}/remove_segment`, options)
       .then(res => res.json())
-      .then(data => dispatch({ type: "update_contacts", payload: data }))
+      .then(data => dispatch({ type: "update_contact", payload: data }))
+  }
+}
+
+export const sendToSegment = campaignId => {
+  return function (dispatch) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      }
+    }
+    fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/send_to_segment`, options)
+      .then(res => res.json())
+      .then(data => dispatch({ type: "update_campaign", payload: data }))
   }
 }

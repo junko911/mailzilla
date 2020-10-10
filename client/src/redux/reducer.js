@@ -33,7 +33,8 @@ function campaignsReducer(state = defaultState.campaigns, action) {
     case "create_campaign":
       return [...state, action.payload]
     case "update_campaign":
-      return state
+      const newArray = state.filter(campaign => campaign.id !== action.payload.id)
+      return [...newArray, action.payload]
     default:
       return state
   }
@@ -52,7 +53,7 @@ function contactsReducer(state = defaultState.contacts, action) {
   switch (action.type) {
     case "get_contacts":
       return action.payload
-    case "update_contacts":
+    case "update_contact":
       const newArray = state.filter(contact => contact.id !== action.payload.id)
       return [...newArray, action.payload]
     default:

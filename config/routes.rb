@@ -9,7 +9,8 @@ Rails.application.routes.draw do
       resources :segments
       resources :campaigns do
         member do
-          patch "send_test"
+          post "send_test"
+          post "send_to_segment"
         end
         collection do
           get :templates

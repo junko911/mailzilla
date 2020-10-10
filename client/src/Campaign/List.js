@@ -4,7 +4,7 @@ import Row from './Row'
 import { connect } from 'react-redux'
 import { getCampaigns, getTemplates } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
-import Detail from './Detail'
+import Details from './Details'
 import CreateForm from './CreateForm'
 import EditForm from './EditForm'
 import Preview from './Preview'
@@ -42,7 +42,7 @@ class List extends React.Component {
           <Route path='/campaigns/:id' render={({ match }) => {
             let id = parseInt(match.params.id)
             let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
-            return <Detail campaign={foundCampaign} />
+            return <Details campaign={foundCampaign} />
           }} />
           <Route path='/campaigns' render={() => {
             return (

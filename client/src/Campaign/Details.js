@@ -1,7 +1,7 @@
 import React from 'react'
 import Preview from './Preview'
 
-const Detail = ({ campaign }) => {
+const Details = ({ campaign }) => {
   return (
     <>
       {campaign ? <>
@@ -15,4 +15,4 @@ const Detail = ({ campaign }) => {
   )
 }
 
-export default Detail
+export default Details

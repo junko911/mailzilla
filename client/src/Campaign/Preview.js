@@ -2,20 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Button } from 'reactstrap'
 import { withRouter } from 'react-router-dom'
+import { sendToSegment } from '../redux/actions'
 
 const Preview = props => {
   let foundCampaign = props.campaigns.find(campaign => campaign.id === props.id)
 
-  const clickHandler = () => {
+  const sendTest = () => {
     const options = {
-      method: 'PATCH',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accepts': 'application/json'
-      },
-      body: JSON.stringify({
-        campaign: foundCampaign
-      })
+      }
     }
     fetch(`http://localhost:3000/api/v1/campaigns/${props.id}/send_test`, options)
       .then(() => {
@@ -56,12 +54,13 @@ const Preview = props => {
                     >Edit</Button>
                     <Button
                       color="primary"
-                      onClick={clickHandler}
+                      onClick={sendTest}
                       className="redirect-btn"
                     >Send test to myself</Button>
                     <Button
                       color="danger"
                       className="redirect-btn"
+                      onClick={() => props.sendToSegment(props.id)}
                     >Send to segment</Button>
                   </div>
                 </Col>
@@ -78,4 +77,8 @@ const msp = state => {
   return { campaigns: state.campaigns }
 }
 
-export default withRouter(connect(msp)(Preview))
+const mdp = dispatch => {
+  return { sendToSegment: campaignId => dispatch(sendToSegment(campaignId)) }
+}
+
+export default withRouter(connect(msp, mdp)(Preview))
