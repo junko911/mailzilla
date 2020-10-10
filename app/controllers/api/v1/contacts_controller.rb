@@ -13,7 +13,7 @@ class Api::V1::ContactsController < ApplicationController
   
   def remove_segment
     contact = Contact.find(params[:contact_id].to_i)
-    contact.segments.find(params[:contact][:segment_id]).destroy
+    contact.segments.delete(params[:contact][:segment_id])
     render json: contact
   end
 
