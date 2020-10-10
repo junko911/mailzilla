@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :contacts
+      resources :segments
       resources :campaigns do
         member do
           patch "send_test"

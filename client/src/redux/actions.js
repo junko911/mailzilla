@@ -76,3 +76,23 @@ export const getContacts = () => {
       .then(data => dispatch({ type: "get_contacts", payload: data }))
   }
 }
+
+export const updateContact = segmentObj => {
+  return function (dispatch) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify({
+        segment: segmentObj
+      })
+    }
+    fetch("http://localhost:3000/api/v1/segments", options)
+      .then(res => res.json())
+      .then(data => {
+        
+      })
+  }
+}

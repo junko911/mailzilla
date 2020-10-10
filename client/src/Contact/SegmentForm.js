@@ -1,15 +1,20 @@
 import React from 'react'
-import { FormGroup, Label, Input } from 'reactstrap'
+import { FormGroup, Input, ModalBody, } from 'reactstrap'
 
-const SegmentForm = () => {
+const SegmentForm = props => {
+
   return (
-    <FormGroup>
-      <Input
-        type="search"
-        name="segment"
-        placeholder="Segment name"
-      />
-    </FormGroup>
+    <ModalBody>
+      <FormGroup>
+        <Input
+          type="search"
+          name="segment"
+          placeholder="Segment name"
+          onChange={e => props.changeSearchTerm(e.target.value)}
+        />
+      </FormGroup>
+    </ModalBody>
+
   )
 }
 
