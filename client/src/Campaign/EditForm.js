@@ -37,13 +37,15 @@ class EditForm extends React.Component {
     const contentBlock = htmlToDraft(this.props.campaign.content)
     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
     const editorState = EditorState.createWithContent(contentState)
-    this.setState({ editorState })
+    this.setState({ editorState, content: draftToHtml(convertToRaw(editorState.getCurrentContent())) })
   }
 
   render() {
     return (
       <>
-        <h1>Content</h1>
+        <h4>Campaign: {this.props.campaign.name}</h4>
+        <h4>Subject: {this.props.campaign.subject}</h4>
+        <h4>Content</h4>
         <Form onSubmit={this.submitHandler}>
           <Row>
             <Col xs="9">

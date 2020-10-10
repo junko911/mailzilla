@@ -47,17 +47,22 @@ const Preview = props => {
                     <Button
                       color="secondary"
                       className="redirect-btn"
+                      href={`/campaigns`}
+                    >Go back to campaigns</Button>
+                    <Button
+                      color="success"
+                      className="redirect-btn"
                       href={`/campaigns/${foundCampaign.id}/edit`}
                     >Edit</Button>
                     <Button
-                      color="success"
+                      color="primary"
                       onClick={clickHandler}
                       className="redirect-btn"
-                    >Send Test to Myself</Button>
+                    >Send test to myself</Button>
                     <Button
-                      color="primary"
+                      color="danger"
                       className="redirect-btn"
-                    >Send to Segment</Button>
+                    >Send to segment</Button>
                   </div>
                 </Col>
               </Row>
