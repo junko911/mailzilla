@@ -11,15 +11,14 @@ const Segments = props => {
   const toggle = () => setModal(!modal)
 
   const genSegmentButton = () => {
-    return props.segments.map(segment => {
+    return props.contact.segments.map(segment => {
       return <Button key={segment.id} outline color="secondary">x {segment.name}</Button>
     })
   }
 
   const submitHandler = e => {
     e.preventDefault()
-    console.log(searchTerm)
-    props.updateContact({ name: searchTerm })
+    props.updateContact(props.contact.id, { name: searchTerm })
   }
 
   return (
@@ -44,7 +43,7 @@ const Segments = props => {
 }
 
 const mdp = dispatch => {
-  return { updateContact: segmentObj => dispatch(updateContact(segmentObj)) }
+  return { updateContact: (contactId, segmentObj) => dispatch(updateContact(contactId, segmentObj)) }
 }
 
 export default connect(null, mdp)(Segments)

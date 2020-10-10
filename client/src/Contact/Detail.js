@@ -15,7 +15,7 @@ const Detail = ({ contact }) => {
               <h4>Created At: {contact.created_at}</h4>
             </Col>
             <Col xs="4">
-              <Segments segments={contact.segments}/>
+              <Segments contact={contact} />
             </Col>
           </Row>
         </>

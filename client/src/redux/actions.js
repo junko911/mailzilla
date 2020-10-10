@@ -77,7 +77,7 @@ export const getContacts = () => {
   }
 }
 
-export const updateContact = segmentObj => {
+export const updateContact = (contactId, segmentObj) => {
   return function (dispatch) {
     const options = {
       method: 'POST',
@@ -92,7 +92,20 @@ export const updateContact = segmentObj => {
     fetch("http://localhost:3000/api/v1/segments", options)
       .then(res => res.json())
       .then(data => {
-        
+        console.log(contactId)
+        const options = {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json'
+          },
+          body: JSON.stringify({
+            contact: {
+              segment: data
+            }
+          })
+        }
+        fetch(`http://localhost:3000/api/v1/contacts/${contactId}/add_segment`, options)
       })
   }
 }
