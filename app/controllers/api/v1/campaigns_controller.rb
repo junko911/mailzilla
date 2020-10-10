@@ -20,9 +20,6 @@ class Api::V1::CampaignsController < ApplicationController
 
   def create
     campaign = Campaign.new(campaign_params)
-    campaign.user = User.first
-    campaign.segment = Segment.first
-    campaign.from = User.first.email
     campaign.status = 0
     campaign.content = File.read("public/templates/index_#{campaign.template_id}.html")
     campaign.save

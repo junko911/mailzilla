@@ -11,7 +11,8 @@ class CreateForm extends React.Component {
   state = {
     name: "",
     subject: "",
-    template_id: 0
+    template_id: 0,
+    segment_id: 0
   }
 
   changeHandler = e => {
@@ -20,7 +21,15 @@ class CreateForm extends React.Component {
 
   submitHandler = e => {
     e.preventDefault()
-    this.props.submitHandler(this.state).then(() => {
+    const campaignObj = {
+      name: this.state.name,
+      subject: this.state.subject,
+      from: this.props.currentUser.email,
+      template_id: this.state.template_id,
+      segment_id: this.state.segment_id,
+      user_id: this.props.currentUser.id
+    }
+    this.props.submitHandler(campaignObj).then(() => {
       this.props.history.push(this.props.redirectTo)
     })
   }
@@ -30,8 +39,16 @@ class CreateForm extends React.Component {
     this.setState({ template_id: foundTemplate.id })
   }
 
+  dropDownHandler = e => {
+    this.setState({segment_id: parseInt(e.target.value)})
+  }
+
   genOptions = () => {
-    
+    if (this.props.currentUser) {
+      return this.props.currentUser.segments.map(segment => {
+        return <option key={segment.id} value={segment.id}>{segment.name}</option>
+      })
+    }
   }
 
   render() {
@@ -41,21 +58,18 @@ class CreateForm extends React.Component {
         <Form onSubmit={this.submitHandler}>
           <FormGroup>
             <Label for="name">Name</Label>
-            <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
+            <Input type="text" name="name" id="name" value={this.state.name} onChange={this.changeHandler} />
           </FormGroup>
           <FormGroup>
-            <Label for="exampleSelect">Select</Label>
-            <Input type="select" name="select" id="exampleSelect">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <Label for="segment">Select segment</Label>
+            <Input type="select" name="segment_id" id="segment" onChange={this.dropDownHandler}>
+              <option></option>
+              {this.genOptions()}
             </Input>
           </FormGroup>
           <FormGroup>
             <Label for="subject">Subject</Label>
-            <Input type="text" name="subject" id="campaign-subject" value={this.state.subject} onChange={this.changeHandler} />
+            <Input type="text" name="subject" id="subject" value={this.state.subject} onChange={this.changeHandler} />
           </FormGroup>
           <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
           <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
@@ -66,7 +80,7 @@ class CreateForm extends React.Component {
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns, redirectTo: state.redirectTo, templates: state.templates }
+  return { campaigns: state.campaigns, redirectTo: state.redirectTo, templates: state.templates, currentUser: state.currentUser }
 }
 
 const mdp = dispatch => {
