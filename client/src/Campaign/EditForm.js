@@ -59,7 +59,7 @@ class EditForm extends React.Component {
               </FormGroup>
             </Col>
             <Col xs="3">
-              <Button color="primary" className="redirect-btn" >Preview</Button>
+              <Button color="primary" className="redirect-btn" >Save</Button>
             </Col>
           </Row>
         </Form>

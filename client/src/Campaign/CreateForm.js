@@ -57,7 +57,7 @@ class CreateForm extends React.Component {
         <h1>Create New Campaign</h1>
         <Form onSubmit={this.submitHandler}>
           <FormGroup>
-            <Label for="name">Name</Label>
+            <Label for="name">Campaign name</Label>
             <Input type="text" name="name" id="name" value={this.state.name} onChange={this.changeHandler} />
           </FormGroup>
           <FormGroup>

@@ -56,7 +56,7 @@ export const updateCampaign = (id, content) => {
     return fetch(`http://localhost:3000/api/v1/campaigns/${id}`, options)
       .then(res => res.json())
       .then(data => {
-        dispatch({ type: "redirect", payload: `/campaigns/${data.id}/preview` });
+        dispatch({ type: "redirect", payload: `/campaigns/${data.id}` });
       })
   }
 }

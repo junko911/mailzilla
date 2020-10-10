@@ -10,8 +10,8 @@ const NavBar = () => {
   return (
     <div className="nav-bar">
       <Navbar
-        color="dark"
-        light
+        color="light"
+        dark
         expand="md"
         style={{ height: "100px" }}
       >
