@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Button } from 'reactstrap'
+import { Row, Col, Button, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { withRouter } from 'react-router-dom'
 import { sendToSegment } from '../redux/actions'
 
 const Preview = props => {
   let foundCampaign = props.campaigns.find(campaign => campaign.id === props.id)
+
+  const [modal, setModal] = useState(false)
+  const toggle = () => setModal(!modal)
 
   const sendTest = () => {
     const options = {
@@ -19,6 +22,11 @@ const Preview = props => {
       .then(() => {
         props.history.push(`/campaigns/${props.id}`)
       })
+  }
+
+  const sendToSegment = () => {
+    props.sendToSegment(props.id)
+    toggle()
   }
 
   return (
@@ -60,8 +68,20 @@ const Preview = props => {
                     <Button
                       color="danger"
                       className="redirect-btn"
-                      onClick={() => props.sendToSegment(props.id)}
+                      // onClick={() => props.sendToSegment(props.id)}
+                      onClick={toggle}
                     >Send to segment</Button>
+                  </div>
+                  <div>
+                    <Modal isOpen={modal} toggle={toggle}>
+                      <ModalBody>
+                        <h4>Are you sure?</h4>
+                        <ModalFooter>
+                          <Button color="primary" size="sm" onClick={sendToSegment}>Yes</Button>
+                          <Button color="secondary" size="sm" onClick={toggle}>Cancel</Button>
+                        </ModalFooter>
+                      </ModalBody>
+                    </Modal>
                   </div>
                 </Col>
               </Row>
