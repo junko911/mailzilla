@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users
       resources :contacts do
         patch "add_segment"
+        patch "remove_segment"
       end
       resources :segments
       resources :campaigns do

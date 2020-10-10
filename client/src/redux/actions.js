@@ -92,7 +92,6 @@ export const addSegment = (contactId, segmentObj) => {
     return fetch("http://localhost:3000/api/v1/segments", options)
       .then(res => res.json())
       .then(data => {
-        console.log(contactId)
         const options = {
           method: 'PATCH',
           headers: {
@@ -109,5 +108,25 @@ export const addSegment = (contactId, segmentObj) => {
           .then(res => res.json())
           .then(data => dispatch({ type: "update_contacts", payload: data }))
       })
+  }
+}
+
+export const removeSegment = (contactId, segmentId) => {
+  return function (dispatch) {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify({
+        contact: {
+          segment_id: segmentId
+        }
+      })
+    }
+    fetch(`http://localhost:3000/api/v1/contacts/${contactId}/remove_segment`, options)
+      .then(res => res.json())
+      .then(data => dispatch({ type: "update_contacts", payload: data }))
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalFooter, Form, } from 'reactstrap'
 import SegmentForm from './SegmentForm'
-import { addSegment } from '../redux/actions'
+import { addSegment, removeSegment } from '../redux/actions'
 import { connect } from 'react-redux'
 
 const Segments = props => {
@@ -12,7 +12,7 @@ const Segments = props => {
 
   const genSegmentButton = () => {
     return props.contact.segments.map(segment => {
-      return <Button key={segment.id} outline color="secondary">x {segment.name}</Button>
+      return <Button key={segment.id} outline color="secondary" onClick={() => props.removeSegment(props.contact.id, segment.id)}>x {segment.name}</Button>
     })
   }
 
@@ -43,7 +43,10 @@ const Segments = props => {
 }
 
 const mdp = dispatch => {
-  return { addSegment: (contactId, segmentObj) => dispatch(addSegment(contactId, segmentObj)) }
+  return {
+    addSegment: (contactId, segmentObj) => dispatch(addSegment(contactId, segmentObj)),
+    removeSegment: (contactId, segmentId) => dispatch(removeSegment(contactId, segmentId))
+  }
 }
 
 export default connect(null, mdp)(Segments)

@@ -10,7 +10,7 @@ class Contact < ApplicationRecord
       segments: segments.map { |segment|
         {
           id: segment.id,
-          name: segment.name,
+          name: segment.name
         }
       },
     }
