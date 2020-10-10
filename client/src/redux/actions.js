@@ -140,7 +140,7 @@ export const sendToSegment = campaignId => {
         'Accepts': 'application/json'
       }
     }
-    fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/send_to_segment`, options)
+    return fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/send_to_segment`, options)
       .then(res => res.json())
       .then(data => dispatch({ type: "update_campaign", payload: data }))
   }

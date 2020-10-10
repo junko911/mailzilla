@@ -25,8 +25,10 @@ const Preview = props => {
   }
 
   const sendToSegment = () => {
-    props.sendToSegment(props.id)
-    toggle()
+    props.sendToSegment(props.id).then(() => {
+      toggle()
+      props.toggleAlert()
+    })
   }
 
   return (
@@ -68,7 +70,6 @@ const Preview = props => {
                     <Button
                       color="danger"
                       className="redirect-btn"
-                      // onClick={() => props.sendToSegment(props.id)}
                       onClick={toggle}
                     >Send to segment</Button>
                   </div>
