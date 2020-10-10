@@ -4,6 +4,21 @@ class Campaign < ApplicationRecord
   belongs_to :user
   belongs_to :segment
 
+  def as_json(_options = nil)
+    {
+      id: id,
+      name: name,
+      status: status,
+      created_at: created_at,
+      subject: subject,
+      from: from,
+      content: content,
+      segment: segment,
+      template_id: template_id,
+      user: user
+    }
+  end
+
   def send_test
     fromAddress = SendGrid::Email.new(email: from)
     body = SendGrid::Content.new(type: "text/html", value: content)
