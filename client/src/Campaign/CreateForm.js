@@ -30,6 +30,10 @@ class CreateForm extends React.Component {
     this.setState({ template_id: foundTemplate.id })
   }
 
+  genOptions = () => {
+    
+  }
+
   render() {
     return (
       <>
@@ -38,6 +42,16 @@ class CreateForm extends React.Component {
           <FormGroup>
             <Label for="name">Name</Label>
             <Input type="text" name="name" id="campaign-name" value={this.state.name} onChange={this.changeHandler} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleSelect">Select</Label>
+            <Input type="select" name="select" id="exampleSelect">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Input>
           </FormGroup>
           <FormGroup>
             <Label for="subject">Subject</Label>

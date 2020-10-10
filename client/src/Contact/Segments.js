@@ -18,7 +18,7 @@ const Segments = props => {
 
   const submitHandler = e => {
     e.preventDefault()
-    props.addSegment(props.contact.id, { name: searchTerm }).then(() => {
+    props.addSegment(props.contact.id, { name: searchTerm, user_id: props.currentUser.id }).then(() => {
       toggle()
     })
   }
@@ -42,6 +42,10 @@ const Segments = props => {
   )
 }
 
+const msp = state => {
+  return { currentUser: state.currentUser }
+}
+
 const mdp = dispatch => {
   return {
     addSegment: (contactId, segmentObj) => dispatch(addSegment(contactId, segmentObj)),
@@ -49,4 +53,4 @@ const mdp = dispatch => {
   }
 }
 
-export default connect(null, mdp)(Segments)
+export default connect(msp, mdp)(Segments)
