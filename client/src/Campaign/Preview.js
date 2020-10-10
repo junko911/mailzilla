@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Button, Modal, ModalBody, ModalFooter } from 'reactstrap'
-import { withRouter } from 'react-router-dom'
 import { sendToSegment } from '../redux/actions'
 
 const Preview = props => {
@@ -20,7 +19,7 @@ const Preview = props => {
     }
     fetch(`http://localhost:3000/api/v1/campaigns/${props.id}/send_test`, options)
       .then(() => {
-        props.history.push(`/campaigns/${props.id}`)
+        props.toggleAlert()
       })
   }
 
@@ -102,4 +101,4 @@ const mdp = dispatch => {
   return { sendToSegment: campaignId => dispatch(sendToSegment(campaignId)) }
 }
 
-export default withRouter(connect(msp, mdp)(Preview))
+export default connect(msp, mdp)(Preview)

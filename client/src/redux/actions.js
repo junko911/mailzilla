@@ -41,8 +41,6 @@ export const createCampaign = campaignObj => {
 
 export const updateCampaign = (id, content) => {
   return function (dispatch, getState) {
-    const foundCampaign = getState().campaigns.find(campaign => campaign.id === id)
-    foundCampaign.content = content
     const options = {
       method: 'PATCH',
       headers: {
@@ -50,12 +48,15 @@ export const updateCampaign = (id, content) => {
         'Accepts': 'application/json'
       },
       body: JSON.stringify({
-        campaign: foundCampaign
+        campaign: {
+          content: content
+        }
       })
     }
     return fetch(`http://localhost:3000/api/v1/campaigns/${id}`, options)
       .then(res => res.json())
       .then(data => {
+        dispatch({ type: "update_campaign", payload: data })
         dispatch({ type: "redirect", payload: `/campaigns/${data.id}` });
       })
   }

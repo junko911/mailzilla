@@ -29,7 +29,7 @@ class EditForm extends React.Component {
     e.preventDefault()
     const id = this.props.campaign.id
     this.props.submitHandler(id, this.state.content).then(() => {
-      this.props.history.push(this.props.redirectTo)
+      this.props.history.push(`/campaigns/${id}`)
     })
   }
 
@@ -45,6 +45,7 @@ class EditForm extends React.Component {
       <>
         <h4>Campaign: {this.props.campaign.name}</h4>
         <h4>Subject: {this.props.campaign.subject}</h4>
+        <h4>Segment: {this.props.campaign.segment.name}</h4>
         <h4>Content</h4>
         <Form onSubmit={this.submitHandler}>
           <Row>
