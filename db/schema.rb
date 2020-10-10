@@ -48,7 +48,8 @@ ActiveRecord::Schema.define(version: 2020_10_10_024023) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_segments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
