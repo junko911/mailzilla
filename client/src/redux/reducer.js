@@ -52,7 +52,10 @@ function contactsReducer(state = defaultState.contacts, action) {
   switch (action.type) {
     case "get_contacts":
       return action.payload
-      default:
+    case "update_contacts":
+      const newArray = state.filter(contact => contact.id !== action.payload.id)
+      return [...newArray, action.payload]
+    default:
       return state
   }
 }

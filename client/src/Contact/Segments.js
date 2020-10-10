@@ -18,7 +18,9 @@ const Segments = props => {
 
   const submitHandler = e => {
     e.preventDefault()
-    props.updateContact(props.contact.id, { name: searchTerm })
+    props.updateContact(props.contact.id, { name: searchTerm }).then(() => {
+      toggle()
+    })
   }
 
   return (

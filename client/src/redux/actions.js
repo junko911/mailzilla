@@ -89,7 +89,7 @@ export const updateContact = (contactId, segmentObj) => {
         segment: segmentObj
       })
     }
-    fetch("http://localhost:3000/api/v1/segments", options)
+    return fetch("http://localhost:3000/api/v1/segments", options)
       .then(res => res.json())
       .then(data => {
         console.log(contactId)
@@ -106,6 +106,8 @@ export const updateContact = (contactId, segmentObj) => {
           })
         }
         fetch(`http://localhost:3000/api/v1/contacts/${contactId}/add_segment`, options)
+          .then(res => res.json())
+          .then(data => dispatch({ type: "update_contacts", payload: data }))
       })
   }
 }
