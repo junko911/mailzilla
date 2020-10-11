@@ -8,6 +8,7 @@ import Details from './Details'
 import CreateForm from './CreateForm'
 import EditForm from './EditForm'
 import Preview from './Preview'
+import SampleTable from './SampleTable'
 
 class List extends React.Component {
 
@@ -63,6 +64,7 @@ class List extends React.Component {
                     {this.genCampaignRows()}
                   </tbody>
                 </Table>
+                <SampleTable campaigns={this.props.campaigns}/>
               </>
             )
           }} />
