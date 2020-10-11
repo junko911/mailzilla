@@ -11,11 +11,13 @@ const Import = props => {
   const alertDisplay = alert ? "block" : "none"
 
   const [inputValue, changeInputValue] = useState("")
+  const [contactCount, changeContactCount] = useState(0)
 
   const importContacts = e => {
     e.preventDefault()
-    props.importContacts(inputValue, props.currentUser.id).then(() => {
+    props.importContacts(inputValue, props.currentUser.id).then(data => {
       toggle()
+      changeContactCount(data.payload.length)
       changeInputValue("")
     })
   }
@@ -24,16 +26,16 @@ const Import = props => {
     <>
       <h1>Import</h1>
       <Alert color="success" style={{ display: alertDisplay }}>
-        Contacts added!
+        {contactCount} contacts added!
       </Alert>
       <Form onSubmit={importContacts}>
         <FormGroup>
-          <Label for="copy-paste-field">Paste your contact information into this field.</Label>
+          <Label for="copy-paste-field">Paste your contact information from your spreadsheet into this field.</Label>
           <Input
             type="textarea"
             name="text"
             id="copy-paste-field"
-            placeholder="Email Address          Name"
+            placeholder="example@example.com          Name"
             value={inputValue}
             onChange={e => changeInputValue(e.target.value)} />
         </FormGroup>
