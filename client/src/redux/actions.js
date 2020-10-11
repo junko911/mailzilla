@@ -146,3 +146,24 @@ export const sendToSegment = campaignId => {
       .then(data => dispatch({ type: "update_campaign", payload: data }))
   }
 }
+
+export const importContacts = (inputValue, userId) => {
+  return function (dispatch) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify({
+        contact: {
+          input_value: inputValue,
+          user_id: userId
+        }
+      })
+    }
+    return fetch("http://localhost:3000/api/v1/contacts", options)
+      .then(res => res.json())
+      .then(data => dispatch({ type: "add_contacts", payload: data }))
+  }
+}

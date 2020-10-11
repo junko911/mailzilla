@@ -12,7 +12,7 @@ const Details = ({ campaign }) => {
   return (
     <>
       {campaign ?
-        <div id="campaign-details">
+        <>
           <Alert color="success" style={{ display: alertDisplay }}>
             The campaign has been sent!
           </Alert>
@@ -22,7 +22,7 @@ const Details = ({ campaign }) => {
           <h4>Status: {campaign.status[0].toUpperCase() + campaign.status.slice(1)}</h4>
           <h4>Created at: {campaign.created_at}</h4>
           <Preview id={campaign.id} toggleAlert={toggle} />
-        </div>
+        </>
         : null}
     </>
   )

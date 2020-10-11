@@ -56,6 +56,8 @@ function contactsReducer(state = defaultState.contacts, action) {
     case "update_contact":
       const newArray = state.filter(contact => contact.id !== action.payload.id)
       return [...newArray, action.payload]
+    case "add_contacts":
+      return [state, action.payload]
     default:
       return state
   }

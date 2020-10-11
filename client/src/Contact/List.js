@@ -33,7 +33,7 @@ class List extends React.Component {
             return (
               <>
                 <h1>Contacts</h1>
-                <Button color="success" href="#">Import Contacts</Button>
+                <Button color="success" href="/contacts/import">Import Contacts</Button>
                 <Table>
                   <thead>
                     <tr>
