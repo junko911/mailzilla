@@ -20,6 +20,11 @@ const CampaignTable = props => {
       width: 100,
     },
     {
+      label: 'Number of contacts',
+      field: 'numOfContacts',
+      width: 270,
+    },
+    {
       label: 'Status',
       field: 'status',
       width: 270,
@@ -41,6 +46,7 @@ const CampaignTable = props => {
         return {
           name: campaign.name,
           segment: campaign.segment.name,
+          numOfContacts: campaign.num_of_contacts,
           status: campaign.status,
           details: <Button color="info" href={`/campaigns/${campaign.id}`}>Details</Button>
         }
@@ -49,7 +55,14 @@ const CampaignTable = props => {
     setDataRows(getRows())
   }, [props.campaigns])
 
-  return <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={{ columns: dataColumns, rows: dataRows }} />
+  return <MDBDataTableV5
+    hover entriesOptions={[5, 20, 25]}
+    entries={5} pagesAmount={4}
+    data={{ columns: dataColumns, rows: dataRows }}
+    pagingTop
+    searchTop
+    searchBottom={false}
+    barReverse />
 
 }
 

@@ -14,6 +14,7 @@ class Campaign < ApplicationRecord
       from: from,
       content: content,
       segment: segment,
+      num_of_contacts: segment.contacts.length,
       template_id: template_id,
       user: user
     }
