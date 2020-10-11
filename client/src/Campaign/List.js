@@ -55,7 +55,7 @@ class List extends React.Component {
                       <th>#</th>
                       <th>Name</th>
                       <th>Status</th>
-                      <th>Created At</th>
+                      <th>Created at</th>
                       <th style={{ width: "160px" }}></th>
                     </tr>
                   </thead>

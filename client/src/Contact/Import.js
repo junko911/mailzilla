@@ -26,7 +26,7 @@ const Import = props => {
     <>
       <h1>Import</h1>
       <Alert color="success" style={{ display: alertDisplay }}>
-        {contactCount} contacts added!
+        {contactCount > 0 ? `${contactCount} contacts added!` : `${contactCount} contacts added. They might already have been in your list.`}
       </Alert>
       <Form onSubmit={importContacts}>
         <FormGroup>
@@ -37,7 +37,8 @@ const Import = props => {
             id="copy-paste-field"
             placeholder="example@example.com          Name"
             value={inputValue}
-            onChange={e => changeInputValue(e.target.value)} />
+            onChange={e => changeInputValue(e.target.value)}
+            style={{ minHeight: "200px" }} />
         </FormGroup>
         <Button color="success">Import</Button>
       </Form>
