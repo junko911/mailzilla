@@ -80,7 +80,7 @@ class CreateForm extends React.Component {
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns, redirectTo: state.redirectTo, templates: state.templates, currentUser: state.currentUser }
+  return { redirectTo: state.redirectTo, templates: state.templates, currentUser: state.currentUser }
 }
 
 const mdp = dispatch => {

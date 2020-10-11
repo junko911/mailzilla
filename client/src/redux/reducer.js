@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 const defaultState = {
-  campaigns: [],
+  campaigns: null,
   currentUser: null,
   redirectTo: null,
   templates: [],
