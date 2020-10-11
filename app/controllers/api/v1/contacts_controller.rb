@@ -6,8 +6,11 @@ class Api::V1::ContactsController < ApplicationController
 
   def create
     contacts_array = params[:contact][:input_value].split("\n").map { |e| e.split("\t") }
-    contacts = contacts_array.map { |contact|
-      Contact.find_or_create_by(email: contact[0], name: contact[1], user_id: params[:contact][:user_id])
+    filtered_array = contacts_array.filter {|contact|
+      !Contact.find_by(email: contact[0], name: contact[1], user_id: params[:contact][:user_id])
+    }
+    contacts = filtered_array.map { |contact|
+      Contact.create(email: contact[0], name: contact[1], user_id: params[:contact][:user_id])
     }
     render json: contacts
   end
