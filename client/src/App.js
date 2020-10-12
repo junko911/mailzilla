@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Nav/Navbar'
 import CampaignList from './Campaign/List'
 import ContactsList from './Contact/List'
-import Home from './Home'
+import Home from './Nav/Home'
 import { getCurrentUser } from './redux/actions';
 import { connect } from 'react-redux'
 
@@ -33,7 +33,7 @@ class App extends React.Component {
 }
 
 const mdp = dispatch => {
-  return { getUser: () => dispatch(getCurrentUser(1)) }
+  return { getUser: () => dispatch(getCurrentUser()) }
 }
 
 export default connect(null, mdp)(App)
