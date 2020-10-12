@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sendgrid-ruby'
 gem 'dotenv-rails'
+
+gem "jwt", "~> 2.2"
