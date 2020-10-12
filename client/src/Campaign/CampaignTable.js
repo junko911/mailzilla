@@ -56,14 +56,16 @@ const CampaignTable = props => {
   }, [props.campaigns])
 
   return <MDBDataTableV5
-    hover entriesOptions={[5, 20, 25]}
-    entries={5} pagesAmount={4}
+    hover
+    entriesOptions={[5, 20, 25]}
+    entries={5}
+    pagesAmount={4}
     data={{ columns: dataColumns, rows: dataRows }}
     pagingTop
     searchTop
     searchBottom={false}
-    barReverse />
-
+    barReverse
+  />
 }
 
 export default CampaignTable
