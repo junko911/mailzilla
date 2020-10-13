@@ -2,7 +2,7 @@ class Api::V1::CampaignsController < ApplicationController
   before_action :find_campaign, only: [:update, :send_test, :send_to_segment]
 
   def index
-    campaigns = Campaign.all
+    campaigns = Campaign.where(user: current_user)
     render json: campaigns
   end
 
