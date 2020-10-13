@@ -1,11 +1,12 @@
 import React from 'react'
-import { Button, Table } from 'reactstrap'
+import { Button } from 'reactstrap'
 import { connect } from 'react-redux'
 import { getContacts } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
 import Row from './Row'
 import Details from './Details'
 import Import from './Import'
+import ContactTable from './ContactTable'
 
 class List extends React.Component {
 
@@ -35,21 +36,9 @@ class List extends React.Component {
                 <h1>Contacts</h1>
                 <Button color="success" href="/contacts/import">Import Contacts</Button>
                 {this.props.contacts ?
-                  <Table>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Created at</th>
-                        <th style={{ width: "160px" }}></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.genContactRows()}
-                    </tbody>
-                  </Table>
-                  : null
+                  <ContactTable contacts={this.props.contacts}/>
+                  : 
+                  <div>Loading...</div>
                 }
               </>
             )

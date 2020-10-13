@@ -2,27 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import { Button } from 'reactstrap'
 
-const CampaignTable = props => {
+const ContactTable = props => {
 
   const [dataColumns] = useState([
     {
       label: 'Name',
       field: 'name',
-      width: 150,
-    },
-    {
-      label: 'Segment',
-      field: 'segment',
       width: 100,
     },
     {
-      label: 'Number of contacts',
-      field: 'numOfContacts',
-      width: 270,
-    },
-    {
-      label: 'Status',
-      field: 'status',
+      label: 'Email',
+      field: 'email',
       width: 270,
     },
     {
@@ -37,18 +27,16 @@ const CampaignTable = props => {
 
   useEffect(() => {
     const getRows = () => {
-      return props.campaigns.map(campaign => {
+      return props.contacts.map(contact => {
         return {
-          name: campaign.name,
-          segment: campaign.segment.name,
-          numOfContacts: campaign.num_of_contacts,
-          status: campaign.status,
-          details: <Button color="info" href={`/campaigns/${campaign.id}`}>Details</Button>
+          name: contact.name,
+          email: contact.email,
+          details: <Button color="info" href={`/contacts/${contact.id}`}>Details</Button>
         }
       })
     }
     setDataRows(getRows())
-  }, [props.campaigns])
+  }, [props.contacts])
 
   return <MDBDataTableV5
     hover
@@ -63,4 +51,4 @@ const CampaignTable = props => {
   />
 }
 
-export default CampaignTable
+export default ContactTable
