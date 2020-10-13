@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
       @token = encode_token(user_id: @user.id)
       render json: { user: @user, jwt: @token }, status: :created
     else
-      render json: { error: "failed to create user" }, status: :not_acceptable
+      render json: { errors: @user.errors.full_messages }, status: :not_acceptable
     end
   end
 
@@ -18,6 +18,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

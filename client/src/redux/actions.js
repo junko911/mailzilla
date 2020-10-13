@@ -52,12 +52,16 @@ export const signup = userObj => {
         user: userObj
       })
     }
-    fetch("http://localhost:3000/api/v1/users", options)
+    return fetch("http://localhost:3000/api/v1/users", options)
       .then(res => res.json())
       .then(data => {
-        localStorage.setItem("token", data.jwt)
-        dispatch({ type: "get_current_user", payload: data.user })
-        history.push("/campaigns")
+        if (data.user) {
+          localStorage.setItem("token", data.jwt)
+          dispatch({ type: "get_current_user", payload: data.user })
+          history.push("/campaigns")
+        } else {
+          return data
+        }
       })
   }
 }
