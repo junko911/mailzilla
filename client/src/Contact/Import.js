@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import { connect } from 'react-redux'
 import { importContacts } from '../redux/actions'
@@ -54,4 +53,4 @@ const mdp = dispatch => {
   return { importContacts: (inputValue, userId) => dispatch(importContacts(inputValue, userId)) }
 }
 
-export default withRouter(connect(msp, mdp)(Import))
+export default connect(msp, mdp)(Import)

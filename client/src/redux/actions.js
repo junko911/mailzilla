@@ -1,3 +1,4 @@
+import { history } from '../index'
 const token = localStorage.getItem("token")
 
 export const getCurrentUser = () => {
@@ -13,16 +14,20 @@ export const getCurrentUser = () => {
   }
 }
 
+export const logout = () => {
+  return function (dispatch) {
+    localStorage.removeItem("token")
+    dispatch({ type: "logout" })
+    history.push("/")
+  }
+}
+
 export const getCampaigns = () => {
   return function (dispatch) {
     const token = localStorage.getItem("token")
     fetch("http://localhost:3000/api/v1/campaigns", {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-        Accepts: "application/json"
-      }
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
       .then(data => dispatch({ type: "get_campaigns", payload: data }))
@@ -39,7 +44,8 @@ export const createCampaign = campaignObj => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json'
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         campaign: campaignObj
@@ -60,7 +66,8 @@ export const updateCampaign = (id, content) => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json'
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         campaign: {
@@ -81,11 +88,7 @@ export const getTemplates = () => {
   return function (dispatch) {
     fetch("http://localhost:3000/api/v1/campaigns/templates", {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-        Accepts: "application/json"
-      }
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
       .then(data => dispatch({ type: "get_templates", payload: data }))
@@ -94,7 +97,10 @@ export const getTemplates = () => {
 
 export const getContacts = () => {
   return function (dispatch) {
-    fetch("http://localhost:3000/api/v1/contacts")
+    fetch("http://localhost:3000/api/v1/contacts", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(data => dispatch({ type: "get_contacts", payload: data }))
   }
@@ -106,7 +112,8 @@ export const addSegment = (contactId, segmentObj) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json'
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         segment: segmentObj
@@ -119,7 +126,8 @@ export const addSegment = (contactId, segmentObj) => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            Accepts: 'application/json'
+            Accepts: 'application/json',
+            Authorization: `Bearer ${token}`
           },
           body: JSON.stringify({
             contact: {
@@ -140,7 +148,8 @@ export const removeSegment = (contactId, segmentId) => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json'
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         contact: {
@@ -160,7 +169,8 @@ export const sendToSegment = campaignId => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json'
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
       }
     }
     return fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/send_to_segment`, options)
@@ -175,7 +185,8 @@ export const importContacts = (inputValue, userId) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json'
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         contact: {

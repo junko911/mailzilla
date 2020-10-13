@@ -5,13 +5,15 @@ const defaultState = {
   currentUser: null,
   redirectTo: null,
   templates: [],
-  contacts: []
+  contacts: null
 }
 
 function userReducer(state = defaultState.currentUser, action) {
   switch (action.type) {
     case "get_current_user":
       return action.payload
+    case "logout":
+      return null
     default:
       return state
   }

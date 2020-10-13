@@ -39,7 +39,6 @@ const CampaignTable = props => {
 
   const [dataRows, setDataRows] = useState([])
 
-
   useEffect(() => {
     const getRows = () => {
       return props.campaigns.map(campaign => {
