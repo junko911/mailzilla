@@ -3,7 +3,6 @@ import { Button } from 'reactstrap'
 import { connect } from 'react-redux'
 import { getContacts } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
-import Row from './Row'
 import Details from './Details'
 import Import from './Import'
 import ContactTable from './ContactTable'
@@ -12,12 +11,6 @@ class List extends React.Component {
 
   componentDidMount() {
     this.props.fetchContacts()
-  }
-
-  genContactRows = () => {
-    return this.props.contacts.map(contact => {
-      return <Row key={contact.id} contact={contact} />
-    })
   }
 
   render() {

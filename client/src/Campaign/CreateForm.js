@@ -5,6 +5,7 @@ import { createCampaign } from '../redux/actions'
 import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { withRouter } from 'react-router-dom'
 import Templates from './Templates'
+import { getTemplates } from '../redux/actions'
 
 class CreateForm extends React.Component {
 
@@ -13,6 +14,10 @@ class CreateForm extends React.Component {
     subject: "",
     template_id: 0,
     segment_id: 0
+  }
+
+  componentDidMount() {
+    this.props.fetchTemplates()
   }
 
   changeHandler = e => {
@@ -40,7 +45,7 @@ class CreateForm extends React.Component {
   }
 
   dropDownHandler = e => {
-    this.setState({segment_id: parseInt(e.target.value)})
+    this.setState({ segment_id: parseInt(e.target.value) })
   }
 
   genOptions = () => {
@@ -71,7 +76,10 @@ class CreateForm extends React.Component {
             <Label for="subject">Subject</Label>
             <Input type="text" name="subject" id="subject" value={this.state.subject} onChange={this.changeHandler} />
           </FormGroup>
-          <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
+          {this.props.templates ?
+            <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
+            : <div>Loading...</div>
+          }
           <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
         </Form>
       </>
@@ -80,11 +88,19 @@ class CreateForm extends React.Component {
 }
 
 const msp = state => {
-  return { redirectTo: state.redirectTo, templates: state.templates, currentUser: state.currentUser }
+  return {
+    redirectTo: state.redirectTo,
+    templates: state.templates,
+    currentUser: state.currentUser
+  }
 }
 
 const mdp = dispatch => {
-  return { submitHandler: campaignObj => dispatch(createCampaign(campaignObj)) }
+  return {
+    submitHandler: campaignObj => dispatch(createCampaign(campaignObj)),
+    fetchTemplates: () => dispatch(getTemplates())
+
+  }
 }
 
 export default withRouter(connect(msp, mdp)(CreateForm))

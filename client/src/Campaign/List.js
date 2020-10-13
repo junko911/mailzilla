@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'reactstrap'
 import { connect } from 'react-redux'
-import { getCampaigns, getTemplates } from '../redux/actions'
+import { getCampaigns } from '../redux/actions'
 import { Route, Switch } from 'react-router-dom'
 import Details from './Details'
 import CreateForm from './CreateForm'
@@ -13,7 +13,6 @@ class List extends React.Component {
 
   componentDidMount() {
     this.props.fetchCampaigns()
-    this.props.fetchTemplates()
   }
 
   render() {
@@ -32,12 +31,7 @@ class List extends React.Component {
             }
             return <div>Loading...</div>
           }} />
-          <Route exact path='/campaigns/create' render={() => {
-            if (this.props.templates) {
-              return <CreateForm />
-            }
-            return <div>Loading...</div>
-          }} />
+          <Route exact path='/campaigns/create' component={CreateForm} />
           <Route path='/campaigns/:id' render={({ match }) => {
             if (this.props.campaigns) {
               let id = parseInt(match.params.id)
@@ -66,11 +60,11 @@ class List extends React.Component {
 }
 
 const msp = state => {
-  return { campaigns: state.campaigns, templates: state.templates }
+  return { campaigns: state.campaigns }
 }
 
 const mdp = dispatch => {
-  return { fetchCampaigns: () => dispatch(getCampaigns()), fetchTemplates: () => dispatch(getTemplates()) }
+  return { fetchCampaigns: () => dispatch(getCampaigns()) }
 }
 
 export default connect(msp, mdp)(List)
