@@ -32,7 +32,12 @@ class List extends React.Component {
             }
             return <div>Loading...</div>
           }} />
-          <Route exact path='/campaigns/create' component={CreateForm} />
+          <Route exact path='/campaigns/create' render={() => {
+            if (this.props.templates) {
+              return <CreateForm />
+            }
+            return <div>Loading...</div>
+          }} />
           <Route path='/campaigns/:id' render={({ match }) => {
             if (this.props.campaigns) {
               let id = parseInt(match.params.id)
