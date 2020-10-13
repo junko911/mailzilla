@@ -9,7 +9,7 @@ export const getCurrentUser = () => {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
-        .then(data => dispatch({ type: "get_current_user", payload: data }))
+        .then(data => dispatch({ type: "get_current_user", payload: data.user }))
     } else {
       history.push("/login")
     }
@@ -31,9 +31,9 @@ export const login = userObj => {
     return fetch("http://localhost:3000/api/v1/login", options)
       .then(res => res.json())
       .then(data => {
-        if (data.user){
+        if (data.user) {
           localStorage.setItem("token", data.jwt)
-          dispatch({ type: "getCurrentUser", payload: data })
+          dispatch({ type: "get_current_user", payload: data.user })
           history.push("/campaigns")
         } else {
           return data
@@ -58,7 +58,7 @@ export const signup = userObj => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem("token", data.jwt)
-        dispatch({ type: "getCurrentUser", payload: data })
+        dispatch({ type: "get_current_user", payload: data.user })
         history.push("/campaigns")
       })
   }

@@ -10,7 +10,7 @@ const defaultState = {
 
 function userReducer(state = defaultState.currentUser, action) {
   switch (action.type) {
-    case "getCurrentUser":
+    case "get_current_user":
       return action.payload
     case "logout":
       return null
