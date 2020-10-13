@@ -10,6 +10,8 @@ export const getCurrentUser = () => {
       })
         .then(res => res.json())
         .then(data => dispatch({ type: "get_current_user", payload: data }))
+    } else {
+      history.push("/login")
     }
   }
 }
@@ -26,12 +28,16 @@ export const login = userObj => {
         user: userObj
       })
     }
-    fetch("http://localhost:3000/api/v1/login", options)
+    return fetch("http://localhost:3000/api/v1/login", options)
       .then(res => res.json())
       .then(data => {
-        localStorage.setItem("token", data.jwt)
-        dispatch({ type: "getCurrentUser", payload: data })
-        history.push("/campaigns")
+        if (data.user){
+          localStorage.setItem("token", data.jwt)
+          dispatch({ type: "getCurrentUser", payload: data })
+          history.push("/campaigns")
+        } else {
+          return data
+        }
       })
   }
 }

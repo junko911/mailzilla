@@ -1,13 +1,15 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Alert } from 'reactstrap'
 import { login } from '../redux/actions'
 import { connect } from 'react-redux'
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 class Login extends React.Component {
 
   state = {
     email: "",
-    password: ""
+    password: "",
+    errorMessage: null
   }
 
   changeHandler = e => {
@@ -15,15 +17,43 @@ class Login extends React.Component {
   }
 
   submitHandler = e => {
-    e.preventDefault()
-    this.props.submitHandler(this.state)
+    this.props.submitHandler(this.state).then(data => {
+      if (data) {
+        this.setState({ errorMessage: data.message })
+      }
+    })
   }
 
   render() {
     return (
       <>
         <h1>Log In</h1>
-        <Form onSubmit={this.submitHandler}>
+        {this.state.errorMessage ?
+          <Alert color="danger">
+            {this.state.errorMessage}
+          </Alert>
+          : null
+        }
+        <AvForm onValidSubmit={this.submitHandler}>
+          <AvField
+            type="email"
+            name="email"
+            label="Email"
+            errorMessage="Please enter your email"
+            required
+            onChange={this.changeHandler}
+          />
+          <AvField
+            type="password"
+            name="password"
+            label="Password"
+            errorMessage="Please enter your password"
+            required
+            onChange={this.changeHandler}
+          />
+          <Button color="primary">Log in</Button>
+        </AvForm>
+        {/* <Form onSubmit={this.submitHandler}>
           <FormGroup>
             <Label for="loginEmail">Email</Label>
             <Input
@@ -47,7 +77,7 @@ class Login extends React.Component {
             />
           </FormGroup>
           <Button color="primary">Log in</Button>
-        </Form>
+        </Form> */}
       </>
     )
   }

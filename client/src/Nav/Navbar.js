@@ -4,7 +4,6 @@ import {
   Navbar,
   NavItem,
   NavLink,
-  Button
 } from 'reactstrap'
 import { connect } from 'react-redux'
 
@@ -26,8 +25,10 @@ const NavBar = props => {
               <NavItem>
                 <NavLink href="/contacts">Contacts</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink onClick={props.logoutHandler}>Logout</NavLink>
+              </NavItem>
             </Nav>
-            <Button onClick={props.logoutHandler}>Logout</Button>
           </>
           :
           <>
