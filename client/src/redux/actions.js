@@ -10,8 +10,6 @@ export const getCurrentUser = () => {
       })
         .then(res => res.json())
         .then(data => dispatch({ type: "get_current_user", payload: data.user }))
-    } else {
-      history.push("/login")
     }
   }
 }

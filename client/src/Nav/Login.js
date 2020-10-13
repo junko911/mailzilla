@@ -53,31 +53,6 @@ class Login extends React.Component {
           />
           <Button color="primary">Log in</Button>
         </AvForm>
-        {/* <Form onSubmit={this.submitHandler}>
-          <FormGroup>
-            <Label for="loginEmail">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              id="loginEmail"
-              placeholder="example@example.com"
-              value={this.state.email}
-              onChange={this.changeHandler}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="loginPassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="loginPassword"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.changeHandler}
-            />
-          </FormGroup>
-          <Button color="primary">Log in</Button>
-        </Form> */}
       </>
     )
   }
