@@ -26,9 +26,12 @@ class List extends React.Component {
         <Switch>
           <Route path='/contacts/import' component={Import} />
           <Route path='/contacts/:id' render={({ match }) => {
-            let id = parseInt(match.params.id)
-            let foundContact = this.props.contacts.find(contact => contact.id === id)
-            return <Details contact={foundContact} />
+            if (this.props.contacts) {
+              let id = parseInt(match.params.id)
+              let foundContact = this.props.contacts.find(contact => contact.id === id)
+              return <Details contact={foundContact} />
+            }
+            return <div>Loading...</div>
           }} />
           <Route path='/contacts' render={() => {
             return (
@@ -36,8 +39,8 @@ class List extends React.Component {
                 <h1>Contacts</h1>
                 <Button color="success" href="/contacts/import">Import Contacts</Button>
                 {this.props.contacts ?
-                  <ContactTable contacts={this.props.contacts}/>
-                  : 
+                  <ContactTable contacts={this.props.contacts} />
+                  :
                   <div>Loading...</div>
                 }
               </>
