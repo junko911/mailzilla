@@ -30,7 +30,29 @@ export const login = userObj => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem("token", data.jwt)
-        dispatch({ type: "login", payload: data })
+        dispatch({ type: "getCurrentUser", payload: data })
+        history.push("/campaigns")
+      })
+  }
+}
+
+export const signup = userObj => {
+  return function (dispatch) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json',
+      },
+      body: JSON.stringify({
+        user: userObj
+      })
+    }
+    fetch("http://localhost:3000/api/v1/users", options)
+      .then(res => res.json())
+      .then(data => {
+        localStorage.setItem("token", data.jwt)
+        dispatch({ type: "getCurrentUser", payload: data })
         history.push("/campaigns")
       })
   }

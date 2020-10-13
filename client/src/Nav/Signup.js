@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
-import { login } from '../redux/actions'
+import { signup } from '../redux/actions'
 import { connect } from 'react-redux'
 
-class Login extends React.Component {
+class SignUp extends React.Component {
 
   state = {
+    name: "",
     email: "",
     password: ""
   }
@@ -22,31 +23,42 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <h1>Log In</h1>
+        <h1>Sign up</h1>
         <Form onSubmit={this.submitHandler}>
           <FormGroup>
-            <Label for="loginEmail">Email</Label>
+            <Label for="signupName">Name</Label>
+            <Input
+              type="text"
+              name="name"
+              id="signupName"
+              placeholder="Name"
+              value={this.state.name}
+              onChange={this.changeHandler}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="signupEmail">Email</Label>
             <Input
               type="email"
               name="email"
-              id="loginEmail"
+              id="signupEmail"
               placeholder="example@example.com"
               value={this.state.email}
               onChange={this.changeHandler}
             />
           </FormGroup>
           <FormGroup>
-            <Label for="loginPassword">Password</Label>
+            <Label for="signupPassword">Password</Label>
             <Input
               type="password"
               name="password"
-              id="loginPassword"
+              id="signupPassword"
               placeholder="Password"
               value={this.state.password}
               onChange={this.changeHandler}
             />
           </FormGroup>
-          <Button color="primary">Log in</Button>
+          <Button color="primary">Submit</Button>
         </Form>
       </>
     )
@@ -54,7 +66,7 @@ class Login extends React.Component {
 }
 
 const mdp = dispatch => {
-  return { submitHandler: userObj => dispatch(login(userObj)) }
+  return { submitHandler: userObj => dispatch(signup(userObj)) }
 }
 
-export default connect(null, mdp)(Login)
+export default connect(null, mdp)(SignUp)
