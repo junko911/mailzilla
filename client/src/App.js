@@ -8,6 +8,7 @@ import Home from './Nav/Home'
 import { getCurrentUser, logout } from './redux/actions';
 import { connect } from 'react-redux'
 import { history } from './index'
+import Login from './Nav/Login';
 
 const App = props => {
 
@@ -22,6 +23,7 @@ const App = props => {
       </div>
       <div className="container">
         <Switch>
+          <Route path="/login" component={Login} />
           <Route path="/campaigns" component={CampaignList} />
           <Route path="/contacts" component={ContactsList} />
           <Route path="/" component={Home} />

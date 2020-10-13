@@ -21,9 +21,6 @@ const NavBar = props => {
           <>
             <Nav horizontal="center" style={{ fontSize: "25px" }}>
               <NavItem>
-                <NavLink href="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="/campaigns">Campaigns</NavLink>
               </NavItem>
               <NavItem>
@@ -36,7 +33,7 @@ const NavBar = props => {
           <>
             <Nav horizontal="center" style={{ fontSize: "25px" }}>
               <NavItem>
-                <NavLink href="#">Log In</NavLink>
+                <NavLink href="/login">Log In</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#">Sign Up</NavLink>
