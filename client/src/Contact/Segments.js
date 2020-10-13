@@ -33,7 +33,7 @@ const Segments = props => {
           <ModalHeader toggle={toggle}>Find or Create Segment</ModalHeader>
           <SegmentForm changeSearchTerm={changeSearchTerm} />
           <ModalFooter>
-            <Button color="primary">Create</Button>
+            <Button color="primary">Add</Button>
           </ModalFooter>
         </Form>
       </Modal>
