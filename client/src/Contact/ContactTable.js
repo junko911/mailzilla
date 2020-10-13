@@ -16,6 +16,11 @@ const ContactTable = props => {
       width: 270,
     },
     {
+      label: 'Segments',
+      field: 'segments',
+      width: 270,
+    },
+    {
       label: '',
       field: 'details',
       sort: 'disabled',
@@ -31,6 +36,7 @@ const ContactTable = props => {
         return {
           name: contact.name,
           email: contact.email,
+          segments: contact.segments.map(segment => <Button size="sm" outline disabled style={{marginRight:"10px"}}>{segment.name}</Button>),
           details: <Button color="info" href={`/contacts/${contact.id}`}>Details</Button>
         }
       })

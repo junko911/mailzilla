@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :contacts
   has_many :segments
+  has_many :campaigns
 
   def as_json(_options = nil)
     {

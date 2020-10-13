@@ -18,7 +18,7 @@ const Segments = props => {
 
   const submitHandler = e => {
     e.preventDefault()
-    props.addSegment(props.contact.id, { name: searchTerm, user_id: props.currentUser.id }).then(() => {
+    props.addSegment(props.contact.id, { name: searchTerm }).then(() => {
       toggle()
     })
   }
