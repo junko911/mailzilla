@@ -19,25 +19,35 @@ const Segments = props => {
   const submitHandler = e => {
     e.preventDefault()
     props.addSegment(props.contact.id, { name: searchTerm }).then(() => {
+      changeSearchTerm("")
       toggle()
     })
   }
 
+  const filteredSegments = () => {
+    return props.currentUser.segments.filter(segment => !props.contact.segments.map(e => e.id).includes(segment.id))
+  }
+
   return (
     <>
-      <h1>Segments</h1>
-      <Button color="primary" onClick={toggle}>+</Button>
-      {genSegmentButton()}
-      <Modal isOpen={modal} toggle={toggle}>
-        <Form onSubmit={submitHandler}>
-          <ModalHeader toggle={toggle}>Find or Create Segment</ModalHeader>
-          <SegmentForm changeSearchTerm={changeSearchTerm} />
-          <ModalFooter>
-            <Button color="primary">Add</Button>
-          </ModalFooter>
-        </Form>
-      </Modal>
-
+      {props.currentUser ?
+        <>
+          <h1>Segments</h1>
+          <Button color="primary" onClick={toggle}>+</Button>
+          {genSegmentButton()}
+          <Modal isOpen={modal} toggle={toggle}>
+            <Form onSubmit={submitHandler}>
+              <ModalHeader toggle={toggle}>Add segment to contact</ModalHeader>
+              <SegmentForm segments={filteredSegments()} searchTerm={searchTerm} changeSearchTerm={changeSearchTerm} />
+              <ModalFooter>
+                <Button color="primary">Add</Button>
+              </ModalFooter>
+            </Form>
+          </Modal>
+        </>
+        :
+        <div>Loading...</div>
+      }
     </>
   )
 }
