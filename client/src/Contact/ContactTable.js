@@ -47,9 +47,7 @@ const ContactTable = props => {
 
   return <MDBDataTable
     hover
-    entriesOptions={[5, 20, 25]}
-    entries={5}
-    pagesAmount={4}
+    entriesOptions={[5, 10, 20]}
     data={{ columns: dataColumns, rows: dataRows }}
     barReverse
   />
