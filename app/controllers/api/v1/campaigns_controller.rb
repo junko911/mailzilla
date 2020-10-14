@@ -26,6 +26,15 @@ class Api::V1::CampaignsController < ApplicationController
     render json: campaign
   end
 
+  def upload
+    name = params[:file].original_filename
+    name = "#{rand(1000..9999)}_#{name}"
+
+    path = File.join("public", "uploads", name)
+    File.open(path, "wb") { |f| f.write(params[:file].read) }
+    render json: { data: { link: "http://localhost:3000/uploads/#{name}" } }
+  end
+
   def update
     @campaign.update(campaign_params)
     render json: @campaign
@@ -40,13 +49,13 @@ class Api::V1::CampaignsController < ApplicationController
     @campaign.send_to_segment
     render json: @campaign
   end
-  
+
   private
-  
+
   def campaign_params
     params.require(:campaign).permit!
   end
-  
+
   def find_campaign
     @campaign = Campaign.find(params[:id])
   end

@@ -40,6 +40,24 @@ class EditForm extends React.Component {
     this.setState({ editorState, content: draftToHtml(convertToRaw(editorState.getCurrentContent())) })
   }
 
+  uploadImageCallBack = (file) => {
+    return new Promise(
+      (resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        const fd = new FormData()
+        const token = localStorage.getItem("token")
+        xhr.open("POST", `http://localhost:3000/api/v1/campaigns/${this.props.campaign.id}/upload`)
+        xhr.setRequestHeader("Authorization", `Bearer ${token}`)
+        fd.append('file', file)
+        xhr.send(fd)
+        xhr.addEventListener('load', (data) => {
+          const response = JSON.parse(data.target.response)
+          resolve(response)
+        })
+      }
+    )
+  }
+
   render() {
     return (
       <>
@@ -54,9 +72,12 @@ class EditForm extends React.Component {
                 <div style={{ minHeight: "500px", border: "1px solid #ced4da" }}>
                   <Editor
                     editorState={this.state.editorState}
-                    wrapperClassName="demo-wrapper"
-                    editorClassName="demo-editor"
+                    wrapperClassName="wrapper-class"
+                    editorClassName="editor-class"
                     onEditorStateChange={this.onEditorStateChange}
+                    toolbar={{
+                      image: { uploadCallback: this.uploadImageCallBack, alt: { present: true, mandatory: true }, previewImage: true }
+                    }}
                   />
                 </div>
               </FormGroup>

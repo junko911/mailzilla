@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         member do
           post "send_test"
           post "send_to_segment"
+          post "upload"
         end
         collection do
           get :templates
