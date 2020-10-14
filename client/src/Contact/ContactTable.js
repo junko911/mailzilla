@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MDBDataTableV5 } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact';
 import { Button } from 'reactstrap'
 
 const ContactTable = props => {
@@ -19,6 +19,7 @@ const ContactTable = props => {
       label: 'Segments',
       field: 'segments',
       width: 270,
+      sort: 'disabled',
     },
     {
       label: '',
@@ -44,15 +45,12 @@ const ContactTable = props => {
     setDataRows(getRows())
   }, [props.contacts])
 
-  return <MDBDataTableV5
+  return <MDBDataTable
     hover
     entriesOptions={[5, 20, 25]}
     entries={5}
     pagesAmount={4}
     data={{ columns: dataColumns, rows: dataRows }}
-    pagingTop
-    searchTop
-    searchBottom={false}
     barReverse
   />
 }
