@@ -17,7 +17,10 @@ class Campaign < ApplicationRecord
       segment: segment,
       num_of_contacts: segment.contacts.length,
       template_id: template_id,
-      user: user
+      user: user,
+      sent: campaign_contacts.length,
+      delivered: campaign_contacts.where(status: "delivered").length,
+      open: campaign_contacts.where(status: "open").length
     }
   end
 
