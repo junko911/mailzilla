@@ -1,9 +1,5 @@
 import React from "react";
 import { Row, Col, Button, Form, FormGroup } from "reactstrap";
-import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
-import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { updateCampaign } from "../redux/actions";
@@ -11,7 +7,7 @@ import CKEditor from "ckeditor4-react";
 
 class EditForm extends React.Component {
   state = {
-    editorState: EditorState.createEmpty(),
+    content: ""
   };
 
   submitHandler = (e) => {
@@ -21,18 +17,6 @@ class EditForm extends React.Component {
       this.props.history.push(`/campaigns/${id}`);
     });
   };
-
-  componentDidMount() {
-    const contentBlock = htmlToDraft(this.props.campaign.content);
-    const contentState = ContentState.createFromBlockArray(
-      contentBlock.contentBlocks
-    );
-    const editorState = EditorState.createWithContent(contentState);
-    this.setState({
-      editorState,
-      content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-    });
-  }
 
   render() {
     const editorConfiguration = {
