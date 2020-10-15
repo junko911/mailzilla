@@ -12,3 +12,7 @@ body {
   margin-bottom: 10px;
   width: 100%;
 }
+
+.ck-content {
+  height: 500px;
+}

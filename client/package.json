@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "availity-reactstrap-validation": "^2.6.1",
     "bootstrap": "^4.5.2",
+    "ckeditor4-react": "^1.2.0",
     "draft-js": "^0.11.7",
     "draft-js-export-html": "^1.4.1",
     "draftjs-to-html": "^0.9.1",

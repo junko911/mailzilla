@@ -1,4 +1,5 @@
 class Api::V1::CampaignsController < ApplicationController
+  skip_before_action :authorized, only: [:upload]
   before_action :find_campaign, only: [:update, :send_test, :send_to_segment]
 
   def index
@@ -27,12 +28,17 @@ class Api::V1::CampaignsController < ApplicationController
   end
 
   def upload
-    name = params[:file].original_filename
+    name = params[:upload].original_filename
     name = "#{rand(1000..9999)}_#{name}"
 
     path = File.join("public", "uploads", name)
-    File.open(path, "wb") { |f| f.write(params[:file].read) }
-    render json: { data: { link: "http://localhost:3000/uploads/#{name}" } }
+    File.open(path, "wb") { |f| f.write(params[:upload].read) }
+
+    render json: {
+      uploaded: 1,
+      fileName: name,
+      url: "http://localhost:3000/uploads/#{name}"
+    }
   end
 
   def update
