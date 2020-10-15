@@ -4,9 +4,7 @@ import { Row, Col, Button, Modal, ModalBody, ModalFooter } from "reactstrap"
 import { sendToSegment } from "../redux/actions"
 
 const Preview = props => {
-  let foundCampaign = props.campaigns.find(
-    campaign => campaign.id === props.id
-  )
+  let foundCampaign = props.campaigns.find(campaign => campaign.id === props.id)
 
   const [modal, setModal] = useState(false)
   const toggle = () => setModal(!modal)
@@ -22,11 +20,10 @@ const Preview = props => {
       },
     }
     fetch(
-      `http://localhost:3000/api/v1/campaigns/${props.id}/send_test`,
-      options
-    ).then(() => {
-      props.toggleAlert()
-    })
+      `http://localhost:3000/api/v1/campaigns/${props.id}/send_test`, options)
+      .then(() => {
+        props.toggleAlert()
+      })
   }
 
   const sendToSegment = () => {
@@ -45,18 +42,14 @@ const Preview = props => {
             <h4>Subject: {foundCampaign.subject}</h4>
             <Row>
               <Col xs="9">
-                {foundCampaign.content ? (
+                {foundCampaign.content ?
                   <div
                     dangerouslySetInnerHTML={{ __html: foundCampaign.content }}
                     style={{ border: "1px solid #ced4da", minHeight: "500px" }}
                   ></div>
-                ) : (
-                  <div
-                    style={{ border: "1px solid #ced4da", minHeight: "500px" }}
-                  >
-                    No content
-                  </div>
-                )}
+                  :
+                  <div style={{ border: "1px solid #ced4da", minHeight: "500px" }}>No content</div>
+                }
               </Col>
               <Col xs="3">
                 <div>
@@ -122,7 +115,7 @@ const msp = state => {
 }
 
 const mdp = dispatch => {
-  return { sendToSegment: (campaignId) => dispatch(sendToSegment(campaignId)) }
+  return { sendToSegment: campaignId => dispatch(sendToSegment(campaignId)) }
 }
 
 export default connect(msp, mdp)(Preview)

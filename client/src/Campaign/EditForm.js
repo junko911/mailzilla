@@ -63,9 +63,7 @@ class EditForm extends React.Component {
               </FormGroup>
             </Col>
             <Col xs="3">
-              <Button color="primary" className="redirect-btn">
-                Save
-              </Button>
+              <Button color="primary" className="redirect-btn">Save</Button>
             </Col>
           </Row>
         </Form>
@@ -79,9 +77,7 @@ const msp = state => {
 }
 
 const mdp = dispatch => {
-  return {
-    submitHandler: (id, content) => dispatch(updateCampaign(id, content)),
-  }
+  return { submitHandler: (id, content) => dispatch(updateCampaign(id, content)) }
 }
 
 export default withRouter(connect(msp, mdp)(EditForm))
