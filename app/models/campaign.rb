@@ -6,6 +6,11 @@ class Campaign < ApplicationRecord
   belongs_to :segment
 
   def as_json(_options = nil)
+    sent = campaign_contacts.length
+    delivered = campaign_contacts.where("(status = 'delivered') or (status='open')").length
+    open = campaign_contacts.where(status: "open").length
+    open_rate = open / delivered.to_f
+
     {
       id: id,
       name: name,
@@ -18,9 +23,10 @@ class Campaign < ApplicationRecord
       num_of_contacts: segment.contacts.length,
       template_id: template_id,
       user: user,
-      sent: campaign_contacts.length,
-      delivered: campaign_contacts.where(status: "delivered").length,
-      open: campaign_contacts.where(status: "open").length
+      sent: sent,
+      delivered: delivered,
+      open: open,
+      open_rate: open_rate.round(2)
     }
   end
 
