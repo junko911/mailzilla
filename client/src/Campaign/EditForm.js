@@ -1,22 +1,22 @@
-import React from "react";
-import { Row, Col, Button, Form, FormGroup } from "reactstrap";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { updateCampaign } from "../redux/actions";
-import CKEditor from "ckeditor4-react";
+import React from "react"
+import { Row, Col, Button, Form, FormGroup } from "reactstrap"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
+import { updateCampaign } from "../redux/actions"
+import CKEditor from "ckeditor4-react"
 
 class EditForm extends React.Component {
   state = {
     content: ""
-  };
+  }
 
-  submitHandler = (e) => {
-    e.preventDefault();
-    const id = this.props.campaign.id;
+  submitHandler = e => {
+    e.preventDefault()
+    const id = this.props.campaign.id
     this.props.submitHandler(id, this.state.content).then(() => {
-      this.props.history.push(`/campaigns/${id}`);
-    });
-  };
+      this.props.history.push(`/campaigns/${id}`)
+    })
+  }
 
   render() {
     const editorConfiguration = {
@@ -37,10 +37,9 @@ class EditForm extends React.Component {
         '/'
       ],
       filebrowserImageUploadUrl: `http://localhost:3000/api/v1/campaigns/${this.props.campaign.id}/upload`,
-    };
+    }
 
-    CKEditor.editorUrl = "https://cdn.ckeditor.com/4.15.0/full/ckeditor.js";
-
+    CKEditor.editorUrl = "https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"
 
     return (
       <>
@@ -55,10 +54,10 @@ class EditForm extends React.Component {
                 <CKEditor
                   data={this.props.campaign.content}
                   config={editorConfiguration}
-                  onChange={(event) => {
+                  onChange={e => {
                     this.setState({
-                      content: event.editor.getData(),
-                    });
+                      content: e.editor.getData(),
+                    })
                   }}
                 />
               </FormGroup>
@@ -71,18 +70,18 @@ class EditForm extends React.Component {
           </Row>
         </Form>
       </>
-    );
+    )
   }
 }
 
-const msp = (state) => {
-  return { redirectTo: state.redirectTo };
-};
+const msp = state => {
+  return { redirectTo: state.redirectTo }
+}
 
-const mdp = (dispatch) => {
+const mdp = dispatch => {
   return {
     submitHandler: (id, content) => dispatch(updateCampaign(id, content)),
-  };
-};
+  }
+}
 
-export default withRouter(connect(msp, mdp)(EditForm));
+export default withRouter(connect(msp, mdp)(EditForm))
