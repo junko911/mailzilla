@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Row, Col, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import { sendToSegment } from "../redux/actions";
+import React, { useState } from "react"
+import { connect } from "react-redux"
+import { Row, Col, Button, Modal, ModalBody, ModalFooter } from "reactstrap"
+import { sendToSegment } from "../redux/actions"
 
-const Preview = (props) => {
+const Preview = props => {
   let foundCampaign = props.campaigns.find(
-    (campaign) => campaign.id === props.id
-  );
+    campaign => campaign.id === props.id
+  )
 
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
+  const [modal, setModal] = useState(false)
+  const toggle = () => setModal(!modal)
 
   const sendTest = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token")
     const options = {
       method: "POST",
       headers: {
@@ -20,21 +20,21 @@ const Preview = (props) => {
         Accepts: "application/json",
         Authorization: `Bearer ${token}`,
       },
-    };
+    }
     fetch(
       `http://localhost:3000/api/v1/campaigns/${props.id}/send_test`,
       options
     ).then(() => {
-      props.toggleAlert();
-    });
-  };
+      props.toggleAlert()
+    })
+  }
 
   const sendToSegment = () => {
     props.sendToSegment(props.id).then(() => {
-      toggle();
-      props.toggleAlert();
-    });
-  };
+      toggle()
+      props.toggleAlert()
+    })
+  }
 
   return (
     <>
@@ -114,15 +114,15 @@ const Preview = (props) => {
         </>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-const msp = (state) => {
-  return { campaigns: state.campaigns };
-};
+const msp = state => {
+  return { campaigns: state.campaigns }
+}
 
-const mdp = (dispatch) => {
-  return { sendToSegment: (campaignId) => dispatch(sendToSegment(campaignId)) };
-};
+const mdp = dispatch => {
+  return { sendToSegment: (campaignId) => dispatch(sendToSegment(campaignId)) }
+}
 
-export default connect(msp, mdp)(Preview);
+export default connect(msp, mdp)(Preview)
