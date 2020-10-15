@@ -5,7 +5,7 @@ import Navbar from './Nav/Navbar'
 import CampaignList from './Campaign/List'
 import ContactsList from './Contact/List'
 import Home from './Nav/Home'
-import { getCurrentUser, logout } from './redux/actions';
+import { getCurrentUser, logout, getSegments } from './redux/actions';
 import { connect } from 'react-redux'
 import { history } from './index'
 import Login from './Nav/Login';
@@ -15,6 +15,7 @@ const App = props => {
 
   useEffect(() => {
     props.getUser()
+    props.getSegments()
   }, [props])
 
   return (
@@ -38,6 +39,7 @@ const App = props => {
 const mdp = dispatch => {
   return {
     getUser: () => dispatch(getCurrentUser()),
+    getSegments: () => dispatch(getSegments()),
     logoutHandler: () => dispatch(logout())
   }
 }

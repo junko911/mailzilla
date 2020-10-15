@@ -5,7 +5,7 @@ import { createCampaign } from '../redux/actions'
 import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { withRouter } from 'react-router-dom'
 import Templates from './Templates'
-import { getTemplates } from '../redux/actions'
+import { getTemplates, createSegment } from '../redux/actions'
 
 class CreateForm extends React.Component {
 
@@ -13,7 +13,9 @@ class CreateForm extends React.Component {
     name: "",
     subject: "",
     template_id: 0,
-    segment_id: 0
+    segment_id: 0,
+    segmentForm: false,
+    segmentName: ""
   }
 
   componentDidMount() {
@@ -45,18 +47,34 @@ class CreateForm extends React.Component {
   }
 
   dropDownHandler = e => {
-    this.setState({ segment_id: parseInt(e.target.value) })
+    if (e.target.value === "create") {
+      this.setState({ segmentForm: true })
+    } else {
+      this.setState({ segment_id: parseInt(e.target.value), segmentForm: false })
+    }
   }
 
   genOptions = () => {
-    if (this.props.currentUser) {
-      return this.props.currentUser.segments.map(segment => {
+    if (this.props.segments) {
+      return this.props.segments.map(segment => {
         return <option key={segment.id} value={segment.id}>{segment.name}</option>
       })
     }
   }
 
+  formHandler = e => {
+    this.setState({ segmentName: e.target.value })
+  }
+
+  createSegment = () => {
+    this.props.createSegment({ name: this.state.segmentName }).then(() => {
+      this.setState({ segmentForm: false, segmentName: "" })
+    })
+  }
+
   render() {
+    const segmentForm = this.state.segmentForm ? "block" : "none"
+
     return (
       <>
         <h1>Create New Campaign</h1>
@@ -66,11 +84,15 @@ class CreateForm extends React.Component {
             <Input type="text" name="name" id="name" value={this.state.name} onChange={this.changeHandler} />
           </FormGroup>
           <FormGroup>
-            <Label for="segment">Select segment</Label>
+            <Label for="segment">Select a segment</Label>
             <Input type="select" name="segment_id" id="segment" onChange={this.dropDownHandler}>
               <option></option>
+              <option value="create">Create a new segment</option>
               {this.genOptions()}
             </Input>
+            <Label for="segmentForm" style={{ display: segmentForm }}>Enter segment name</Label>
+            <Input type="text" style={{ display: segmentForm }} id="segmentForm" value={this.state.segmentName} onChange={this.formHandler} />
+            <Button color="primary" size="sm" style={{ display: segmentForm }} onClick={this.createSegment}>Create</Button>
           </FormGroup>
           <FormGroup>
             <Label for="subject">Subject</Label>
@@ -91,15 +113,16 @@ const msp = state => {
   return {
     redirectTo: state.redirectTo,
     templates: state.templates,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    segments: state.segments
   }
 }
 
 const mdp = dispatch => {
   return {
+    createSegment: segmentObj => dispatch(createSegment(segmentObj)),
     submitHandler: campaignObj => dispatch(createCampaign(campaignObj)),
     fetchTemplates: () => dispatch(getTemplates())
-
   }
 }
 

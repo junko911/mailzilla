@@ -14,6 +14,19 @@ export const getCurrentUser = () => {
   }
 }
 
+export const getSegments = () => {
+  return function (dispatch) {
+    if (token) {
+      fetch("http://localhost:3000/api/v1/segments", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.json())
+        .then(data => dispatch({ type: "get_segments", payload: data }))
+    }
+  }
+}
+
 export const login = userObj => {
   return function (dispatch) {
     const options = {
@@ -155,6 +168,25 @@ export const getContacts = () => {
     })
       .then(res => res.json())
       .then(data => dispatch({ type: "get_contacts", payload: data }))
+  }
+}
+
+export const createSegment = segmentObj => {
+  return function (dispatch) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        segment: segmentObj
+      })
+    }
+    return fetch("http://localhost:3000/api/v1/segments", options)
+      .then(res => res.json())
+      .then(data => dispatch({ type: "create_segment", payload: data }))
   }
 }
 
