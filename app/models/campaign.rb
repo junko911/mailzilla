@@ -2,6 +2,7 @@ class Campaign < ApplicationRecord
   enum status: %i(draft sending sent)
 
   belongs_to :user
+  has_many :campaign_contacts
   belongs_to :segment
 
   def as_json(_options = nil)
@@ -35,8 +36,10 @@ class Campaign < ApplicationRecord
     sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
 
     segment.contacts.each { |contact|
+      campaign_contact = campaign_contacts.create(contact: contact)
       to = SendGrid::Email.new(email: contact.email)
       mail = SendGrid::Mail.new(fromAddress, subject, to, body)
+      mail.add_custom_arg(SendGrid::CustomArg.new(key: 'campaign_contact_id', value: campaign_contact.id))
       sg.client.mail._("send").post(request_body: mail.to_json)
     }
 

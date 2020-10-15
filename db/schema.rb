@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_135946) do
+ActiveRecord::Schema.define(version: 2020_10_15_171513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaign_contacts", force: :cascade do |t|
+    t.bigint "campaign_id"
+    t.bigint "contact_id"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["campaign_id"], name: "index_campaign_contacts_on_campaign_id"
+    t.index ["contact_id"], name: "index_campaign_contacts_on_contact_id"
+  end
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
