@@ -20,14 +20,27 @@ class EditForm extends React.Component {
 
   render() {
     const editorConfiguration = {
-      alignment: {
-        options: ["left", "right"],
-      },
-      toolbar: "Basic",
+      toolbar: [
+        { name: 'document', items: ['Source'] },
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['SelectAll'] },
+        '/',
+        '/',
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+        { name: 'links', items: ['Link', 'Unlink'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley'] },
+        '/',
+        { name: 'styles', items: ['Font', 'FontSize'] },
+        { name: 'colors', items: ['TextColor', 'BGColor'] },
+        '/',
+        '/'
+      ],
       filebrowserImageUploadUrl: `http://localhost:3000/api/v1/campaigns/${this.props.campaign.id}/upload`,
     };
 
     CKEditor.editorUrl = "https://cdn.ckeditor.com/4.15.0/full/ckeditor.js";
+
 
     return (
       <>
