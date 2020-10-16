@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTableV5 } from 'mdbreact';
 import { Button } from 'reactstrap'
 
 const CampaignTable = props => {
@@ -50,12 +50,13 @@ const CampaignTable = props => {
     setDataRows(getRows())
   }, [props.campaigns])
 
-  return <MDBDataTable
+  return <MDBDataTableV5
     hover
-    entriesOptions={[5, 10, 20]}
     data={{ columns: dataColumns, rows: dataRows }}
-    barReverse
-    noBottomColumns
+    fixed
+    pagingTop
+    searchTop
+    searchBottom={false}
   />
 }
 
