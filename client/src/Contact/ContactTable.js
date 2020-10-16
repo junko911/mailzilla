@@ -50,6 +50,7 @@ const ContactTable = props => {
     entriesOptions={[5, 10, 20]}
     data={{ columns: dataColumns, rows: dataRows }}
     barReverse
+    noBottomColumns
   />
 }
 
