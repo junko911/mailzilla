@@ -62,13 +62,6 @@ const Preview = props => {
               <Col xs="3">
                 <div>
                   <Button
-                    color="secondary"
-                    className="redirect-btn"
-                    href={`/campaigns`}
-                  >
-                    Go back to campaigns
-                  </Button>
-                  <Button
                     color="success"
                     className="redirect-btn"
                     href={`/campaigns/${foundCampaign.id}/edit`}
@@ -88,6 +81,13 @@ const Preview = props => {
                     onClick={toggleModal}
                   >
                     Send to segment
+                  </Button>
+                  <Button
+                    color="secondary"
+                    className="redirect-btn"
+                    href={`/campaigns/${props.id}`}
+                  >
+                    Go back to campaign details
                   </Button>
                 </div>
                 <div>
