@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
-import { Button } from 'reactstrap'
+import { Button, Form, Label, Input } from 'reactstrap'
 
 const ContactTable = props => {
 
@@ -31,28 +31,47 @@ const ContactTable = props => {
 
   const [dataRows, setDataRows] = useState([])
 
+  const [filterTerm, setFilterTerm] = useState("")
+
   useEffect(() => {
+    const contacts = filterTerm === "" ? props.contacts : props.contacts.filter(contact => contact.segments.map(e => e.name).includes(filterTerm))
     const getRows = () => {
-      return props.contacts.map(contact => {
+      return contacts.map(contact => {
         return {
           name: contact.name,
           email: contact.email,
-          segments: contact.segments.map(segment => <Button key={segment.id} size="sm" outline disabled style={{marginRight:"10px"}}>{segment.name}</Button>),
+          segments: contact.segments.map(segment => <Button key={segment.id} size="sm" outline disabled style={{ marginRight: "10px" }}>{segment.name}</Button>),
           details: <Button color="info" href={`/contacts/${contact.id}`}>Details</Button>
         }
       })
     }
     setDataRows(getRows())
-  }, [props.contacts])
+  }, [props.contacts, filterTerm])
 
-  return <MDBDataTableV5
-  hover
-  data={{ columns: dataColumns, rows: dataRows }}
-  fixed
-  pagingTop
-  searchTop
-  searchBottom={false}
-/>
+  const genOptions = () => {
+    return props.segments ? props.segments.map(segment => <option key={segment.id}>{segment.name}</option>) : null
+  }
+
+  return (
+    <>
+      <Form>
+        <Label>Filter by segment</Label>
+        <Input type="select" onChange={e => setFilterTerm(e.target.value)} >
+          <option></option>
+          {genOptions()}
+        </Input>
+      </Form>
+      <MDBDataTableV5
+        className="contact-table"
+        hover
+        data={{ columns: dataColumns, rows: dataRows }}
+        fixed
+        pagingTop
+        searchTop
+        searchBottom={false}
+      />
+    </>
+  )
 }
 
 export default ContactTable

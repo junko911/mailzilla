@@ -32,7 +32,7 @@ class List extends React.Component {
                 <h1>Contacts</h1>
                 <Button color="success" href="/contacts/import">Import Contacts</Button>
                 {this.props.contacts ?
-                  <ContactTable contacts={this.props.contacts} />
+                  <ContactTable contacts={this.props.contacts} segments={this.props.segments} />
                   :
                   <div>Loading...</div>
                 }
@@ -46,7 +46,7 @@ class List extends React.Component {
 }
 
 const msp = state => {
-  return { contacts: state.contacts }
+  return { contacts: state.contacts, segments: state.segments }
 }
 
 const mdp = dispatch => {
