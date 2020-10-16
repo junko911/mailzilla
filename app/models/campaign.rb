@@ -23,6 +23,12 @@ class Campaign < ApplicationRecord
       num_of_contacts: segment.contacts.length,
       template_id: template_id,
       user: user,
+      contacts: campaign_contacts.map {|campaign_contact|
+        {
+          contact: campaign_contact.contact,
+          status: campaign_contact.status
+        }
+      },
       sent: sent,
       delivered: delivered,
       open: open,

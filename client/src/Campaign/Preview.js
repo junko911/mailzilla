@@ -1,13 +1,18 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
-import { Row, Col, Button, Modal, ModalBody, ModalFooter } from "reactstrap"
+import { Row, Col, Button, Modal, ModalBody, ModalFooter, Alert } from "reactstrap"
 import { sendToSegment } from "../redux/actions"
 
 const Preview = props => {
-  let foundCampaign = props.campaigns.find(campaign => campaign.id === props.id)
+  let foundCampaign = props.campaigns ? props.campaigns.find(campaign => campaign.id === props.id) : null
 
   const [modal, setModal] = useState(false)
-  const toggle = () => setModal(!modal)
+  const toggleModal = () => setModal(!modal)
+
+  const [alert, setAlert] = useState(false)
+  const toggleAlert = () => setAlert(!alert)
+
+  const alertDisplay = alert ? "block" : "none"
 
   const sendTest = () => {
     const token = localStorage.getItem("token")
@@ -22,14 +27,14 @@ const Preview = props => {
     fetch(
       `http://localhost:3000/api/v1/campaigns/${props.id}/send_test`, options)
       .then(() => {
-        props.toggleAlert()
+        toggleAlert()
       })
   }
 
   const sendToSegment = () => {
     props.sendToSegment(props.id).then(() => {
-      toggle()
-      props.toggleAlert()
+      toggleModal()
+      toggleAlert()
     })
   }
 
@@ -38,6 +43,9 @@ const Preview = props => {
       {foundCampaign ? (
         <>
           <h1>Preview</h1>
+          <Alert color="success" style={{ display: alertDisplay }}>
+            The campaign has been sent!
+          </Alert>
           <>
             <h4>Subject: {foundCampaign.subject}</h4>
             <Row>
@@ -77,13 +85,13 @@ const Preview = props => {
                   <Button
                     color="danger"
                     className="redirect-btn"
-                    onClick={toggle}
+                    onClick={toggleModal}
                   >
                     Send to segment
                   </Button>
                 </div>
                 <div>
-                  <Modal isOpen={modal} toggle={toggle}>
+                  <Modal isOpen={modal} toggle={toggleModal}>
                     <ModalBody>
                       <h4>Are you sure?</h4>
                       <ModalFooter>
@@ -94,7 +102,7 @@ const Preview = props => {
                         >
                           Yes
                         </Button>
-                        <Button color="secondary" size="sm" onClick={toggle}>
+                        <Button color="secondary" size="sm" onClick={toggleModal}>
                           Cancel
                         </Button>
                       </ModalFooter>
