@@ -35,6 +35,7 @@ const StatsTable = ({campaign}) => {
           name: contact.contact.name,
           email: contact.contact.email,
           status: contact.status,
+          sentAt: contact.created_at
         }
       })
     }

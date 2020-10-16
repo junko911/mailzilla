@@ -26,7 +26,11 @@ class Campaign < ApplicationRecord
       contacts: campaign_contacts.map {|campaign_contact|
         {
           contact: campaign_contact.contact,
-          status: campaign_contact.status
+          status: campaign_contact.status,
+          created_at: campaign_contact.created_at,
+          delivered_at: campaign_contact.delivered_at,
+          open_at: campaign_contact.open_at,
+          click_at: campaign_contact.click_at
         }
       },
       sent: sent,

@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2020_10_15_171513) do
     t.bigint "campaign_id"
     t.bigint "contact_id"
     t.string "status"
+    t.datetime "delivered_at"
+    t.datetime "open_at"
+    t.datetime "click_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["campaign_id"], name: "index_campaign_contacts_on_campaign_id"
