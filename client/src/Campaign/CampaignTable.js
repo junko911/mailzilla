@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import { Button } from 'reactstrap'
+import moment from 'moment'
 
 const CampaignTable = props => {
 
@@ -26,6 +27,11 @@ const CampaignTable = props => {
       width: 270,
     },
     {
+      label: 'Created at',
+      field: 'createdAt',
+      width: 270,
+    },
+    {
       label: '',
       field: 'details',
       sort: 'disabled',
@@ -43,6 +49,7 @@ const CampaignTable = props => {
           segment: campaign.segment.name,
           numOfContacts: campaign.num_of_contacts,
           status: campaign.status,
+          createdAt: moment(campaign.created_at).format('lll'),
           details: <Button color="info" href={`/campaigns/${campaign.id}`}>Details</Button>
         }
       })

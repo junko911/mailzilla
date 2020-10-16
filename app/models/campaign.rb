@@ -7,8 +7,8 @@ class Campaign < ApplicationRecord
 
   def as_json(_options = nil)
     sent = campaign_contacts.length
-    delivered = campaign_contacts.where("(status = 'delivered') or (status='open')").length
-    open = campaign_contacts.where(status: "open").length
+    delivered = campaign_contacts.where.not(delivered_at: nil).length
+    open = campaign_contacts.where.not(open_at: nil).length
     open_rate = open / delivered.to_f
 
     {
