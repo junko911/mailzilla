@@ -61,27 +61,32 @@ const Preview = props => {
               </Col>
               <Col xs="3">
                 <div>
-                  <Button
-                    color="success"
-                    className="redirect-btn"
-                    href={`/campaigns/${foundCampaign.id}/edit`}
-                  >
-                    Edit
+                  {foundCampaign.status === "draft" ?
+                    <>
+                      <Button
+                        color="success"
+                        className="redirect-btn"
+                        href={`/campaigns/${foundCampaign.id}/edit`}
+                      >
+                        Edit
                   </Button>
-                  <Button
-                    color="primary"
-                    onClick={sendTest}
-                    className="redirect-btn"
-                  >
-                    Send test to myself
+                      <Button
+                        color="primary"
+                        onClick={sendTest}
+                        className="redirect-btn"
+                      >
+                        Send test to myself
                   </Button>
-                  <Button
-                    color="danger"
-                    className="redirect-btn"
-                    onClick={toggleModal}
-                  >
-                    Send to segment
+                      <Button
+                        color="danger"
+                        className="redirect-btn"
+                        onClick={toggleModal}
+                      >
+                        Send to segment
                   </Button>
+                    </>
+                    : null
+                  }
                   <Button
                     color="secondary"
                     className="redirect-btn"
