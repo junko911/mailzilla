@@ -10,6 +10,8 @@ class Campaign < ApplicationRecord
     delivered = campaign_contacts.where.not(delivered_at: nil).length
     open = campaign_contacts.where.not(open_at: nil).length
     open_rate = open / delivered.to_f
+    bounce = campaign_contacts.where(status: "bounce").length
+    spamreport = campaign_contacts.where(status: "spamreport").length
 
     {
       id: id,
@@ -36,7 +38,9 @@ class Campaign < ApplicationRecord
       sent: sent,
       delivered: delivered,
       open: open,
-      open_rate: open_rate.round(2)
+      open_rate: open_rate.round(2),
+      bounce: bounce,
+      spamreport: spamreport
     }
   end
 
