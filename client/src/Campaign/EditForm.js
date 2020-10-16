@@ -14,7 +14,7 @@ class EditForm extends React.Component {
     e.preventDefault()
     const id = this.props.campaign.id
     this.props.submitHandler(id, this.state.content).then(() => {
-      this.props.history.push(`/campaigns/${id}`)
+      this.props.history.push(`/campaigns/${id}/preview`)
     })
   }
 
@@ -64,6 +64,7 @@ class EditForm extends React.Component {
             </Col>
             <Col xs="3">
               <Button color="primary" className="redirect-btn">Save</Button>
+              <Button color="secondary" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Go back to preview</Button>
             </Col>
           </Row>
         </Form>
