@@ -10,7 +10,7 @@ class Api::V1::CampaignsController < ApplicationController
   def templates
     templates = [1, 2].map do |index|
       {
-        template: File.read("public/templates/index_#{index}.html"),
+        template: File.read("public/templates/template_#{index}.html"),
         title: "Template #{index}",
         id: index
       }
@@ -22,7 +22,7 @@ class Api::V1::CampaignsController < ApplicationController
   def create
     campaign = Campaign.new(campaign_params)
     campaign.status = 0
-    campaign.content = File.read("public/templates/index_#{campaign.template_id}.html")
+    campaign.content = File.read("public/templates/template_#{campaign.template_id}.html")
     campaign.save
     render json: campaign
   end
