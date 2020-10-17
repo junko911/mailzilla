@@ -20,6 +20,8 @@ class EditForm extends React.Component {
 
   render() {
     const editorConfiguration = {
+      allowedContent: true,
+      height: 700,
       toolbar: [
         { name: 'document', items: ['Source'] },
         { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'Undo', 'Redo'] },
@@ -46,10 +48,10 @@ class EditForm extends React.Component {
         <h4>Campaign: {this.props.campaign.name}</h4>
         <h4>Subject: {this.props.campaign.subject}</h4>
         <h4>Segment: {this.props.campaign.segment.name}</h4>
-        <h4>Content</h4>
+        <small>*Use <i>{"{{name}}"}</i> markup to personalize email per contact</small>
         <Form onSubmit={this.submitHandler}>
           <Row>
-            <Col xs="9">
+            <Col>
               <FormGroup>
                 <CKEditor
                   data={this.props.campaign.content}
@@ -62,8 +64,12 @@ class EditForm extends React.Component {
                 />
               </FormGroup>
             </Col>
+          </Row>
+          <Row>
             <Col xs="3">
               <Button color="primary" className="redirect-btn">Save</Button>
+            </Col>
+            <Col xs="3">
               <Button color="secondary" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Go back to preview</Button>
             </Col>
           </Row>

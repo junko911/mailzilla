@@ -55,10 +55,11 @@ class Campaign < ApplicationRecord
 
   def send_to_segment
     fromAddress = SendGrid::Email.new(email: from)
-    body = SendGrid::Content.new(type: "text/html", value: content)
     sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
 
     segment.contacts.each { |contact|
+      value = Mustache.render(content, name: contact.name)
+      body = SendGrid::Content.new(type: "text/html", value: value)
       campaign_contact = campaign_contacts.create(contact: contact)
       to = SendGrid::Email.new(email: contact.email)
       mail = SendGrid::Mail.new(fromAddress, subject, to, body)
