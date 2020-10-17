@@ -18,6 +18,7 @@ class Campaign < ApplicationRecord
       name: name,
       status: status,
       created_at: created_at,
+      sent_at: sent_at,
       subject: subject,
       from: from,
       content: content,
@@ -68,5 +69,6 @@ class Campaign < ApplicationRecord
     }
 
     update(status: :sent)
+    update(sent_at: updated_at)
   end
 end

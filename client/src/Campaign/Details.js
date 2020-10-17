@@ -15,7 +15,8 @@ const Details = ({ campaign }) => {
               <h4>Name: {campaign.name}</h4>
               <h4>Segment: {campaign.segment.name}</h4>
               <h4>Status: {campaign.status[0].toUpperCase() + campaign.status.slice(1)}</h4>
-              <h4>Created at: {moment(campaign.created_at).calendar()}</h4>
+              <h4>Created at: {moment(campaign.created_at).format('lll')}</h4>
+              {campaign.sent_at ? <h4>Sent at: {moment(campaign.sent_at).format('lll')}</h4> : null}
             </Col>
             <Col xs="3">
               <Button

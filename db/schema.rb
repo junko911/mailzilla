@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_171513) do
+ActiveRecord::Schema.define(version: 2020_10_17_022406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_10_15_171513) do
     t.integer "template_id"
     t.bigint "segment_id"
     t.bigint "user_id"
+    t.datetime "sent_at"
     t.index ["segment_id"], name: "index_campaigns_on_segment_id"
     t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
