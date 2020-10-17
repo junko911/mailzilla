@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col, Card, CardText, CardTitle } from 'reactstrap'
 import StatsTable from './StatsTable'
+import StatsChart from './StatsChart'
 
 const Stats = ({ campaign }) => {
   return (
@@ -34,6 +35,7 @@ const Stats = ({ campaign }) => {
           </Col>
         </Row>
       </div>
+      <StatsChart campaign={campaign}/>
       <StatsTable campaign={campaign} />
     </div>
   )
