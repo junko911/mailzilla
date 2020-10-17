@@ -2,46 +2,48 @@ import React, { Component } from 'react';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import moment from 'moment'
 
 am4core.useTheme(am4themes_animated);
 
 class StatsChart extends Component {
   componentDidMount() {
+    const sentAt = moment(this.props.campaign.sent_at).format('l').split('/').map(e => parseInt(e))
     let chart = am4core.create("chartdiv", am4charts.XYChart);
     chart.legend = new am4charts.Legend();
 
     chart.data = [{
-      date: new Date(2020, 10, 1),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1]),
       "delivered": 5,
       "opened": 2,
       "clicked": 1
     }, {
-      date: new Date(2020, 10, 2),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1] + 1),
       "delivered": 1,
       "opened": 2,
       "clicked": 1
     }, {
-      date: new Date(2020, 10, 3),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1] + 2),
       "delivered": 3,
       "opened": 2,
       "clicked": 1
     }, {
-      date: new Date(2020, 10, 4),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1] + 3),
       "delivered": 4,
       "opened": 2,
       "clicked": 1
     }, {
-      date: new Date(2020, 10, 5),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1] + 4),
       "delivered": 2,
       "opened": 2,
       "clicked": 1
     }, {
-      date: new Date(2020, 10, 6),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1] + 5),
       "delivered": 10,
       "opened": 2,
       "clicked": 1
     }, {
-      date: new Date(2020, 10, 7),
+      date: new Date(sentAt[2], sentAt[0] - 1, sentAt[1] + 6),
       "delivered": 3,
       "opened": 1,
       "clicked": 1
@@ -58,7 +60,7 @@ class StatsChart extends Component {
     series.tooltipText = "[bold]{valueY}"
     series.strokeWidth = 3;
     series.minBulletDistance = 15;
-    
+
     let series2 = chart.series.push(new am4charts.LineSeries());
     series2.name = "Opened";
     series2.dataFields.valueY = "opened";
@@ -97,12 +99,12 @@ class StatsChart extends Component {
     bullet.circle.strokeWidth = 2;
     bullet.circle.radius = 4;
     bullet.circle.fill = am4core.color("#fff");
-    
+
     var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
     bullet2.circle.strokeWidth = 2;
     bullet2.circle.radius = 4;
     bullet2.circle.fill = am4core.color("#fff");
-    
+
     var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
     bullet3.circle.strokeWidth = 2;
     bullet3.circle.radius = 4;
