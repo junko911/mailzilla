@@ -47,8 +47,8 @@ class StatsChart extends Component {
       "clicked": 1
     }]
 
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    chart.xAxes.push(new am4charts.DateAxis());
+    chart.yAxes.push(new am4charts.ValueAxis());
 
     // Create series
     var series = chart.series.push(new am4charts.LineSeries());
@@ -77,20 +77,20 @@ class StatsChart extends Component {
 
     series.tooltip.background.strokeOpacity = 0;
     series.tooltip.pointerOrientation = "left";
-    series.tooltip.label.minWidth = 40;
-    series.tooltip.label.minHeight = 40;
+    series.tooltip.label.minWidth = 30;
+    series.tooltip.label.minHeight = 30;
     series.tooltip.label.textAlign = "middle";
 
     series2.tooltip.background.strokeOpacity = 0;
     series2.tooltip.pointerOrientation = "left";
-    series2.tooltip.label.minWidth = 40;
-    series2.tooltip.label.minHeight = 40;
+    series2.tooltip.label.minWidth = 30;
+    series2.tooltip.label.minHeight = 30;
     series2.tooltip.label.textAlign = "middle";
 
     series3.tooltip.background.strokeOpacity = 0;
     series3.tooltip.pointerOrientation = "left";
-    series3.tooltip.label.minWidth = 40;
-    series3.tooltip.label.minHeight = 40;
+    series3.tooltip.label.minWidth = 30;
+    series3.tooltip.label.minHeight = 30;
     series3.tooltip.label.textAlign = "middle";
 
     var bullet = series.bullets.push(new am4charts.CircleBullet());

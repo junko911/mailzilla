@@ -18,13 +18,13 @@ const Stats = ({ campaign }) => {
           <Col xs="3">
             <Card className="text-center">
               <CardTitle>Delivered</CardTitle>
-              <CardText>{campaign.delivered}</CardText>
+              <CardText style={{ color: "#67b7dc" }}>{campaign.delivered}</CardText>
             </Card>
           </Col>
           <Col xs="3">
             <Card className="text-center">
               <CardTitle>Open</CardTitle>
-              <CardText>{campaign.open}</CardText>
+              <CardText style={{color: "#6794dc"}}>{campaign.open}</CardText>
             </Card>
           </Col>
           <Col xs="3">
@@ -35,7 +35,7 @@ const Stats = ({ campaign }) => {
           </Col>
         </Row>
       </div>
-      <StatsChart campaign={campaign}/>
+      <StatsChart campaign={campaign} />
       <StatsTable campaign={campaign} />
     </div>
   )
