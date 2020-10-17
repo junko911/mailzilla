@@ -6,7 +6,8 @@ const defaultState = {
   redirectTo: null,
   templates: [],
   contacts: null,
-  segments: null
+  segments: null,
+  stats: null
 }
 
 function userReducer(state = defaultState.currentUser, action) {
@@ -77,13 +78,23 @@ function segmentsReducer(state = defaultState.segments, action) {
   }
 }
 
+function statsReducer(state = defaultState.stats, action) {
+  switch (action.type) {
+    case "get_stats":
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   campaigns: campaignsReducer,
   currentUser: userReducer,
   redirectTo: redirectReducer,
   templates: templatesReducer,
   contacts: contactsReducer,
-  segments: segmentsReducer
+  segments: segmentsReducer,
+  stats: statsReducer,
 })
 
 export default rootReducer

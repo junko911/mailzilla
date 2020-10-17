@@ -1,6 +1,6 @@
 class Api::V1::CampaignsController < ApplicationController
-  skip_before_action :authorized, only: [:upload]
-  before_action :find_campaign, only: [:update, :send_test, :send_to_segment]
+  skip_before_action :authorized, only: [:upload, :stats]
+  before_action :find_campaign, only: [:update, :send_test, :send_to_segment, :stats]
 
   def index
     campaigns = Campaign.where(user: current_user)
@@ -17,6 +17,22 @@ class Api::V1::CampaignsController < ApplicationController
     end
 
     render json: templates
+  end
+
+  def stats
+    start_date = @campaign.sent_at.to_date
+    end_date = start_date + 7.days
+  
+    result = (start_date..end_date).map do |date|
+      {
+        date: date.strftime("%B %e, %Y"),
+        deliver_at: @campaign.campaign_contacts.where("date(created_at) = ?", date).count,
+        open_at: @campaign.campaign_contacts.where("date(open_at) = ?", date).count,
+        click_at: @campaign.campaign_contacts.where("date(click_at) = ?", date).count
+      }
+    end
+
+    render json: result
   end
 
   def create

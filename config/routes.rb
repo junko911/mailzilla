@@ -14,6 +14,7 @@ Rails.application.routes.draw do
           post "send_test"
           post "send_to_segment"
           post "upload"
+          get "stats"
         end
         collection do
           get :templates

@@ -284,3 +284,11 @@ export const importContacts = (inputValue, userId) => {
       .then(data => dispatch({ type: "add_contacts", payload: data }))
   }
 }
+
+export const getStats = campaignId => {
+  return function (dispatch) {
+    return fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/stats`)
+      .then(res => res.json())
+      .then(data => dispatch({ type: "get_stats", payload: data }))
+  }
+}
