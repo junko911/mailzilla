@@ -43,15 +43,15 @@ class Campaign < ApplicationRecord
       },
       sent: sent,
       delivered: delivered,
-      delivered_rate: delivered_rate,
+      delivered_rate: delivered_rate.round(4),
       open: open,
-      open_rate: open_rate.round(2),
+      open_rate: open_rate.round(4),
       click: click,
-      click_rate: click_rate,
+      click_rate: click_rate.round(4),
       bounce: bounce,
-      bounce_rate: bounce_rate,
+      bounce_rate: bounce_rate.round(4),
       spamreport: spamreport,
-      spamreport_rate: spamreport_rate
+      spamreport_rate: spamreport_rate.round(4)
     }
   end
 

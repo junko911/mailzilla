@@ -22,7 +22,7 @@ div.stats .card-title {
   font-weight: 600;
   border-bottom: 1px solid rgba(0,0,0,.125);
   width: 80%;
-  margin: 10px auto;
+  margin: 5px auto 2px auto;
 }
 
 div.stats .pagination {
@@ -32,4 +32,8 @@ div.stats .pagination {
 div.stats .card-text {
   font-size: 30px;
   margin-bottom: 10px;
+}
+
+.stats-card {
+  height: 100px;
 }
