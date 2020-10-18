@@ -8,10 +8,15 @@ class Campaign < ApplicationRecord
   def as_json(_options = nil)
     sent = campaign_contacts.length
     delivered = campaign_contacts.where.not(delivered_at: nil).length
+    delivered_rate = delivered / sent.to_f
     open = campaign_contacts.where.not(open_at: nil).length
     open_rate = open / delivered.to_f
     bounce = campaign_contacts.where(status: "bounce").length
+    bounce_rate = bounce / sent.to_f
+    click = campaign_contacts.where.not(click_at: nil).length
+    click_rate = click / delivered.to_f
     spamreport = campaign_contacts.where(status: "spamreport").length
+    spamreport_rate = spamreport / delivered.to_f
 
     {
       id: id,
@@ -38,10 +43,15 @@ class Campaign < ApplicationRecord
       },
       sent: sent,
       delivered: delivered,
+      delivered_rate: delivered_rate,
       open: open,
       open_rate: open_rate.round(2),
+      click: click,
+      click_rate: click_rate,
       bounce: bounce,
-      spamreport: spamreport
+      bounce_rate: bounce_rate,
+      spamreport: spamreport,
+      spamreport_rate: spamreport_rate
     }
   end
 
