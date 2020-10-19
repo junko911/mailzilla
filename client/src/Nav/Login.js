@@ -26,14 +26,16 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
-        <h2>Log In</h2>
+      <div className="login" style={{marginTop:"100px"}}>
+        <h1>Log In</h1>
         {this.state.errorMessage ?
           <Alert color="danger">
             {this.state.errorMessage}
           </Alert>
           : null
         }
+        <div className="auth-msg">Need a Mailzilla account? <a href="/signup">Create an account</a></div>
+        <div className="auth-form">
         <AvForm onValidSubmit={this.submitHandler}>
           <AvField
             type="email"
@@ -53,6 +55,7 @@ class Login extends React.Component {
           />
           <Button color="primary">Log in</Button>
         </AvForm>
+        </div>
       </div>
     )
   }

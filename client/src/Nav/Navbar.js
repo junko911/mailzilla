@@ -18,8 +18,8 @@ const NavBar = props => {
         expand="md"
         style={{ height: "100px" }}
       >
-        <NavbarBrand href="/" style={{ fontSize: "25px", paddingTop: "8px", paddingLeft: "100px", paddingRight: "50px" }}>
-          <img src={"./paper-plane.png"} width="30" height="30" className="d-inline-block align-top" alt="" loading="lazy" />
+        <NavbarBrand href="/" style={{ fontSize: "30px", paddingTop: "8px", paddingLeft: "100px", paddingRight: "50px" }}>
+          <img src={"./paper-plane.png"} width="40" height="40" className="d-inline-block align-top" alt="" loading="lazy" />
           <span>&nbsp;&nbsp;</span><strong>Mailzilla</strong>
         </NavbarBrand>
         {props.currentUser ?

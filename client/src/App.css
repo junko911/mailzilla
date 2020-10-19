@@ -6,7 +6,6 @@ body {
 .container {
   width: 80%;
   margin: 20px auto;
-  background-color: #fff;
 }
 
 .redirect-btn {
@@ -40,8 +39,16 @@ div.stats .card-text {
 }
 
 .login, .signup {
-  width: 300px;
+  width: 350px;
   margin: auto;
+}
+
+.auth-form {
+  margin-top: 30px;
+}
+
+.auth-msg {
+  margin-top: 30px;
 }
 
 .nav-link {
