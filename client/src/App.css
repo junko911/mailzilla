@@ -99,3 +99,19 @@ div.stats .card-text {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.title {
+  margin: 30px auto;
+}
+
+div.title .btn {
+  float: right;
+  margin-top: -40px;
+}
+
+.main {
+  background-color: #fff;
+  box-shadow: 0 8px 24px rgba(149,157,165,0.2);
+  border-radius: 5px;
+  padding: 10px;
+}

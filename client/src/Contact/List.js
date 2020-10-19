@@ -29,7 +29,7 @@ class List extends React.Component {
           <Route path='/contacts' render={() => {
             return (
               <>
-                <h1>Contacts</h1>
+                <h1 className="title">Contacts</h1>
                 <Button color="success" href="/contacts/import">Import Contacts</Button>
                 {this.props.contacts ?
                   <ContactTable contacts={this.props.contacts} segments={this.props.segments} />

@@ -57,14 +57,18 @@ const CampaignTable = props => {
     setDataRows(getRows())
   }, [props.campaigns])
 
-  return <MDBDataTableV5
-    hover
-    data={{ columns: dataColumns, rows: dataRows }}
-    fixed
-    pagingTop
-    searchTop
-    searchBottom={false}
-  />
+  return (
+    <div className="main">
+      <MDBDataTableV5
+        hover
+        data={{ columns: dataColumns, rows: dataRows }}
+        fixed
+        pagingTop
+        searchTop
+        searchBottom={false}
+      />
+    </div>
+  )
 }
 
 export default CampaignTable
