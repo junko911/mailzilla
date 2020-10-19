@@ -83,6 +83,6 @@ class Campaign < ApplicationRecord
     }
 
     update(status: :sent)
-    update(sent_at: updated_at)
+    update(sent_at: Time.current)
   end
 end
