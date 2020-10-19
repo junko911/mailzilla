@@ -1,8 +1,7 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap'
 import { connect } from 'react-redux'
 import { createCampaign } from '../redux/actions'
-import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { withRouter } from 'react-router-dom'
 import Templates from './Templates'
 import { getTemplates, createSegment } from '../redux/actions'
@@ -15,7 +14,8 @@ class CreateForm extends React.Component {
     template_id: 0,
     segment_id: 0,
     segmentForm: false,
-    segmentName: ""
+    segmentName: "",
+    errorMessages: null
   }
 
   componentDidMount() {
@@ -36,8 +36,10 @@ class CreateForm extends React.Component {
       segment_id: this.state.segment_id,
       user_id: this.props.currentUser.id
     }
-    this.props.submitHandler(campaignObj).then(() => {
-      this.props.history.push(this.props.redirectTo)
+    this.props.submitHandler(campaignObj).then(data => {
+      if (data) {
+        this.setState({ errorMessages: data.errors })
+      }
     })
   }
 
@@ -78,6 +80,14 @@ class CreateForm extends React.Component {
     return (
       <>
         <h1>Create New Campaign</h1>
+        {this.state.errorMessages ?
+          <Alert color="danger">
+            <ul>
+              {this.state.errorMessages.map(msg => <li key={this.state.errorMessages.indexOf(msg)}>{msg}</li>)}
+            </ul>
+          </Alert>
+          : null
+        }
         <Form onSubmit={this.submitHandler}>
           <FormGroup>
             <Label for="name">Campaign name</Label>

@@ -119,8 +119,12 @@ export const createCampaign = campaignObj => {
     return fetch("http://localhost:3000/api/v1/campaigns", options)
       .then(res => res.json())
       .then(data => {
-        dispatch({ type: "create_campaign", payload: data })
-        dispatch({ type: "redirect", payload: `/campaigns/${data.id}/edit` });
+        if (data.campaign) {
+          dispatch({ type: "create_campaign", payload: data })
+          dispatch({ type: "redirect", payload: `/campaigns/${data.id}/edit` });
+        } else {
+          return data
+        }
       })
   }
 }

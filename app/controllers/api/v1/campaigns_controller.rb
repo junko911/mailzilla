@@ -22,7 +22,7 @@ class Api::V1::CampaignsController < ApplicationController
   def stats
     start_date = @campaign.sent_at.to_date
     end_date = start_date + 7.days
-  
+
     result = (start_date..end_date).map do |date|
       {
         date: date.strftime("%B %e, %Y"),
@@ -38,9 +38,13 @@ class Api::V1::CampaignsController < ApplicationController
   def create
     campaign = Campaign.new(campaign_params)
     campaign.status = 0
-    campaign.content = File.read("public/templates/template_#{campaign.template_id}.html")
-    campaign.save
-    render json: campaign
+    if campaign.valid?
+      campaign.content = File.read("public/templates/template_#{campaign.template_id}.html")
+      campaign.save
+      render json: campaign, status: :created
+    else
+      render json: { errors: campaign.errors.full_messages }, status: :not_acceptable
+    end
   end
 
   def upload

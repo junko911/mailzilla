@@ -5,6 +5,11 @@ class Campaign < ApplicationRecord
   has_many :campaign_contacts
   belongs_to :segment
 
+  validates :name, presence: true
+  validates :segment, presence: true
+  validates :subject, presence: true
+  validates :content, presence: true
+
   def as_json(_options = nil)
     sent = campaign_contacts.length
     delivered = campaign_contacts.where.not(delivered_at: nil).length
