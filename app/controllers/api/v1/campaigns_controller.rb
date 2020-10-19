@@ -26,7 +26,8 @@ class Api::V1::CampaignsController < ApplicationController
     result = (start_date..end_date).map do |date|
       {
         date: date.strftime("%B %e, %Y"),
-        deliver_at: @campaign.campaign_contacts.where("date(created_at) = ?", date).count,
+        sent_at: @campaign.campaign_contacts.where("date(created_at) = ?", date).count,
+        delivered_at: @campaign.campaign_contacts.where("date(delivered_at) = ?", date).count,
         open_at: @campaign.campaign_contacts.where("date(open_at) = ?", date).count,
         click_at: @campaign.campaign_contacts.where("date(click_at) = ?", date).count
       }

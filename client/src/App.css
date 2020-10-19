@@ -37,3 +37,9 @@ div.stats .card-text {
 .stats-card {
   height: 100px;
 }
+
+.login, .signup {
+  width: 300px;
+  margin: auto;
+
+}

@@ -28,7 +28,7 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="signup">
         <h1>Sign up</h1>
         {this.state.errorMessages ?
           <Alert color="danger">
@@ -73,7 +73,7 @@ class SignUp extends React.Component {
           />
           <Button color="primary">Sign up</Button>
         </AvForm>
-      </>
+      </div>
     )
   }
 }

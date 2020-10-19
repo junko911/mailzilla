@@ -26,8 +26,8 @@ class Login extends React.Component {
 
   render() {
     return (
-      <>
-        <h1>Log In</h1>
+      <div className="login">
+        <h2>Log In</h2>
         {this.state.errorMessage ?
           <Alert color="danger">
             {this.state.errorMessage}
@@ -53,7 +53,7 @@ class Login extends React.Component {
           />
           <Button color="primary">Log in</Button>
         </AvForm>
-      </>
+      </div>
     )
   }
 }

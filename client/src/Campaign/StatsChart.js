@@ -13,7 +13,7 @@ class StatsChart extends React.Component {
       let chart = am4core.create("chartdiv", am4charts.XYChart);
       chart.legend = new am4charts.Legend()
 
-      chart.data = this.props.stats.map(e => ({ date: new Date(e.date), opened: e.open_at, clicked: e.clicked_at }))
+      chart.data = this.props.stats.map(e => ({ date: new Date(e.date), opened: e.open_at, clicked: e.click_at, sent: e.sent_at, delivered: e.delivered_at }))
 
       chart.xAxes.push(new am4charts.DateAxis());
       chart.yAxes.push(new am4charts.ValueAxis());
@@ -34,6 +34,14 @@ class StatsChart extends React.Component {
       series2.strokeWidth = 3;
       series2.minBulletDistance = 15;
 
+      // let series3 = chart.series.push(new am4charts.LineSeries());
+      // series3.name = "Sent";
+      // series3.dataFields.valueY = "sent";
+      // series3.dataFields.dateX = "date";
+      // series3.tooltipText = "[bold]{valueY}"
+      // series3.strokeWidth = 3;
+      // series3.minBulletDistance = 15;
+
       series.tooltip.background.strokeOpacity = 0;
       series.tooltip.pointerOrientation = "left";
       series.tooltip.label.minWidth = 30;
@@ -46,6 +54,12 @@ class StatsChart extends React.Component {
       series2.tooltip.label.minHeight = 30;
       series2.tooltip.label.textAlign = "middle";
 
+      // series3.tooltip.background.strokeOpacity = 0;
+      // series3.tooltip.pointerOrientation = "left";
+      // series3.tooltip.label.minWidth = 30;
+      // series3.tooltip.label.minHeight = 30;
+      // series3.tooltip.label.textAlign = "middle";
+
       var bullet = series.bullets.push(new am4charts.CircleBullet());
       bullet.circle.strokeWidth = 2;
       bullet.circle.radius = 4;
@@ -55,6 +69,11 @@ class StatsChart extends React.Component {
       bullet2.circle.strokeWidth = 2;
       bullet2.circle.radius = 4;
       bullet2.circle.fill = am4core.color("#fff");
+
+      // var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
+      // bullet3.circle.strokeWidth = 2;
+      // bullet3.circle.radius = 4;
+      // bullet3.circle.fill = am4core.color("#fff");
 
       chart.cursor = new am4charts.XYCursor()
     })
