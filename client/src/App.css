@@ -39,8 +39,8 @@ div.stats .card-text {
 }
 
 .login, .signup {
-  width: 350px;
   margin: auto;
+  margin-top: 100px;
 }
 
 .auth-form {
