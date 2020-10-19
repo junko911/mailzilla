@@ -24,7 +24,7 @@ class List extends React.Component {
               let foundContact = this.props.contacts.find(contact => contact.id === id)
               return <Details contact={foundContact} />
             }
-            return <div>Loading...</div>
+            return <div class="loader"></div>
           }} />
           <Route path='/contacts' render={() => {
             return (
@@ -34,7 +34,7 @@ class List extends React.Component {
                 {this.props.contacts ?
                   <ContactTable contacts={this.props.contacts} segments={this.props.segments} />
                   :
-                  <div>Loading...</div>
+                  <div class="loader"></div>
                 }
               </>
             )

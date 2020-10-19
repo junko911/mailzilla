@@ -110,7 +110,7 @@ class CreateForm extends React.Component {
           </FormGroup>
           {this.props.templates ?
             <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
-            : <div>Loading...</div>
+            : null
           }
           <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
         </Form>
