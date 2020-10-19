@@ -29,7 +29,7 @@ class List extends React.Component {
               let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
               return <EditForm campaign={foundCampaign} />
             }
-            return <div>Loading...</div>
+            return <div class="loader"></div>
           }} />
           <Route exact path='/campaigns/create' component={CreateForm} />
           <Route path='/campaigns/:id' render={({ match }) => {
@@ -38,7 +38,7 @@ class List extends React.Component {
               let foundCampaign = this.props.campaigns.find(campaign => campaign.id === id)
               return <Details campaign={foundCampaign} />
             }
-            return <div>Loading...</div>
+            return <div class="loader"></div>
           }} />
           <Route path='/campaigns' render={() => {
             return (
@@ -48,7 +48,7 @@ class List extends React.Component {
                 {this.props.campaigns ?
                   <CampaignTable campaigns={this.props.campaigns} />
                   :
-                  <div>Loading...</div>
+                  <div class="loader"></div>
                 }
               </>
             )

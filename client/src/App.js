@@ -4,7 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import Navbar from './Nav/Navbar'
 import CampaignList from './Campaign/List'
 import ContactsList from './Contact/List'
-import Home from './Nav/Home'
+import Home from './Common/Home'
 import { getCurrentUser, logout, getSegments } from './redux/actions';
 import { connect } from 'react-redux'
 import { history } from './index'

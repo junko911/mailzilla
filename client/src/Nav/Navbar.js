@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Nav,
-  Collapse,
   Navbar,
   NavItem,
   NavLink,
@@ -26,10 +25,10 @@ const NavBar = props => {
           <>
             <Nav horizontal="center">
               <NavItem>
-                <NavLink href="/campaigns"><i class="fas fa-envelope-open-text"></i>Campaigns</NavLink>
+                <NavLink href="/campaigns"><i className="fas fa-envelope-open-text"></i>Campaigns</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/contacts"><i class="fas fa-users"></i>Contacts</NavLink>
+                <NavLink href="/contacts"><i className="fas fa-users"></i>Contacts</NavLink>
               </NavItem>
             </Nav>
             <Nav className="ml-auto auth">
