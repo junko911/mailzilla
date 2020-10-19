@@ -99,10 +99,6 @@ export const getCampaigns = () => {
   }
 }
 
-export const redirect = link => {
-  return { type: "redirect", payload: link };
-};
-
 export const createCampaign = campaignObj => {
   return function (dispatch) {
     const options = {

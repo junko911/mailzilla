@@ -121,7 +121,6 @@ class CreateForm extends React.Component {
 
 const msp = state => {
   return {
-    redirectTo: state.redirectTo,
     templates: state.templates,
     currentUser: state.currentUser,
     segments: state.segments

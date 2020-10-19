@@ -3,7 +3,6 @@ import { combineReducers } from 'redux'
 const defaultState = {
   campaigns: null,
   currentUser: null,
-  redirectTo: null,
   templates: [],
   contacts: null,
   segments: null,
@@ -16,15 +15,6 @@ function userReducer(state = defaultState.currentUser, action) {
       return action.payload
     case "logout":
       return null
-    default:
-      return state
-  }
-}
-
-function redirectReducer(state = defaultState.redirectTo, action) {
-  switch (action.type) {
-    case "redirect":
-      return action.payload
     default:
       return state
   }
@@ -90,7 +80,6 @@ function statsReducer(state = defaultState.stats, action) {
 const rootReducer = combineReducers({
   campaigns: campaignsReducer,
   currentUser: userReducer,
-  redirectTo: redirectReducer,
   templates: templatesReducer,
   contacts: contactsReducer,
   segments: segmentsReducer,
