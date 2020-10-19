@@ -8,7 +8,6 @@ class Campaign < ApplicationRecord
   validates :name, presence: true
   validates :segment, presence: true
   validates :subject, presence: true
-  validates :content, presence: true
 
   def as_json(_options = nil)
     sent = campaign_contacts.length

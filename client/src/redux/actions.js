@@ -119,11 +119,12 @@ export const createCampaign = campaignObj => {
     return fetch("http://localhost:3000/api/v1/campaigns", options)
       .then(res => res.json())
       .then(data => {
-        if (data.campaign) {
-          dispatch({ type: "create_campaign", payload: data })
-          dispatch({ type: "redirect", payload: `/campaigns/${data.id}/edit` });
-        } else {
+        debugger
+        if (data.errors) {
           return data
+        } else {
+          dispatch({ type: "create_campaign", payload: data })
+          history.push(`/campaigns/${data.id}/edit`)
         }
       })
   }
@@ -148,7 +149,7 @@ export const updateCampaign = (id, content) => {
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "update_campaign", payload: data })
-        dispatch({ type: "redirect", payload: `/campaigns/${data.id}` });
+        history.push(`/campaigns/${data.id}`)
       })
   }
 }

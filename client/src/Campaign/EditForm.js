@@ -70,7 +70,7 @@ class EditForm extends React.Component {
               <Button color="primary" className="redirect-btn">Save</Button>
             </Col>
             <Col xs="3">
-              <Button color="secondary" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Go back to preview</Button>
+              <Button color="info" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Preview</Button>
             </Col>
           </Row>
         </Form>
@@ -79,12 +79,8 @@ class EditForm extends React.Component {
   }
 }
 
-const msp = state => {
-  return { redirectTo: state.redirectTo }
-}
-
 const mdp = dispatch => {
   return { submitHandler: (id, content) => dispatch(updateCampaign(id, content)) }
 }
 
-export default withRouter(connect(msp, mdp)(EditForm))
+export default withRouter(connect(null, mdp)(EditForm))
