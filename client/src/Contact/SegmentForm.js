@@ -12,6 +12,7 @@ const SegmentForm = props => {
           color="primary"
           size="sm"
           onClick={() => props.changeSearchTerm(segment.name)}
+          style={{ marginRight: "5px", marginBottom: "5px" }}
         >
           + {segment.name}
         </Button>
@@ -22,7 +23,7 @@ const SegmentForm = props => {
   return (
     <ModalBody>
       <FormGroup>
-        <div style={{ fontSize: "25px" }}>Create a new segment</div>
+        <h4 style={{ marginBottom: "10px" }}>Create a new segment</h4>
         <Input
           type="search"
           name="segment"
@@ -31,9 +32,9 @@ const SegmentForm = props => {
           autoComplete="off"
           onChange={e => props.changeSearchTerm(e.target.value)}
           value={props.searchTerm}
+          style={{ marginBottom: "20px" }}
         />
-        <div>Or</div>
-        <div style={{ fontSize: "25px" }}>Choose one from existing segments:</div>
+        <h4 style={{ marginBottom: "10px" }}>Choose one from existing segments</h4>
         {genOptions().length > 0 ?
           genOptions()
           :

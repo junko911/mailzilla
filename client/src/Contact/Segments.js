@@ -12,7 +12,7 @@ const Segments = props => {
 
   const genSegmentButton = () => {
     return props.contact.segments.map(segment => {
-      return <Button key={segment.id} outline color="secondary" onClick={() => props.removeSegment(props.contact.id, segment.id)}>x {segment.name}</Button>
+      return <Button key={segment.id} outline color="secondary" style={{ marginRight: "5px", marginBottom: "5px" }} onClick={() => props.removeSegment(props.contact.id, segment.id)}>x {segment.name}</Button>
     })
   }
 
@@ -46,9 +46,9 @@ const Segments = props => {
             >+</Button>
           </div>
           {genSegmentButton()}
-          <Modal isOpen={modal} toggle={toggle}>
+          <Modal isOpen={modal} toggle={toggle} style={{ padding: "2rem" }}>
             <Form onSubmit={submitHandler}>
-              <ModalHeader toggle={toggle}>Add segment to contact</ModalHeader>
+              <ModalHeader toggle={toggle}><h3>Add segment to contact</h3></ModalHeader>
               <SegmentForm segments={filteredSegments()} searchTerm={searchTerm} changeSearchTerm={changeSearchTerm} />
               <ModalFooter>
                 <Button color="primary">Add</Button>
