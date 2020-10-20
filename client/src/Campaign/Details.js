@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Badge } from 'reactstrap'
+import { Button, Badge, Col, Row } from 'reactstrap'
 import moment from 'moment'
 import Stats from './Stats'
 
@@ -31,8 +31,34 @@ const Details = ({ campaign }) => {
               </Button>
           </div>
           <div className="main">
-            <h4>Segment: {campaign.segment.name}</h4>
-            <h4>Subject: {campaign.subject}</h4>
+            <div style={{ margin: "0 20px", lineHeight: "45px" }}>
+              <Row style={{ borderBottom: "1px solid #dedddc" }}>
+                <Col xs="4">
+                  <Badge color="success" pill><i class="fas fa-check"></i></Badge>
+                  <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Segment</h4></Col>
+                <Col xs="8">
+                  <div>{campaign.segment.name}</div>
+                </Col>
+              </Row>
+              <Row style={{ borderBottom: "1px solid #dedddc" }}>
+                <Col xs="4"><Badge color="success" pill><i class="fas fa-check"></i></Badge><h4 style={{ display: "inline" }}>&nbsp;&nbsp;From</h4></Col>
+                <Col xs="8">
+                  <div>{campaign.from}</div>
+                </Col>
+              </Row>
+              <Row style={{ borderBottom: "1px solid #dedddc" }}>
+                <Col xs="4"><Badge color="success" pill><i class="fas fa-check"></i></Badge><h4 style={{ display: "inline" }}>&nbsp;&nbsp;Subject</h4></Col>
+                <Col xs="8">
+                  <div>{campaign.subject}</div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs="4"><Badge color="success" pill><i class="fas fa-check"></i></Badge><h4 style={{ display: "inline" }}>&nbsp;&nbsp;Content</h4></Col>
+                <Col xs="8">
+                  <div>Content</div>
+                </Col>
+              </Row>
+            </div>
           </div>
           {campaign.status === "sent" ?
             <Stats campaign={campaign} />
