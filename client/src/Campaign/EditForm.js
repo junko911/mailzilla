@@ -65,10 +65,10 @@ class EditForm extends React.Component {
           </Row>
           <Row>
             <Col xs="3">
-              <Button color="primary" className="redirect-btn">Save</Button>
+              <Button color="success" className="redirect-btn">Save</Button>
             </Col>
             <Col xs="3">
-              <Button color="info" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Preview</Button>
+              <Button color="primary" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Preview</Button>
             </Col>
           </Row>
         </Form>
