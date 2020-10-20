@@ -27,7 +27,7 @@ const Templates = props => {
 
   return (
     <>
-      <h3>Templates</h3>
+      <div style={{ fontSize: "1rem" }}>Templates</div>
       <Row>
         {genOptions()}
       </Row>

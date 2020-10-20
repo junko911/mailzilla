@@ -79,7 +79,7 @@ class CreateForm extends React.Component {
 
     return (
       <>
-        <h1>Create New Campaign</h1>
+        <h1 className="title">Create New Campaign</h1>
         {this.state.errorMessages ?
           <Alert color="danger">
             <ul>
@@ -88,32 +88,34 @@ class CreateForm extends React.Component {
           </Alert>
           : null
         }
-        <Form onSubmit={this.submitHandler}>
-          <FormGroup>
-            <Label for="name">Campaign name</Label>
-            <Input type="text" name="name" id="name" value={this.state.name} onChange={this.changeHandler} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="segment">Select a segment</Label>
-            <Input type="select" name="segment_id" id="segment" onChange={this.dropDownHandler}>
-              <option></option>
-              <option value="create">Create a new segment</option>
-              {this.genOptions()}
-            </Input>
-            <Label for="segmentForm" style={{ display: segmentForm }}>Enter segment name</Label>
-            <Input type="text" style={{ display: segmentForm }} id="segmentForm" value={this.state.segmentName} onChange={this.formHandler} />
-            <Button color="primary" size="sm" style={{ display: segmentForm }} onClick={this.createSegment}>Create</Button>
-          </FormGroup>
-          <FormGroup>
-            <Label for="subject">Subject</Label>
-            <Input type="text" name="subject" id="subject" value={this.state.subject} onChange={this.changeHandler} />
-          </FormGroup>
-          {this.props.templates ?
-            <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
-            : null
-          }
-          <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
-        </Form>
+        <div className="main">
+          <Form onSubmit={this.submitHandler}>
+            <FormGroup>
+              <Label for="name">Campaign name</Label>
+              <Input type="text" name="name" id="name" value={this.state.name} onChange={this.changeHandler} />
+            </FormGroup>
+            <FormGroup>
+              <Label for="segment">Select a segment</Label>
+              <Input type="select" name="segment_id" id="segment" onChange={this.dropDownHandler}>
+                <option></option>
+                <option value="create">Create a new segment</option>
+                {this.genOptions()}
+              </Input>
+              <Label for="segmentForm" style={{ display: segmentForm }}>Enter segment name</Label>
+              <Input type="text" style={{ display: segmentForm }} id="segmentForm" value={this.state.segmentName} onChange={this.formHandler} />
+              <Button color="primary" size="sm" style={{ display: segmentForm }} onClick={this.createSegment}>Create</Button>
+            </FormGroup>
+            <FormGroup>
+              <Label for="subject">Subject</Label>
+              <Input type="text" name="subject" id="subject" value={this.state.subject} onChange={this.changeHandler} />
+            </FormGroup>
+            {this.props.templates ?
+              <Templates templates={this.props.templates} templateId={this.state.template_id} selectHanlder={this.selectHanlder} />
+              : null
+            }
+            <Button color="primary" style={{ marginTop: "30px" }}>Next</Button>
+          </Form>
+        </div>
       </>
     )
   }
