@@ -20,7 +20,7 @@ const Details = props => {
 
   const editHandler = e => {
     e.preventDefault()
-    props.editHandler(props.campaign.id, "name", campaignName).then(data=>{
+    props.editHandler(props.campaign.id, "name", campaignName).then(data => {
       toggleEditForm()
     })
   }
@@ -68,30 +68,33 @@ const Details = props => {
               <Row style={{ borderBottom: "1px solid #dedddc" }}>
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Segment</h4></Col>
-                <Col xs="8">
+                <Col xs="6">
                   <div>{props.campaign.segment.name}</div>
+                </Col>
+                <Col xs="2">
+                  <Button size="sm">Change segment</Button>
                 </Col>
               </Row>
               <Row style={{ borderBottom: "1px solid #dedddc" }}>
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;From</h4></Col>
-                <Col xs="8">
+                <Col xs="6">
                   <div>{props.campaign.from}</div>
+                </Col>
+                <Col xs="2">
+                  <Button size="sm">Change from</Button>
                 </Col>
               </Row>
               <Row>
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Subject</h4></Col>
-                <Col xs="8">
+                <Col xs="6">
                   <div>{props.campaign.subject}</div>
                 </Col>
-              </Row>
-              {/* <Row>
-                <Col xs="4"><Badge color="success" pill><i class="fas fa-check"></i></Badge><h4 style={{ display: "inline" }}>&nbsp;&nbsp;Content</h4></Col>
-                <Col xs="8">
-                  <div>Content</div>
+                <Col xs="2">
+                  <Button size="sm">Change subject</Button>
                 </Col>
-              </Row> */}
+              </Row>
             </div>
           </div>
           {props.campaign.status === "sent" ?
