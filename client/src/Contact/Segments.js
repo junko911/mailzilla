@@ -46,7 +46,7 @@ const Segments = props => {
           </Modal>
         </>
         :
-        <div class="loader"></div>
+        null
       }
     </>
   )

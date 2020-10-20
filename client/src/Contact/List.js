@@ -29,12 +29,14 @@ class List extends React.Component {
           <Route path='/contacts' render={() => {
             return (
               <>
-                <h1 className="title">Contacts</h1>
-                <Button color="success" href="/contacts/import">Import Contacts</Button>
+                <div className="title">
+                  <h1>Contacts</h1>
+                  <Button color="success" href="/contacts/import">Import Contacts</Button>
+                </div>
                 {this.props.contacts ?
                   <ContactTable contacts={this.props.contacts} segments={this.props.segments} />
                   :
-                  <div class="loader"></div>
+                  <div className="loader"></div>
                 }
               </>
             )

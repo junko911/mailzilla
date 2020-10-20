@@ -54,22 +54,24 @@ const ContactTable = props => {
 
   return (
     <>
-      <Form>
-        <Label>Filter by segment</Label>
-        <Input type="select" onChange={e => setFilterTerm(e.target.value)} >
-          <option></option>
-          {genOptions()}
-        </Input>
-      </Form>
-      <MDBDataTableV5
-        className="contact-table"
-        hover
-        data={{ columns: dataColumns, rows: dataRows }}
-        fixed
-        pagingTop
-        searchTop
-        searchBottom={false}
-      />
+      <div className="main">
+        <Form inline>
+          <Label>Filter by segment</Label>
+          <Input type="select" onChange={e => setFilterTerm(e.target.value)} >
+            <option></option>
+            {genOptions()}
+          </Input>
+        </Form>
+        <MDBDataTableV5
+          className="contact-table"
+          hover
+          data={{ columns: dataColumns, rows: dataRows }}
+          fixed
+          pagingTop
+          searchTop
+          searchBottom={false}
+        />
+      </div>
     </>
   )
 }
