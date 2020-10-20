@@ -17,7 +17,7 @@ class List extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="container">
         <Switch>
           <Route exact path='/campaigns/:id/preview' render={({ match }) => {
             let id = parseInt(match.params.id)
@@ -56,7 +56,7 @@ class List extends React.Component {
             )
           }} />
         </Switch>
-      </>
+      </div>
     )
   }
 }

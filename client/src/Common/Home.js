@@ -1,19 +1,16 @@
 import React from 'react'
-import {Row, Col} from 'reactstrap'
 
 const Home = () => {
   return (
-    <Row>
-      <Col xs="6">
-        <div style={{border: "1px solid black", height:"500px"}}>
-          Send newsletter to customer...
-        </div>
-      </Col>
-      <Col xs="6">
-        <div style={{border: "1px solid black", height:"500px"}}></div>
-      </Col>
-    </Row>
-    )
+    <div className="home">
+      <div className="home-content">
+        <span>Send</span>
+        <span style={{ margin: "0 10px" }}>Email Newletters</span>
+        <span>With Confidence</span>
+        <h4 style={{ width: "70%", margin: "10px auto" }}>Partner with the email service trusted by developers and marketers for time-savings, scalability, and delivery expertise.</h4>
+      </div>
+    </div>
+  )
 }
 
 export default Home

@@ -23,15 +23,13 @@ const App = props => {
       <div className="header">
         <Navbar logoutHandler={props.logoutHandler} />
       </div>
-      <div className="container">
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/campaigns" component={CampaignList} />
-          <Route path="/contacts" component={ContactsList} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/campaigns" component={CampaignList} />
+        <Route path="/contacts" component={ContactsList} />
+        <Route path="/" component={Home} />
+      </Switch>
     </Router>
   )
 }

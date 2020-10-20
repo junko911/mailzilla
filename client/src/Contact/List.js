@@ -15,7 +15,7 @@ class List extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="container">
         <Switch>
           <Route path='/contacts/import' component={Import} />
           <Route path='/contacts/:id' render={({ match }) => {
@@ -42,7 +42,7 @@ class List extends React.Component {
             )
           }} />
         </Switch>
-      </>
+      </div>
     )
   }
 }
