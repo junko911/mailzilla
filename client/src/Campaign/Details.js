@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Button } from 'reactstrap'
+import { Button, Badge } from 'reactstrap'
 import moment from 'moment'
 import Stats from './Stats'
 
@@ -10,7 +10,12 @@ const Details = ({ campaign }) => {
       {campaign ?
         <>
           <div className="title">
-            <h1>{campaign.name}</h1>
+            <h1>{campaign.name} <Badge pill>{campaign.status[0].toUpperCase() + campaign.status.slice(1)}</Badge></h1>
+            {campaign.status === "draft" ?
+              <small>Created <strong>{moment(campaign.created_at).format('lll')}</strong></small>
+              :
+              <small>Sent <strong>{moment(campaign.sent_at).format('lll')}</strong></small>
+            }
             <Button
               color="primary"
               style={{ marginRight: "220px" }}
@@ -27,9 +32,7 @@ const Details = ({ campaign }) => {
           </div>
           <div className="main">
             <h4>Segment: {campaign.segment.name}</h4>
-            <h4>Status: {campaign.status[0].toUpperCase() + campaign.status.slice(1)}</h4>
-            <h4>Created at: {moment(campaign.created_at).format('lll')}</h4>
-            {campaign.sent_at ? <h4>Sent at: {moment(campaign.sent_at).format('lll')}</h4> : null}
+            <h4>Subject: {campaign.subject}</h4>
           </div>
           {campaign.status === "sent" ?
             <Stats campaign={campaign} />
