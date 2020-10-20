@@ -32,8 +32,19 @@ const Segments = props => {
     <>
       {props.currentUser ?
         <>
-          <h1>Segments</h1>
-          <Button color="primary" onClick={toggle}>+</Button>
+          <div style={{ marginBottom: "20px" }}>
+            <h2 style={{ display: "inline" }}>Segments</h2>
+            <Button
+              color="primary"
+              onClick={toggle}
+              style={{
+                minWidth: "30px",
+                minHeight: "30px",
+                padding: "0",
+                float: "right",
+              }}
+            >+</Button>
+          </div>
           {genSegmentButton()}
           <Modal isOpen={modal} toggle={toggle}>
             <Form onSubmit={submitHandler}>

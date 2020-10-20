@@ -46,7 +46,7 @@ const Details = ({ campaign }) => {
                   <div>{campaign.from}</div>
                 </Col>
               </Row>
-              <Row style={{ borderBottom: "1px solid #dedddc" }}>
+              <Row>
                 <Col xs="4"><Badge color="success" pill><i class="fas fa-check"></i></Badge><h4 style={{ display: "inline" }}>&nbsp;&nbsp;Subject</h4></Col>
                 <Col xs="8">
                   <div>{campaign.subject}</div>

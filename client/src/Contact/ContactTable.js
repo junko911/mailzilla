@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
-import { Button, Form, Label, Input } from 'reactstrap'
+import { Button, Form, Input } from 'reactstrap'
 
 const ContactTable = props => {
 
