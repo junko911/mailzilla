@@ -49,16 +49,15 @@ const ContactTable = props => {
   }, [props.contacts, filterTerm])
 
   const genOptions = () => {
-    return props.segments ? props.segments.map(segment => <option key={segment.id}>{segment.name}</option>) : null
+    return props.segments ? props.segments.map(segment => <option value={segment.name} key={segment.id}>{segment.name}</option>) : null
   }
 
   return (
     <>
       <div className="main">
         <Form inline>
-          <Label>Filter by segment</Label>
-          <Input type="select" onChange={e => setFilterTerm(e.target.value)} >
-            <option></option>
+          <Input type="select" onChange={e => setFilterTerm(e.target.value)} style={{ fontSize: "0.875rem" }}>
+            <option value="">Filter by segment</option>
             {genOptions()}
           </Input>
         </Form>

@@ -10,7 +10,7 @@ body {
 
 .redirect-btn {
   margin-bottom: 10px;
-  width: 100%;
+  width: 200px;
 }
 
 .ck-content {
@@ -86,8 +86,8 @@ div.stats .card-text {
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -101,12 +101,13 @@ div.stats .card-text {
 }
 
 .title {
-  margin: 30px auto;
+  margin: 40px auto;
 }
 
 div.title .btn {
   float: right;
-  margin-top: -40px;
+  margin-top: -50px;
+  width: 200px;
 }
 
 .main {

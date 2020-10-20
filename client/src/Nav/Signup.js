@@ -29,7 +29,7 @@ class SignUp extends React.Component {
   render() {
     return (
       <div className="signup" style={{ width: "500px" }}>
-        <h1>Welcome to Mailzilla</h1>
+        <h1>Welcome to MailZilla</h1>
         {this.state.errorMessages ?
           <Alert color="danger">
             <ul>
