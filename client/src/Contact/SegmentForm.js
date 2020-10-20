@@ -23,7 +23,7 @@ const SegmentForm = props => {
   return (
     <ModalBody>
       <FormGroup>
-        <h4 style={{ marginBottom: "10px" }}>Create a new segment</h4>
+        <h6 style={{ marginBottom: "10px" }}>Create a new segment</h6>
         <Input
           type="search"
           name="segment"
@@ -34,7 +34,7 @@ const SegmentForm = props => {
           value={props.searchTerm}
           style={{ marginBottom: "20px" }}
         />
-        <h4 style={{ marginBottom: "10px" }}>Choose one from existing segments</h4>
+        <h6 style={{ marginBottom: "10px" }}>Choose one from existing segments</h6>
         {genOptions().length > 0 ?
           genOptions()
           :

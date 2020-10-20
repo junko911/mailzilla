@@ -34,7 +34,7 @@ class Login extends React.Component {
           </Alert>
           : null
         }
-        <div className="auth-msg">Need a Mailzilla account? <a href="/signup">Create an account</a></div>
+        <div className="auth-msg">Need a MailZilla account? <a href="/signup">Create an account</a></div>
         <div className="auth-form">
           <AvForm onValidSubmit={this.submitHandler}>
             <AvField

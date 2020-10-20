@@ -116,3 +116,7 @@ div.title .btn {
   border-radius: 5px;
   padding: 30px 20px;
 }
+
+.modal-content {
+  padding: 2rem;
+}
