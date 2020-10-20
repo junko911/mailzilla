@@ -115,7 +115,6 @@ export const createCampaign = campaignObj => {
     return fetch("http://localhost:3000/api/v1/campaigns", options)
       .then(res => res.json())
       .then(data => {
-        debugger
         if (data.errors) {
           return data
         } else {

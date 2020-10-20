@@ -45,9 +45,7 @@ class EditForm extends React.Component {
 
     return (
       <>
-        <h4>Campaign: {this.props.campaign.name}</h4>
-        <h4>Subject: {this.props.campaign.subject}</h4>
-        <h4>Segment: {this.props.campaign.segment.name}</h4>
+        <h1 className="title">{this.props.campaign.name}</h1>
         <small>*Use <i>{"{{name}}"}</i> markup to personalize email per contact</small>
         <Form onSubmit={this.submitHandler}>
           <Row>

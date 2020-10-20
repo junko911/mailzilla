@@ -101,9 +101,9 @@ class CreateForm extends React.Component {
                 <option value="create">Create a new segment</option>
                 {this.genOptions()}
               </Input>
-              <Label for="segmentForm" style={{ display: segmentForm }}>Enter segment name</Label>
+              <Label for="segmentForm" style={{ display: segmentForm, marginTop: "10px" }}>Enter segment name</Label>
               <Input type="text" style={{ display: segmentForm }} id="segmentForm" value={this.state.segmentName} onChange={this.formHandler} />
-              <Button color="primary" size="sm" style={{ display: segmentForm }} onClick={this.createSegment}>Create</Button>
+              <Button color="primary" size="sm" style={{ display: segmentForm, marginTop: "10px" }} onClick={this.createSegment}>Create</Button>
             </FormGroup>
             <FormGroup>
               <Label for="subject">Subject</Label>
