@@ -97,8 +97,9 @@ const Preview = props => {
                 </div>
                 <div>
                   <Modal isOpen={modal} toggle={toggleModal}>
-                    <ModalBody>
+                    <ModalBody style={{ padding: "2rem" }}>
                       <h4>Are you sure?</h4>
+                      <p>You are going to send this campaign to {foundCampaign.num_of_contacts} contacts.</p>
                       <ModalFooter>
                         <Button
                           color="primary"
