@@ -13,7 +13,7 @@ class EditForm extends React.Component {
   submitHandler = e => {
     e.preventDefault()
     const id = this.props.campaign.id
-    this.props.submitHandler(id, this.state.content).then(() => {
+    this.props.submitHandler(id, "content", this.state.content).then(() => {
       this.props.history.push(`/campaigns/${id}/preview`)
     })
   }
@@ -78,7 +78,7 @@ class EditForm extends React.Component {
 }
 
 const mdp = dispatch => {
-  return { submitHandler: (id, content) => dispatch(updateCampaign(id, content)) }
+  return { submitHandler: (id, field, value) => dispatch(updateCampaign(id, field, value)) }
 }
 
 export default withRouter(connect(null, mdp)(EditForm))

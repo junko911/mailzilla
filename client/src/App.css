@@ -150,3 +150,13 @@ div.title .btn {
 div.home-content span {
   font-size: 40px;
 }
+
+.edit {
+  color: #457b9d;
+}
+
+.edit:hover {
+  color: #a8dadc;
+  text-decoration: underline;
+  cursor: pointer;
+}

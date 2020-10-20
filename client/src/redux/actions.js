@@ -2,7 +2,7 @@ import { history } from '../index'
 const token = localStorage.getItem("token")
 
 const unauthCheck = (response) => {
-  if (!response.ok){
+  if (!response.ok) {
     console.error('Unauth error');
     history.push("/")
   }
@@ -133,8 +133,8 @@ export const createCampaign = campaignObj => {
   }
 }
 
-export const updateCampaign = (id, content) => {
-  return function (dispatch, getState) {
+export const updateCampaign = (id, field, value) => {
+  return function (dispatch) {
     const options = {
       method: 'PATCH',
       headers: {
@@ -144,7 +144,7 @@ export const updateCampaign = (id, content) => {
       },
       body: JSON.stringify({
         campaign: {
-          content: content
+          [field]: value
         }
       })
     }
@@ -152,7 +152,6 @@ export const updateCampaign = (id, content) => {
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "update_campaign", payload: data })
-        history.push(`/campaigns/${data.id}`)
       })
   }
 }
