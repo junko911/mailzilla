@@ -42,11 +42,11 @@ const Preview = props => {
     <>
       {foundCampaign ? (
         <>
-          <h1>Preview</h1>
+          <h1 className="title">Preview</h1>
           <Alert color="success" style={{ display: alertDisplay }}>
             The campaign has been sent!
           </Alert>
-          <>
+          <div className="main">
             <h4>Subject: {foundCampaign.subject}</h4>
             <Row>
               <Col xs="9">
@@ -116,7 +116,7 @@ const Preview = props => {
                 </div>
               </Col>
             </Row>
-          </>
+          </div>
         </>
       ) : null}
     </>
