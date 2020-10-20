@@ -43,12 +43,9 @@ div.stats .card-text {
   margin-top: 100px;
 }
 
-.auth-form {
-  margin-top: 30px;
-}
-
 .auth-msg {
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .nav-link {

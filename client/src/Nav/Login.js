@@ -26,35 +26,37 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login" style={{ width: "350px" }}>
-        <h1>Log In</h1>
-        {this.state.errorMessage ?
-          <Alert color="danger">
-            {this.state.errorMessage}
-          </Alert>
-          : null
-        }
-        <div className="auth-msg">Need a MailZilla account? <a href="/signup">Create an account</a></div>
-        <div className="auth-form">
-          <AvForm onValidSubmit={this.submitHandler}>
-            <AvField
-              type="email"
-              name="email"
-              label="Email"
-              errorMessage="Please enter your email"
-              required
-              onChange={this.changeHandler}
-            />
-            <AvField
-              type="password"
-              name="password"
-              label="Password"
-              errorMessage="Please enter your password"
-              required
-              onChange={this.changeHandler}
-            />
-            <Button color="primary">Log in</Button>
-          </AvForm>
+      <div className="login" style={{ width: "380px" }}>
+        <div className="main">
+          <h1>Log In</h1>
+          {this.state.errorMessage ?
+            <Alert color="danger">
+              {this.state.errorMessage}
+            </Alert>
+            : null
+          }
+          <div className="auth-msg">Need a MailZilla account? <a href="/signup">Create an account</a></div>
+          <div className="auth-form">
+            <AvForm onValidSubmit={this.submitHandler}>
+              <AvField
+                type="email"
+                name="email"
+                label="Email"
+                errorMessage="Please enter your email"
+                required
+                onChange={this.changeHandler}
+              />
+              <AvField
+                type="password"
+                name="password"
+                label="Password"
+                errorMessage="Please enter your password"
+                required
+                onChange={this.changeHandler}
+              />
+              <Button color="primary">Log in</Button>
+            </AvForm>
+          </div>
         </div>
       </div>
     )
