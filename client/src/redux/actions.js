@@ -1,13 +1,21 @@
 import { history } from '../index'
 const token = localStorage.getItem("token")
 
+const unauthCheck = (response) => {
+  if (!response.ok){
+    console.error('Unauth error');
+    history.push("/")
+  }
+  return response
+}
+
 export const getCurrentUser = () => {
   return function (dispatch) {
     if (token) {
       fetch("http://localhost:3000/api/v1/profile", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
-      })
+      }).then(unauthCheck)
         .then(res => res.json())
         .then(data => dispatch({ type: "get_current_user", payload: data.user }))
     }
@@ -20,7 +28,7 @@ export const getSegments = () => {
       fetch("http://localhost:3000/api/v1/segments", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
-      })
+      }).then(unauthCheck)
         .then(res => res.json())
         .then(data => dispatch({ type: "get_segments", payload: data }))
     }
@@ -93,7 +101,7 @@ export const getCampaigns = () => {
     fetch("http://localhost:3000/api/v1/campaigns", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
-    })
+    }).then(unauthCheck)
       .then(res => res.json())
       .then(data => dispatch({ type: "get_campaigns", payload: data }))
   }
@@ -154,7 +162,7 @@ export const getTemplates = () => {
     fetch("http://localhost:3000/api/v1/campaigns/templates", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
-    })
+    }).then(unauthCheck)
       .then(res => res.json())
       .then(data => dispatch({ type: "get_templates", payload: data }))
   }
@@ -165,7 +173,7 @@ export const getContacts = () => {
     fetch("http://localhost:3000/api/v1/contacts", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
-    })
+    }).then(unauthCheck)
       .then(res => res.json())
       .then(data => dispatch({ type: "get_contacts", payload: data }))
   }
@@ -288,6 +296,7 @@ export const importContacts = (inputValue, userId) => {
 export const getStats = campaignId => {
   return function (dispatch) {
     return fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/stats`)
+      .then(unauthCheck)
       .then(res => res.json())
       .then(data => dispatch({ type: "get_stats", payload: data }))
   }
