@@ -52,12 +52,12 @@ const Details = ({ campaign }) => {
                   <div>{campaign.subject}</div>
                 </Col>
               </Row>
-              <Row>
+              {/* <Row>
                 <Col xs="4"><Badge color="success" pill><i class="fas fa-check"></i></Badge><h4 style={{ display: "inline" }}>&nbsp;&nbsp;Content</h4></Col>
                 <Col xs="8">
                   <div>Content</div>
                 </Col>
-              </Row>
+              </Row> */}
             </div>
           </div>
           {campaign.status === "sent" ?

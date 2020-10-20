@@ -81,7 +81,9 @@ class StatsChart extends React.Component {
 
   render() {
     return (
-      <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+      <div className="main">
+        <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+      </div>
     );
   }
 }

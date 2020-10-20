@@ -5,14 +5,14 @@ import StatsChart from './StatsChart'
 
 const Stats = ({ campaign }) => {
   return (
-    <div className="stats">
-      <h1>Statistics:</h1>
+    <div className="stats" style={{ marginTop: "30px" }}>
+      <h2 className="title">Stats</h2>
       <div style={{ marginBottom: "50px" }}>
         <Row>
           <Col xs="2">
             <Card className="text-center stats-card">
-              <CardTitle style={{ color: "#264653" }}>Sent</CardTitle>
-              <CardText className="stats-rate" style={{ fontSize: "23px", paddingTop: "10px" }}>{campaign.sent}</CardText>
+              <CardTitle>Sent</CardTitle>
+              <CardText className="stats-rate" style={{ fontSize: "23px", paddingTop: "10px", color: "#264653" }}>{campaign.sent}</CardText>
             </Card>
           </Col>
           <Col xs="2">
@@ -53,6 +53,7 @@ const Stats = ({ campaign }) => {
         </Row>
       </div>
       <StatsChart campaign={campaign} />
+      <h2 className="title">Stats by contacts</h2>
       <StatsTable campaign={campaign} />
     </div>
   )

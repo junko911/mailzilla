@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { MDBDataTableV5 } from 'mdbreact'
 import moment from 'moment'
 
-const StatsTable = ({campaign}) => {
+const StatsTable = ({ campaign }) => {
 
   const [dataColumns] = useState([
     {
@@ -62,16 +62,18 @@ const StatsTable = ({campaign}) => {
   }, [campaign])
 
   return (
-    <MDBDataTableV5
-      hover
-      data={{ columns: dataColumns, rows: dataRows }}
-      paging={false}
-      fixed
-      info={false}
-      searching={false}
-      scrollY
-      maxHeight='300px'
-    />
+    <div className="main" style={{ marginTop: "30px" }}>
+      <MDBDataTableV5
+        hover
+        data={{ columns: dataColumns, rows: dataRows }}
+        paging={false}
+        fixed
+        info={false}
+        searching={false}
+        scrollY
+        maxHeight='300px'
+      />
+    </div>
   )
 }
 
