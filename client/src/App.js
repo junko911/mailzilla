@@ -23,23 +23,15 @@ const App = props => {
       <div className="header">
         <Navbar logoutHandler={props.logoutHandler} />
       </div>
-      {props.currentUser ?
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/campaigns" component={CampaignList} />
-          <Route path="/contacts" component={ContactsList} />
-          <Route path="/" component={Home} />
-        </Switch>
-        :
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/campaigns" component={CampaignList} />
+        <Route path="/contacts" component={ContactsList} />
         <Route path="/" component={Home} />
-      }
+      </Switch>
     </Router>
   )
-}
-
-const msp = state => {
-  return { currentUser: state.currentUser }
 }
 
 const mdp = dispatch => {
@@ -50,4 +42,4 @@ const mdp = dispatch => {
   }
 }
 
-export default connect(msp, mdp)(App)
+export default connect(null, mdp)(App)
