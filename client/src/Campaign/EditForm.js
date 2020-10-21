@@ -7,7 +7,7 @@ import CKEditor from "ckeditor4-react"
 
 class EditForm extends React.Component {
   state = {
-    content: ""
+    content: this.props.campaign.content
   }
 
   submitHandler = e => {
@@ -46,7 +46,8 @@ class EditForm extends React.Component {
     return (
       <>
         <h1 className="title">{this.props.campaign.name}</h1>
-        <small>*Use <i>{"{{name}}"}</i> markup to personalize email per contact</small>
+        <p style={{ marginBottom: "0" }}><small>*Use <i>{"{{name}}"}</i> markup to personalize email per contact</small></p>
+        <p><small>*Use <i>{"{{unsubscribe}}"}</i> markup to allow user to unsubscribe from your campaigns</small></p>
         <Form onSubmit={this.submitHandler}>
           <Row>
             <Col>

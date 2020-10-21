@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.hosts << "d4a1309fc109.ngrok.io"
+  config.hosts << "48fd08a125a0.ngrok.io"
   
   # Settings specified here will take precedence over those in config/application.rb.
 

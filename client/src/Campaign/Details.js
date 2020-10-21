@@ -72,7 +72,7 @@ const Details = props => {
                   <div>{props.campaign.segment.name}</div>
                 </Col>
                 <Col xs="2">
-                  <Button size="sm">Change segment</Button>
+                  {props.campaign.status === "draft" ? <Button size="sm">Change segment</Button> : null}
                 </Col>
               </Row>
               <Row style={{ borderBottom: "1px solid #dedddc" }}>
@@ -82,7 +82,7 @@ const Details = props => {
                   <div>{props.campaign.from}</div>
                 </Col>
                 <Col xs="2">
-                  <Button size="sm">Change from</Button>
+                  {props.campaign.status === "draft" ? <Button size="sm">Change from</Button> : null}
                 </Col>
               </Row>
               <Row>
@@ -92,7 +92,7 @@ const Details = props => {
                   <div>{props.campaign.subject}</div>
                 </Col>
                 <Col xs="2">
-                  <Button size="sm">Change subject</Button>
+                  {props.campaign.status === "draft" ? <Button size="sm">Change subject</Button> : null}
                 </Col>
               </Row>
             </div>
