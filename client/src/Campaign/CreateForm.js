@@ -76,6 +76,7 @@ class CreateForm extends React.Component {
 
   render() {
     const segmentForm = this.state.segmentForm ? "block" : "none"
+    const segmentFormBtn = this.state.segmentForm ? "inline" : "none"
 
     return (
       <>
@@ -103,7 +104,8 @@ class CreateForm extends React.Component {
               </Input>
               <Label for="segmentForm" style={{ display: segmentForm, marginTop: "10px" }}>Enter segment name</Label>
               <Input type="text" style={{ display: segmentForm }} id="segmentForm" value={this.state.segmentName} onChange={this.formHandler} />
-              <Button color="primary" size="sm" style={{ display: segmentForm, marginTop: "10px" }} onClick={this.createSegment}>Create</Button>
+              <Button color="primary" size="sm" style={{ display: segmentFormBtn, marginTop: "10px" }} onClick={this.createSegment}>Create</Button>
+              <Button color="secondary" size="sm" style={{ display: segmentFormBtn, marginTop: "10px", marginLeft: "10px" }} onClick={() => this.setState({ segmentForm: false })}>Cancel</Button>
             </FormGroup>
             <FormGroup>
               <Label for="subject">Subject</Label>

@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
   has_and_belongs_to_many :segments
-  has_many :campaign_contacts
+  has_many :campaign_contacts, dependent: :destroy
   belongs_to :user
 
   def as_json(_options = nil)

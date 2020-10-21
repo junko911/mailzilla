@@ -3,6 +3,7 @@ import { Button, Alert } from 'reactstrap'
 import { login } from '../redux/actions'
 import { connect } from 'react-redux'
 import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { withRouter } from 'react-router-dom'
 
 class Login extends React.Component {
 
@@ -21,6 +22,7 @@ class Login extends React.Component {
       if (data) {
         this.setState({ errorMessage: data.message })
       }
+      // this.props.history.push("/campaigns")
     })
   }
 
@@ -67,4 +69,4 @@ const mdp = dispatch => {
   return { submitHandler: userObj => dispatch(login(userObj)) }
 }
 
-export default connect(null, mdp)(Login)
+export default withRouter(connect(null, mdp)(Login))

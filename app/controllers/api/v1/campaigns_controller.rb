@@ -3,7 +3,7 @@ class Api::V1::CampaignsController < ApplicationController
   before_action :find_campaign, only: [:update, :send_test, :send_to_segment, :stats]
 
   def index
-    campaigns = Campaign.where(user: current_user)
+    campaigns = Campaign.where(user: current_user).order(created_at: :desc)
     render json: campaigns
   end
 

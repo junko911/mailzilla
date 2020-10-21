@@ -123,7 +123,7 @@ div.title .btn {
 }
 
 .home {
-  min-height: 700px;
+  min-height: 1000px;
   background-image: url("/background.jpg");
   background-size: cover;
   position: relative;

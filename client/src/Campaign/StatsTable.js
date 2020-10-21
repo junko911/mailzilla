@@ -8,37 +8,37 @@ const StatsTable = ({ campaign }) => {
     {
       label: 'Name',
       field: 'name',
-      width: 100,
+      width: 30,
     },
-    {
-      label: 'Email',
-      field: 'email',
-      width: 200,
-    },
+    // {
+    //   label: 'Email',
+    //   field: 'email',
+    //   width: 30,
+    // },
     {
       label: 'Status',
       field: 'status',
-      width: 100,
+      width: 30,
     },
-    {
-      label: 'Sent at',
-      field: 'sentAt',
-      width: 200,
-    },
+    // {
+    //   label: 'Sent at',
+    //   field: 'sentAt',
+    //   width: 100,
+    // },
     {
       label: 'Delivered at',
       field: 'deliveredAt',
-      width: 200,
+      width: 150,
     },
     {
       label: 'Opened at',
       field: 'openedAt',
-      width: 200,
+      width: 150,
     },
     {
       label: 'Clicked at',
       field: 'clickedAt',
-      width: 200,
+      width: 150,
     }
   ])
 
@@ -49,9 +49,9 @@ const StatsTable = ({ campaign }) => {
       return campaign.contacts.map(contact => {
         return {
           name: contact.contact.name,
-          email: contact.contact.email,
+          // email: contact.contact.email,
           status: contact.status,
-          sentAt: moment(contact.created_at).format('lll'),
+          // sentAt: moment(contact.created_at).format('lll'),
           deliveredAt: contact.delivered_at ? moment(contact.delivered_at).format('lll') : null,
           openedAt: contact.open_at ? moment(contact.open_at).format('lll') : null,
           clickedAt: contact.click_at ? moment(contact.click_at).format('lll') : null

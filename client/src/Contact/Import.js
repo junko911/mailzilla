@@ -34,12 +34,13 @@ const Import = props => {
             type="textarea"
             name="text"
             id="copy-paste-field"
-            placeholder="example@example.com          Name"
+            placeholder="example@example.com          John Doe"
             value={inputValue}
             onChange={e => changeInputValue(e.target.value)}
             style={{ minHeight: "200px" }} />
         </FormGroup>
         <Button color="success">Import</Button>
+        <Button color="secondary" href="/contacts" style={{ marginLeft: "10px" }}>Go back to contacts</Button>
       </Form>
     </>
   )

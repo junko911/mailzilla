@@ -2,9 +2,9 @@ class User < ApplicationRecord
   has_secure_password
   validates :email, uniqueness: { case_sensitive: false }
 
-  has_many :contacts
-  has_many :segments
-  has_many :campaigns
+  has_many :contacts, dependent: :destroy
+  has_many :segments, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
 
   def as_json(_options = nil)
     {
