@@ -20,7 +20,7 @@ body {
 div.stats .card-title {
   color: #8c9392;
   font-weight: 600;
-  border-bottom: 1px solid rgba(0,0,0,.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   width: 80%;
   margin: 5px auto 2px auto;
 }
@@ -38,7 +38,8 @@ div.stats .card-text {
   height: 100px;
 }
 
-.login, .signup {
+.login,
+.signup {
   margin: 50px auto;
 }
 
@@ -72,9 +73,9 @@ div.stats .card-text {
   width: 0;
 }
 
-.nav-link:hover:after { 
-  width: 100%; 
-  left: 0; 
+.nav-link:hover:after {
+  width: 100%;
+  left: 0;
 }
 
 .auth {
@@ -92,8 +93,12 @@ div.stats .card-text {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .title {
@@ -108,7 +113,7 @@ div.title .btn {
 
 .main {
   background-color: #fff;
-  box-shadow: 0 8px 24px rgba(149,157,165,0.2);
+  box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
   border-radius: 5px;
   padding: 30px 20px;
 }
@@ -124,14 +129,14 @@ div.title .btn {
   position: relative;
 }
 
-.home::before{
-  content: '';
+.home::before {
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(52, 58, 64,0.5);
+  background-color: rgba(52, 58, 64, 0.5);
 }
 
 .home-content {
@@ -139,10 +144,10 @@ div.title .btn {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family:sans-serif;
-  font-weight:bold;
-  letter-spacing:5px;
-  color:#fff;
+  font-family: sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: #fff;
   width: 80%;
   text-align: center;
 }
@@ -165,21 +170,43 @@ div.home-content span {
   height: 300px;
   text-align: center;
   padding-top: 130px;
+  position: relative;
+  overflow: hidden;
+}
+
+.template .btn {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+}
+
+.template::before {
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
 }
 
-#template-1 {
+#template-1::before {
   background-image: url("/template_1_image.png");
 }
 
-#template-2 {
+#template-2::before {
   background-image: url("/template_2_image.png");
 }
 
-.template:hover {
-  opacity: 50%;
+.template:hover::before {
+  opacity: 0.5;
+}
+
+.template:hover .btn {
+  opacity: 1;
 }
 
 .template-title {

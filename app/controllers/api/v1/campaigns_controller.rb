@@ -8,7 +8,7 @@ class Api::V1::CampaignsController < ApplicationController
   end
 
   def templates
-    templates = ["Custom", "Template 1", "Template 2"].map.with_index do |title, index|
+    templates = ["Create your own design", "Template 1", "Template 2"].map.with_index do |title, index|
       {
         template: File.read("public/templates/template_#{index}.html"),
         title: title,
