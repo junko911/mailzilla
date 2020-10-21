@@ -160,3 +160,30 @@ div.home-content span {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.template {
+  height: 300px;
+  text-align: center;
+  padding-top: 130px;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+#template-1 {
+  background-image: url("/template_1_image.png");
+}
+
+#template-2 {
+  background-image: url("/template_2_image.png");
+}
+
+.template:hover {
+  opacity: 50%;
+}
+
+.template-title {
+  text-align: center;
+  font-weight: 800;
+  color: #8d99ae;
+  margin-top: 10px;
+}
