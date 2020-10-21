@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'reactstrap'
+import { Row, Col, Button } from 'reactstrap'
 import Segments from './Segments'
 import moment from 'moment'
 
@@ -11,6 +11,12 @@ const Details = ({ contact }) => {
           <div className="title">
             <h1>{contact.name}</h1>
             <small>Created <strong>{moment(contact.created_at).format('lll')}</strong></small>
+            <Button
+              color="secondary"
+              href={`/contacts`}
+            >
+              Go back to contacts
+              </Button>
           </div>
           <Row>
             <Col xs="8">
