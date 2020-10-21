@@ -40,7 +40,8 @@ class Api::V1::CampaignsController < ApplicationController
     campaign = Campaign.new(campaign_params)
     campaign.status = 0
     if campaign.valid?
-      campaign.content = File.read("public/templates/template_#{campaign.template_id}.html")
+      template_id = campaign.template_id ? campaign.template_id : 0
+      campaign.content = File.read("public/templates/template_#{template_id}.html")
       campaign.save
       render json: campaign, status: :created
     else

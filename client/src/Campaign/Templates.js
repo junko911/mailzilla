@@ -10,7 +10,7 @@ const Templates = props => {
             className="template"
             id={`template-${template.id}`}
             style={{
-              border: props.templateId === template.id ? "1px solid red" : "1px solid #ced4da",
+              border: props.templateId === template.id ? "1px solid #007bff" : "1px solid #ced4da",
             }}
           >
             <Button

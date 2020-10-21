@@ -11,7 +11,7 @@ class CreateForm extends React.Component {
   state = {
     name: "",
     subject: "",
-    template_id: 0,
+    template_id: null,
     segment_id: 0,
     segmentForm: false,
     segmentName: "",
