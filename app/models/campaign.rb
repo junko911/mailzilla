@@ -10,16 +10,16 @@ class Campaign < ApplicationRecord
   validates :subject, presence: true
 
   def as_json(_options = nil)
-    sent = campaign_contacts.length
-    delivered = campaign_contacts.where.not(delivered_at: nil).length
+    sent = campaign_contacts.count
+    delivered = campaign_contacts.where.not(delivered_at: nil).count
     delivered_rate = delivered / sent.to_f
-    open = campaign_contacts.where.not(open_at: nil).length
+    open = campaign_contacts.where.not(open_at: nil).count
     open_rate = open / delivered.to_f
-    bounce = campaign_contacts.where(status: "bounce").length
+    bounce = campaign_contacts.where(status: "bounce").count + campaign_contacts.where(status: "dropped").count
     bounce_rate = bounce / sent.to_f
-    click = campaign_contacts.where.not(click_at: nil).length
+    click = campaign_contacts.where.not(click_at: nil).count
     click_rate = click / delivered.to_f
-    spamreport = campaign_contacts.where(status: "spamreport").length
+    spamreport = campaign_contacts.where(status: "spamreport").count
     spamreport_rate = spamreport / delivered.to_f
 
     {
