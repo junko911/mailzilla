@@ -8,3 +8,6 @@ You can:
 * track the stats of the campaigns (open rate, click rate, unsubscribe, spam report, etc.)
 * manage and categorize contacts
 
+## Demo
+
+![](demo_contact.gif)
