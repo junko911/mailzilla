@@ -10,4 +10,3 @@ You can:
 
 ## Demo
 
-![](demo_contact.gif)
