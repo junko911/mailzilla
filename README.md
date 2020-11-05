@@ -12,3 +12,13 @@ You can:
 ## Demo
 
 [Video](https://www.youtube.com/watch?v=lAlcbW7LLvw&feature=youtu.be)
+
+## Technologies and stack
+
+* Frontend: React, React Redux, Reactstrap
+* Backend: Ruby/Ruby on Rails
+* Database: Postgresql
+* Email Sender: SendGrid
+* Template Editor: CKEditor
+* Data visualization: amCharts
+
