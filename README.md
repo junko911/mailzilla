@@ -4,9 +4,11 @@
 ## About
 Email newsletter tool built with React and Ruby on Rails.
 
-You can:
+Key features:
+
 * send email campaigns.
 * track the stats of the campaigns (open rate, click rate, unsubscribe, spam report, etc.)
+* import contacts from spreadsheets
 * manage and categorize contacts
 
 ## Demo
