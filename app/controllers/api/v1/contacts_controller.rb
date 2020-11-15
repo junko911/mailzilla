@@ -15,6 +15,12 @@ class Api::V1::ContactsController < ApplicationController
     render json: contacts
   end
 
+  def update
+    contact = Contact.find(params[:id])
+    contact.update(contact_params)
+    render json: contact
+  end
+
   def add_segment
     contact = Contact.find(params[:contact_id].to_i)
     contact.segments << Segment.find(params[:contact][:segment][:id])
@@ -25,5 +31,11 @@ class Api::V1::ContactsController < ApplicationController
     contact = Contact.find(params[:contact_id].to_i)
     contact.segments.delete(params[:contact][:segment_id])
     render json: contact
+  end
+
+  private
+
+  def contact_params
+    params.require(:contact).permit!
   end
 end

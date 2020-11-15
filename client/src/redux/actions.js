@@ -173,6 +173,29 @@ export const getContacts = () => {
   }
 }
 
+export const editContact = (id, field, value) => {
+  return function (dispatch) {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        contact: {
+          [field]: value
+        }
+      })
+    }
+    return fetch(`http://localhost:3000/api/v1/contacts/${id}`, options)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "update_contact", payload: data })
+      })
+  }
+}
+
 export const createSegment = segmentObj => {
   return function (dispatch) {
     const options = {

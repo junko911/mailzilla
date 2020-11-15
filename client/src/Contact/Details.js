@@ -1,29 +1,48 @@
-import React from 'react'
-import { Row, Col, Button } from 'reactstrap'
+import React, { useState } from 'react'
+import { Row, Col, Button, Form, Input, FormGroup } from 'reactstrap'
 import Segments from './Segments'
 import moment from 'moment'
+import { editContact } from '../redux/actions'
+import { connect } from "react-redux"
 
-const Details = ({ contact }) => {
+const Details = props => {
 
-  // const editForm = formDisplay ? "block" : "none"
-  // const editFormBtn = formDisplay ? "none" : "block"
+  const [formDisplay, setFormDisplay] = useState(false)
+  const [contactName, setContactName] = useState(props.contact.name)
+
+  const toggleEditForm = () => {
+    setFormDisplay(!formDisplay)
+  }
+
+  const changeHandler = e => {
+    setContactName(e.target.value)
+  }
+
+  const editHandler = e => {
+    e.preventDefault()
+    props.editHandler(props.contact.id, "name", contactName).then(data => {
+      toggleEditForm()
+    })
+  }
+
+  const editForm = formDisplay ? "block" : "none"
+  const editFormBtn = formDisplay ? "none" : "block"
 
   return (
     <>
-      {contact ?
+      {props.contact ?
         <>
           <div className="title">
-            <h1>{contact.name}</h1>
-            {/* <Form onSubmit={editHandler}>
+            <h1 style={{ display: editFormBtn }}>{props.contact.name}</h1>
+            <Form onSubmit={editHandler}>
               <FormGroup style={{ display: editForm, width: "300px" }}>
-                <Input type="text" value={campaignName} onChange={changeHandler} />
+                <Input type="text" value={contactName} onChange={changeHandler} />
                 <Button color="primary" size="sm" style={{ width: "100px", float: "none", marginTop: "10px" }}>Save</Button>
                 <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={toggleEditForm}>Cancel</span>
               </FormGroup>
-            </Form> */}
-            {/* <span className="edit" style={{ display: editFormBtn }} onClick={toggleEditForm}>Edit name</span> */}
-            <span className="edit" style={{ display: "block" }}>Edit name</span>
-            <small>Created <strong>{moment(contact.created_at).format('lll')}</strong></small>
+            </Form>
+            <span className="edit" style={{ display: editFormBtn }} onClick={toggleEditForm}>Edit name</span>
+            <small>Created <strong>{moment(props.contact.created_at).format('lll')}</strong></small>
             <Button
               color="secondary"
               href={`/contacts`}
@@ -40,26 +59,18 @@ const Details = ({ contact }) => {
                       <h4 style={{ display: "inline" }}>Email</h4>
                     </Col>
                     <Col xs="6">
-                      <div>{contact.email}</div>
+                      <div>{props.contact.email}</div>
                     </Col>
                     <Col xs="2">
                       <Button color="secondary">Edit</Button>
                     </Col>
                   </Row>
-                  {/* <Row>
-                    <Col xs="4">
-                      <h4 style={{ display: "inline" }}>Segment</h4>
-                    </Col>
-                    <Col xs="8">
-                      <div>{contact.email}</div>
-                    </Col>
-                  </Row> */}
                 </div>
               </div>
             </Col>
             <Col xs="4">
               <div className="main" style={{ paddingTop: "15px" }}>
-                <Segments contact={contact} />
+                <Segments contact={props.contact} />
               </div>
             </Col>
           </Row>
@@ -69,4 +80,8 @@ const Details = ({ contact }) => {
   )
 }
 
-export default Details
+const mdp = dispatch => {
+  return { editHandler: (id, field, value) => dispatch(editContact(id, field, value)) }
+}
+
+export default connect(null, mdp)(Details)
