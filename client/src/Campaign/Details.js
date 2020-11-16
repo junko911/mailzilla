@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
-import { Button, Badge, Col, Row, Form, Input, FormGroup } from 'reactstrap'
+import { Button, Badge, Col, Row, Form, Input, FormGroup, Label, } from 'reactstrap'
 import moment from 'moment'
 import Stats from './Stats'
-import { updateCampaign } from "../redux/actions";
+import { updateCampaign, createSegment } from "../redux/actions";
 import { connect } from "react-redux"
 
 const Details = props => {
 
   const [formDisplay, setFormDisplay] = useState(false)
   const [campaignName, setCampaignName] = useState(props.campaign.name)
+  const [segmentForm, setSegmentForm] = useState(false)
+  const [segmentName, setSegmentName] = useState("")
+  const [dropdownDisplay, setDropdownDisplay] = useState(false)
 
   const toggleEditForm = () => {
     setFormDisplay(!formDisplay)
@@ -28,6 +31,33 @@ const Details = props => {
   const editForm = formDisplay ? "block" : "none"
   const editFormBtn = formDisplay ? "none" : "block"
 
+  const genOptions = () => {
+    if (props.segments) {
+      return props.segments.map(segment => {
+        return <option key={segment.id} value={segment.id}>{segment.name}</option>
+      })
+    }
+  }
+
+  const dropDownHandler = e => {
+    if (e.target.value === "create") {
+      setSegmentForm("display")
+    } else {
+      props.editHandler(props.campaign.id, "segment_id", parseInt(e.target.value)).then(() => {
+        setDropdownDisplay(false)
+      })
+    }
+  }
+
+  const createSegment = () => {
+    props.createSegment({ name: segmentName }).then(data => {
+      props.editHandler(props.campaign.id, "segment_id", data.payload.id).then(() => {
+        setSegmentForm(false)
+        setDropdownDisplay(false)
+      })
+    })
+  }
+
   return (
     <>
       {props.campaign ?
@@ -36,7 +66,7 @@ const Details = props => {
             <h1 style={{ display: editFormBtn }}>{props.campaign.name} <Badge pill>{props.campaign.status[0].toUpperCase() + props.campaign.status.slice(1)}</Badge></h1>
             {props.campaign.status === "draft" ?
               <>
-                <Form onSubmit={editHandler}>
+                <Form onSubmit={e => editHandler(e, "name", campaignName)}>
                   <FormGroup style={{ display: editForm, width: "300px" }}>
                     <Input type="text" value={campaignName} onChange={changeHandler} />
                     <Button color="primary" size="sm" style={{ width: "100px", float: "none", marginTop: "10px" }}>Save</Button>
@@ -69,10 +99,25 @@ const Details = props => {
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Segment</h4></Col>
                 <Col xs="6">
-                  <div>{props.campaign.segment.name}</div>
+                  <div style={{ display: dropdownDisplay ? "none" : "block" }}>{props.campaign.segment.name}</div>
+                  <Form style={{ display: dropdownDisplay ? "block" : "none" }}>
+                    <FormGroup>
+                      <Label for="segment">Select a segment</Label>
+                      <Input type="select" name="segment_id" id="segment" onChange={dropDownHandler}>
+                        <option></option>
+                        <option value="create">Create a new segment</option>
+                        {genOptions()}
+                      </Input>
+                      <Label for="segmentForm" style={{ display: segmentForm ? "block" : "none", marginTop: "10px" }}>Enter segment name</Label>
+                      <Input type="text" style={{ display: segmentForm ? "block" : "none" }} id="segmentForm" value={segmentName} onChange={e => setSegmentName(e.target.value)} />
+                      <Button color="primary" size="sm" style={{ display: segmentForm ? "inline" : "none", marginTop: "10px" }} onClick={createSegment}>Create</Button>
+                      {/* <Button color="primary" size="sm" style={{ display: dropdownDisplay && !segmentForm ? "inline" : "none", marginTop: "10px" }} onClick={editHandler}>Edit</Button> */}
+                      <Button color="secondary" size="sm" style={{ display: dropdownDisplay ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => { setDropdownDisplay(false); setSegmentForm(false) }}>Cancel</Button>
+                    </FormGroup>
+                  </Form>
                 </Col>
                 <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm">Change segment</Button> : null}
+                  {props.campaign.status === "draft" ? <Button size="sm" style={{ display: dropdownDisplay ? "none" : "block" }} onClick={() => setDropdownDisplay(true)}>Change segment</Button> : null}
                 </Col>
               </Row>
               <Row style={{ borderBottom: "1px solid #dedddc" }}>
@@ -107,8 +152,17 @@ const Details = props => {
   )
 }
 
-const mdp = dispatch => {
-  return { editHandler: (id, field, value) => dispatch(updateCampaign(id, field, value)) }
+const msp = state => {
+  return {
+    segments: state.segments
+  }
 }
 
-export default connect(null, mdp)(Details)
+const mdp = dispatch => {
+  return {
+    editHandler: (id, field, value) => dispatch(updateCampaign(id, field, value)),
+    createSegment: segmentObj => dispatch(createSegment(segmentObj))
+  }
+}
+
+export default connect(msp, mdp)(Details)
