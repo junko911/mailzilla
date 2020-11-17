@@ -12,6 +12,8 @@ const Details = props => {
   const [segmentForm, setSegmentForm] = useState(false)
   const [segmentName, setSegmentName] = useState("")
   const [dropdownDisplay, setDropdownDisplay] = useState(false)
+  const [fromForm, setFromForm] = useState(false)
+  const [from, setFrom] = useState("")
 
   const toggleEditForm = () => {
     setFormDisplay(!formDisplay)
@@ -58,6 +60,12 @@ const Details = props => {
     })
   }
 
+  const fromFormHandler = e => {
+    props.editHandler(props.campaign.id, "from", from).then(() => {
+      setFromForm(false)
+    })
+  }
+
   return (
     <>
       {props.campaign ?
@@ -97,7 +105,7 @@ const Details = props => {
             <div style={{ margin: "0 20px", lineHeight: "45px" }}>
               <Row style={{ borderBottom: "1px solid #dedddc" }}>
                 <Col xs="4">
-                  <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Segment</h4></Col>
+                  <h4>&nbsp;&nbsp;Segment</h4></Col>
                 <Col xs="6">
                   <div style={{ display: dropdownDisplay ? "none" : "block" }}>{props.campaign.segment.name}</div>
                   <Form style={{ display: dropdownDisplay ? "block" : "none" }}>
@@ -111,8 +119,7 @@ const Details = props => {
                       <Label for="segmentForm" style={{ display: segmentForm ? "block" : "none", marginTop: "10px" }}>Enter segment name</Label>
                       <Input type="text" style={{ display: segmentForm ? "block" : "none" }} id="segmentForm" value={segmentName} onChange={e => setSegmentName(e.target.value)} />
                       <Button color="primary" size="sm" style={{ display: segmentForm ? "inline" : "none", marginTop: "10px" }} onClick={createSegment}>Create</Button>
-                      {/* <Button color="primary" size="sm" style={{ display: dropdownDisplay && !segmentForm ? "inline" : "none", marginTop: "10px" }} onClick={editHandler}>Edit</Button> */}
-                      <Button color="secondary" size="sm" style={{ display: dropdownDisplay ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => { setDropdownDisplay(false); setSegmentForm(false) }}>Cancel</Button>
+                      <Button color="secondary" size="sm" style={{ display: dropdownDisplay ? "inline" : "none", marginTop: "10px", marginLeft: segmentForm ? "10px" : "0px" }} onClick={() => { setDropdownDisplay(false); setSegmentForm(false) }}>Cancel</Button>
                     </FormGroup>
                   </Form>
                 </Col>
@@ -124,10 +131,17 @@ const Details = props => {
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;From</h4></Col>
                 <Col xs="6">
-                  <div>{props.campaign.from}</div>
+                  <Form style={{ marginTop: "10px", display: fromForm ? "block" : "none" }} onSubmit={e => editHandler(e, "name", campaignName)}>
+                    <FormGroup style={{ width: "300px" }}>
+                      <Input type="text" value={from} onChange={e => setFrom(e.target.value)} />
+                      <Button color="primary" size="sm" style={{ marginTop: "10px" }} onClick={fromFormHandler}>Save</Button>
+                      <Button color="secondary" size="sm" style={{ display: fromForm ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => setFromForm(false)}>Cancel</Button>
+                    </FormGroup>
+                  </Form>
+                  <div style={{ display: fromForm ? "none" : "block" }}>{props.campaign.from}</div>
                 </Col>
                 <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm">Change from</Button> : null}
+                  {props.campaign.status === "draft" ? <Button size="sm" onClick={() => setFromForm(true)} style={{ display: fromForm ? "none" : "inline" }}>Change from</Button> : null}
                 </Col>
               </Row>
               <Row>
