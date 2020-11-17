@@ -14,6 +14,8 @@ const Details = props => {
   const [dropdownDisplay, setDropdownDisplay] = useState(false)
   const [fromForm, setFromForm] = useState(false)
   const [from, setFrom] = useState("")
+  const [subjectForm, setSubjectForm] = useState(false)
+  const [subject, setSubject] = useState("")
 
   const toggleEditForm = () => {
     setFormDisplay(!formDisplay)
@@ -63,6 +65,12 @@ const Details = props => {
   const fromFormHandler = e => {
     props.editHandler(props.campaign.id, "from", from).then(() => {
       setFromForm(false)
+    })
+  }
+
+  const subjectFormHandler = e => {
+    props.editHandler(props.campaign.id, "subject", subject).then(() => {
+      setSubjectForm(false)
     })
   }
 
@@ -131,7 +139,7 @@ const Details = props => {
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;From</h4></Col>
                 <Col xs="6">
-                  <Form style={{ marginTop: "10px", display: fromForm ? "block" : "none" }} onSubmit={e => editHandler(e, "name", campaignName)}>
+                  <Form style={{ marginTop: "10px", display: fromForm ? "block" : "none" }}>
                     <FormGroup style={{ width: "300px" }}>
                       <Input type="text" value={from} onChange={e => setFrom(e.target.value)} />
                       <Button color="primary" size="sm" style={{ marginTop: "10px" }} onClick={fromFormHandler}>Save</Button>
@@ -148,10 +156,17 @@ const Details = props => {
                 <Col xs="4">
                   <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Subject</h4></Col>
                 <Col xs="6">
-                  <div>{props.campaign.subject}</div>
+                  <Form style={{ marginTop: "10px", display: subjectForm ? "block" : "none" }} onSubmit={subjectFormHandler}>
+                    <FormGroup style={{ width: "300px" }}>
+                      <Input type="text" value={subject} onChange={e => setSubject(e.target.value)} />
+                      <Button color="primary" size="sm" style={{ marginTop: "10px" }} onClick={subjectFormHandler}>Save</Button>
+                      <Button color="secondary" size="sm" style={{ display: subjectForm ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => setSubjectForm(false)}>Cancel</Button>
+                    </FormGroup>
+                  </Form>
+                  <div style={{ display: subjectForm ? "none" : "block" }}>{props.campaign.subject}</div>
                 </Col>
                 <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm">Change subject</Button> : null}
+                  {props.campaign.status === "draft" ? <Button size="sm" onClick={() => setSubjectForm(true)} >Change subject</Button> : null}
                 </Col>
               </Row>
             </div>
