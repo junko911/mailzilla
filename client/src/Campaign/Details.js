@@ -7,7 +7,7 @@ import { connect } from "react-redux"
 
 const Details = props => {
 
-  const [formDisplay, setFormDisplay] = useState(false)
+  const [nameForm, setNameForm] = useState(false)
   const [campaignName, setCampaignName] = useState(props.campaign.name)
   const [segmentForm, setSegmentForm] = useState(false)
   const [segmentName, setSegmentName] = useState("")
@@ -17,22 +17,14 @@ const Details = props => {
   const [subjectForm, setSubjectForm] = useState(false)
   const [subject, setSubject] = useState(props.campaign.subject)
 
-  const toggleEditForm = () => {
-    setFormDisplay(!formDisplay)
-  }
-
-  const changeHandler = e => {
-    setCampaignName(e.target.value)
-  }
-
-  const editHandler = e => {
+  const nameFormHandler = e => {
     e.preventDefault()
-    props.editHandler(props.campaign.id, "name", campaignName).then(data => {
-      toggleEditForm()
+    props.editHandler(props.campaign.id, "name", campaignName).then(() => {
+      setNameForm(false)
     })
   }
 
-  const genOptions = () => {
+  const genSegmentOptions = () => {
     if (props.segments) {
       return props.segments.map(segment => {
         return <option key={segment.id} value={segment.id}>{segment.name}</option>
@@ -76,17 +68,17 @@ const Details = props => {
       {props.campaign ?
         <>
           <div className="title">
-            <h1 style={{ display: formDisplay ? "none" : "block" }}>{props.campaign.name} <Badge pill>{props.campaign.status[0].toUpperCase() + props.campaign.status.slice(1)}</Badge></h1>
+            <h1 style={{ display: nameForm ? "none" : "block" }}>{props.campaign.name} <Badge pill>{props.campaign.status[0].toUpperCase() + props.campaign.status.slice(1)}</Badge></h1>
             {props.campaign.status === "draft" ?
               <>
-                <Form onSubmit={e => editHandler(e, "name", campaignName)}>
-                  <FormGroup style={{ display: formDisplay ? "block" : "none", width: "300px" }}>
-                    <Input type="text" value={campaignName} onChange={changeHandler} />
+                <Form onSubmit={e => nameFormHandler(e)}>
+                  <FormGroup style={{ display: nameForm ? "block" : "none", width: "300px" }}>
+                    <Input type="text" value={campaignName} onChange={e => setCampaignName(e.target.value)} />
                     <Button color="primary" size="sm" style={{ width: "100px", float: "none", marginTop: "10px" }}>Save</Button>
-                    <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={toggleEditForm}>Cancel</span>
+                    <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={() => setNameForm(false)}>Cancel</span>
                   </FormGroup>
                 </Form>
-                <span className="edit" style={{ display: formDisplay ? "none" : "block" }} onClick={toggleEditForm}>Edit name</span>
+                <span className="edit" style={{ display: nameForm ? "none" : "block" }} onClick={() => setNameForm(true)}>Edit name</span>
                 <small>Created <strong>{moment(props.campaign.created_at).format('lll')}</strong></small>
               </>
               :
@@ -119,7 +111,7 @@ const Details = props => {
                       <Input type="select" name="segment_id" id="segment" onChange={dropDownHandler}>
                         <option></option>
                         <option value="create">Create a new segment</option>
-                        {genOptions()}
+                        {genSegmentOptions()}
                       </Input>
                       <Label for="segmentForm" style={{ display: segmentForm ? "block" : "none", marginTop: "10px" }}>Enter segment name</Label>
                       <Input type="text" style={{ display: segmentForm ? "block" : "none" }} id="segmentForm" value={segmentName} onChange={e => setSegmentName(e.target.value)} />
