@@ -155,16 +155,16 @@ const Details = props => {
                   <div style={{ display: subjectForm ? "none" : "block" }}>{props.campaign.subject}</div>
                 </Col>
                 <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm" onClick={() => setSubjectForm(true)} >Change subject</Button> : null}
+                  {props.campaign.status === "draft" ? <Button size="sm" style={{ display: subjectForm ? "none" : "inline" }} onClick={() => setSubjectForm(true)} >Change subject</Button> : null}
                 </Col>
               </Row>
-            </div>
           </div>
+        </div>
           {props.campaign.status === "sent" ?
-            <Stats campaign={props.campaign} />
-            : null
-          }
-        </>
+        <Stats campaign={props.campaign} />
+        : null
+      }
+    </>
         : null}
     </>
   )
