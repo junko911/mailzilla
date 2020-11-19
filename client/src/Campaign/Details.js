@@ -13,9 +13,9 @@ const Details = props => {
   const [segmentName, setSegmentName] = useState("")
   const [dropdownDisplay, setDropdownDisplay] = useState(false)
   const [fromForm, setFromForm] = useState(false)
-  const [from, setFrom] = useState("")
+  const [from, setFrom] = useState(props.campaign.from)
   const [subjectForm, setSubjectForm] = useState(false)
-  const [subject, setSubject] = useState("")
+  const [subject, setSubject] = useState(props.campaign.subject)
 
   const toggleEditForm = () => {
     setFormDisplay(!formDisplay)
@@ -31,9 +31,6 @@ const Details = props => {
       toggleEditForm()
     })
   }
-
-  const editForm = formDisplay ? "block" : "none"
-  const editFormBtn = formDisplay ? "none" : "block"
 
   const genOptions = () => {
     if (props.segments) {
@@ -79,17 +76,17 @@ const Details = props => {
       {props.campaign ?
         <>
           <div className="title">
-            <h1 style={{ display: editFormBtn }}>{props.campaign.name} <Badge pill>{props.campaign.status[0].toUpperCase() + props.campaign.status.slice(1)}</Badge></h1>
+            <h1 style={{ display: formDisplay ? "none" : "block" }}>{props.campaign.name} <Badge pill>{props.campaign.status[0].toUpperCase() + props.campaign.status.slice(1)}</Badge></h1>
             {props.campaign.status === "draft" ?
               <>
                 <Form onSubmit={e => editHandler(e, "name", campaignName)}>
-                  <FormGroup style={{ display: editForm, width: "300px" }}>
+                  <FormGroup style={{ display: formDisplay ? "block" : "none", width: "300px" }}>
                     <Input type="text" value={campaignName} onChange={changeHandler} />
                     <Button color="primary" size="sm" style={{ width: "100px", float: "none", marginTop: "10px" }}>Save</Button>
                     <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={toggleEditForm}>Cancel</span>
                   </FormGroup>
                 </Form>
-                <span className="edit" style={{ display: editFormBtn }} onClick={toggleEditForm}>Edit name</span>
+                <span className="edit" style={{ display: formDisplay ? "none" : "block" }} onClick={toggleEditForm}>Edit name</span>
                 <small>Created <strong>{moment(props.campaign.created_at).format('lll')}</strong></small>
               </>
               :
