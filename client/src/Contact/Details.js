@@ -7,23 +7,15 @@ import { connect } from "react-redux"
 
 const Details = props => {
 
-  const [formDisplay, setFormDisplay] = useState(false)
+  const [nameForm, setnameForm] = useState(false)
   const [contactName, setContactName] = useState(props.contact.name)
   const [emailForm, setEmailForm] = useState(false)
   const [email, setEmail] = useState(props.contact.email)
 
-  const toggleEditForm = () => {
-    setFormDisplay(!formDisplay)
-  }
-
-  const changeHandler = e => {
-    setContactName(e.target.value)
-  }
-
-  const editHandler = e => {
+  const nameFormHandler = e => {
     e.preventDefault()
     props.editHandler(props.contact.id, "name", contactName).then(() => {
-      toggleEditForm()
+      setnameForm(false)
     })
   }
 
@@ -33,23 +25,20 @@ const Details = props => {
     })
   }
 
-  const editForm = formDisplay ? "block" : "none"
-  const editFormBtn = formDisplay ? "none" : "block"
-
   return (
     <>
       {props.contact ?
         <>
           <div className="title">
-            <h1 style={{ display: editFormBtn }}>{props.contact.name}</h1>
-            <Form onSubmit={editHandler}>
-              <FormGroup style={{ display: editForm, width: "300px" }}>
-                <Input type="text" value={contactName} onChange={changeHandler} />
+            <h1 style={{ display: nameForm ? "none" : "block" }}>{props.contact.name}</h1>
+            <Form onSubmit={nameFormHandler}>
+              <FormGroup style={{ display: nameForm ? "block" : "none", width: "300px" }}>
+                <Input type="text" value={contactName} onChange={e => setContactName(e.target.value)} />
                 <Button color="primary" size="sm" style={{ width: "100px", float: "none", marginTop: "10px" }}>Save</Button>
-                <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={toggleEditForm}>Cancel</span>
+                <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={() => setnameForm(false)}>Cancel</span>
               </FormGroup>
             </Form>
-            <span className="edit" style={{ display: editFormBtn }} onClick={toggleEditForm}>Edit name</span>
+            <span className="edit" style={{ display: nameForm ? "none" : "block" }} onClick={() => setnameForm(true)}>Edit name</span>
             <small>Created <strong>{moment(props.contact.created_at).format('lll')}</strong></small>
             <Button
               color="secondary"
