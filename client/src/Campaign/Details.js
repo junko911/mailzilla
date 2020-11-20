@@ -51,13 +51,13 @@ const Details = props => {
     })
   }
 
-  const fromFormHandler = e => {
+  const fromFormHandler = () => {
     props.editHandler(props.campaign.id, "from", from).then(() => {
       setFromForm(false)
     })
   }
 
-  const subjectFormHandler = e => {
+  const subjectFormHandler = () => {
     props.editHandler(props.campaign.id, "subject", subject).then(() => {
       setSubjectForm(false)
     })

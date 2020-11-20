@@ -9,6 +9,8 @@ const Details = props => {
 
   const [formDisplay, setFormDisplay] = useState(false)
   const [contactName, setContactName] = useState(props.contact.name)
+  const [emailForm, setEmailForm] = useState(false)
+  const [email, setEmail] = useState(props.contact.email)
 
   const toggleEditForm = () => {
     setFormDisplay(!formDisplay)
@@ -20,8 +22,14 @@ const Details = props => {
 
   const editHandler = e => {
     e.preventDefault()
-    props.editHandler(props.contact.id, "name", contactName).then(data => {
+    props.editHandler(props.contact.id, "name", contactName).then(() => {
       toggleEditForm()
+    })
+  }
+
+  const emailFormHandler = () => {
+    props.editHandler(props.contact.id, "email", email).then(() => {
+      setEmailForm(false)
     })
   }
 
@@ -59,10 +67,17 @@ const Details = props => {
                       <h4 style={{ display: "inline" }}>Email</h4>
                     </Col>
                     <Col xs="6">
-                      <div>{props.contact.email}</div>
+                      <Form style={{ marginTop: "10px", display: emailForm ? "block" : "none" }} onSubmit={emailFormHandler}>
+                        <FormGroup style={{ width: "300px" }}>
+                          <Input type="text" value={email} onChange={e => setEmail(e.target.value)} />
+                          <Button color="primary" size="sm" style={{ marginTop: "10px" }} onClick={emailFormHandler}>Save</Button>
+                          <Button color="secondary" size="sm" style={{ display: emailForm ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => setEmailForm(false)}>Cancel</Button>
+                        </FormGroup>
+                      </Form>
+                      <div style={{ display: emailForm ? "none" : "block" }}>{props.contact.email}</div>
                     </Col>
                     <Col xs="2">
-                      <Button color="secondary">Edit</Button>
+                      <Button color="secondary" style={{ display: emailForm ? "none" : "inline" }} onClick={() => setEmailForm(true)}>Edit</Button>
                     </Col>
                   </Row>
                 </div>
