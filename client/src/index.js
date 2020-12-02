@@ -13,7 +13,7 @@ import { createBrowserHistory } from "history";
 export const history = createBrowserHistory()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ))
 

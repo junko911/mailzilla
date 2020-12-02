@@ -1,14 +1,6 @@
 import { history } from '../index'
 const token = localStorage.getItem("token")
 
-// const unauthCheck = (response) => {
-//   if (!response.ok) {
-//     console.error('Unauth error');
-//     history.push("/")
-//   }
-//   return response
-// }
-
 export const getCurrentUser = () => {
   return function (dispatch) {
     if (token) {

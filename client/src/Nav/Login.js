@@ -22,7 +22,6 @@ class Login extends React.Component {
       if (data) {
         this.setState({ errorMessage: data.message })
       }
-      // this.props.history.push("/campaigns")
     })
   }
 
