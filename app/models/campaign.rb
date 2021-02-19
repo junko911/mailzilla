@@ -60,17 +60,18 @@ class Campaign < ApplicationRecord
   end
 
   def send_test
-    fromAddress = SendGrid::Email.new(email: from)
+    fromAddress = SendGrid::Email.new(email: ENV["EMAIL_FROM"], name: user.name)
     body = SendGrid::Content.new(type: "text/html", value: content)
     sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
     to = SendGrid::Email.new(email: user.email)
     mail = SendGrid::Mail.new(fromAddress, subject, to, body)
+    mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
     sg.client.mail._("send").post(request_body: mail.to_json)
   end
 
   def send_to_segment
     if status === "draft"
-      fromAddress = SendGrid::Email.new(email: from)
+      fromAddress = SendGrid::Email.new(email: ENV["EMAIL_FROM"], name: user.name)
       sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
 
       segment.contacts.each { |contact|
@@ -79,6 +80,7 @@ class Campaign < ApplicationRecord
         campaign_contact = campaign_contacts.create(contact: contact)
         to = SendGrid::Email.new(email: contact.email)
         mail = SendGrid::Mail.new(fromAddress, subject, to, body)
+        mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
         mail.add_custom_arg(SendGrid::CustomArg.new(key: "campaign_contact_id", value: campaign_contact.id))
         sg.client.mail._("send").post(request_body: mail.to_json)
       }
