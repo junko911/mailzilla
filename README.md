@@ -4,6 +4,8 @@
 ## About
 Email newsletter tool built with React and Ruby on Rails.
 
+[Link](https://mailzilla-app.herokuapp.com/)
+
 Key features:
 
 * send email campaigns.
