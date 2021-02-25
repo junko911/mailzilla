@@ -62,17 +62,18 @@ class Campaign < ApplicationRecord
   end
 
   def send_test
-    from_address = SendGrid::Email.new(email: from)
+    from_address = SendGrid::Email.new(email: from, name: user.name)
     body = SendGrid::Content.new(type: "text/html", value: content)
     to = SendGrid::Email.new(email: user.email)
     mail = SendGrid::Mail.new(from_address, subject, to, body)
+    mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
     sg.client.mail._("send").post(request_body: mail.to_json)
   end
 
   def send_to_segment
     return unless draft?
 
-    from_address = SendGrid::Email.new(email: from)
+    from_address = SendGrid::Email.new(email: from, ENV["EMAIL_FROM"], name: user.name)
 
     segment.contacts.each do |contact|
       value = Mustache.render(content, name: contact.name)
@@ -80,6 +81,7 @@ class Campaign < ApplicationRecord
       campaign_contact = campaign_contacts.create(contact: contact)
       to = SendGrid::Email.new(email: contact.email)
       mail = SendGrid::Mail.new(from_address, subject, to, body)
+      mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
       mail.add_custom_arg(SendGrid::CustomArg.new(key: "campaign_contact_id", value: campaign_contact.id))
       sg.client.mail._("send").post(request_body: mail.to_json)
     end
