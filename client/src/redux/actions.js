@@ -1,10 +1,11 @@
 import { history } from '../index'
+import API_URL from '../config'
 const token = localStorage.getItem("token")
 
 export const getCurrentUser = () => {
   return function (dispatch) {
     if (token) {
-      fetch("http://localhost:3000/api/v1/profile", {
+      fetch(`${API_URL}/api/v1/profile`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => res.json())
@@ -16,7 +17,7 @@ export const getCurrentUser = () => {
 export const getSegments = () => {
   return function (dispatch) {
     if (token) {
-      fetch("http://localhost:3000/api/v1/segments", {
+      fetch(`${API_URL}/api/v1/segments`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => res.json())
@@ -37,7 +38,7 @@ export const login = userObj => {
         user: userObj
       })
     }
-    return fetch("http://localhost:3000/api/v1/login", options)
+    return fetch(`${API_URL}/api/v1/login`, options)
       .then(res => res.json())
       .then(data => {
         if (data.user) {
@@ -63,7 +64,7 @@ export const signup = userObj => {
         user: userObj
       })
     }
-    return fetch("http://localhost:3000/api/v1/users", options)
+    return fetch(`${API_URL}/api/v1/users`, options)
       .then(res => res.json())
       .then(data => {
         if (data.user) {
@@ -88,7 +89,7 @@ export const logout = () => {
 export const getCampaigns = () => {
   return function (dispatch) {
     const token = localStorage.getItem("token")
-    fetch("http://localhost:3000/api/v1/campaigns", {
+    fetch(`${API_URL}/api/v1/campaigns`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => res.json())
@@ -109,7 +110,7 @@ export const createCampaign = campaignObj => {
         campaign: campaignObj
       })
     }
-    return fetch("http://localhost:3000/api/v1/campaigns", options)
+    return fetch(`${API_URL}/api/v1/campaigns`, options)
       .then(res => res.json())
       .then(data => {
         if (data.errors) {
@@ -137,7 +138,7 @@ export const updateCampaign = (id, field, value) => {
         }
       })
     }
-    return fetch(`http://localhost:3000/api/v1/campaigns/${id}`, options)
+    return fetch(`${API_URL}/api/v1/campaigns/${id}`, options)
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "update_campaign", payload: data })
@@ -147,7 +148,7 @@ export const updateCampaign = (id, field, value) => {
 
 export const getTemplates = () => {
   return function (dispatch) {
-    fetch("http://localhost:3000/api/v1/campaigns/templates", {
+    fetch(`${API_URL}/api/v1/campaigns/templates`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => res.json())
@@ -157,7 +158,7 @@ export const getTemplates = () => {
 
 export const getContacts = () => {
   return function (dispatch) {
-    fetch("http://localhost:3000/api/v1/contacts", {
+    fetch(`${API_URL}/api/v1/contacts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => res.json())
@@ -180,7 +181,7 @@ export const editContact = (id, field, value) => {
         }
       })
     }
-    return fetch(`http://localhost:3000/api/v1/contacts/${id}`, options)
+    return fetch(`${API_URL}/api/v1/contacts/${id}`, options)
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "update_contact", payload: data })
@@ -201,7 +202,7 @@ export const createSegment = segmentObj => {
         segment: segmentObj
       })
     }
-    return fetch("http://localhost:3000/api/v1/segments", options)
+    return fetch(`${API_URL}/api/v1/segments`, options)
       .then(res => res.json())
       .then(data => dispatch({ type: "create_segment", payload: data }))
   }
@@ -220,7 +221,7 @@ export const addSegment = (contactId, segmentObj) => {
         segment: segmentObj
       })
     }
-    return fetch("http://localhost:3000/api/v1/segments", options)
+    return fetch(`${API_URL}/api/v1/segments`, options)
       .then(res => res.json())
       .then(data => {
         const options = {
@@ -236,7 +237,7 @@ export const addSegment = (contactId, segmentObj) => {
             }
           })
         }
-        fetch(`http://localhost:3000/api/v1/contacts/${contactId}/add_segment`, options)
+        fetch(`${API_URL}/api/v1/contacts/${contactId}/add_segment`, options)
           .then(res => res.json())
           .then(data => dispatch({ type: "update_contact", payload: data }))
       })
@@ -258,7 +259,7 @@ export const removeSegment = (contactId, segmentId) => {
         }
       })
     }
-    fetch(`http://localhost:3000/api/v1/contacts/${contactId}/remove_segment`, options)
+    fetch(`${API_URL}/api/v1/contacts/${contactId}/remove_segment`, options)
       .then(res => res.json())
       .then(data => dispatch({ type: "update_contact", payload: data }))
   }
@@ -274,7 +275,7 @@ export const sendToSegment = campaignId => {
         Authorization: `Bearer ${token}`
       }
     }
-    return fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/send_to_segment`, options)
+    return fetch(`${API_URL}/api/v1/campaigns/${campaignId}/send_to_segment`, options)
       .then(res => res.json())
       .then(data => dispatch({ type: "update_campaign", payload: data }))
   }
@@ -296,7 +297,7 @@ export const importContacts = (inputValue, userId) => {
         }
       })
     }
-    return fetch("http://localhost:3000/api/v1/contacts", options)
+    return fetch(`${API_URL}/api/v1/contacts`, options)
       .then(res => res.json())
       .then(data => dispatch({ type: "add_contacts", payload: data }))
   }
@@ -304,7 +305,7 @@ export const importContacts = (inputValue, userId) => {
 
 export const getStats = campaignId => {
   return function (dispatch) {
-    return fetch(`http://localhost:3000/api/v1/campaigns/${campaignId}/stats`)
+    return fetch(`${API_URL}/api/v1/campaigns/${campaignId}/stats`)
       .then(res => res.json())
       .then(data => dispatch({ type: "get_stats", payload: data }))
   }

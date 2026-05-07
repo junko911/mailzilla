@@ -1,4 +1,5 @@
 import React from "react"
+import API_URL from "../config"
 import { Row, Col, Button, Form, FormGroup } from "reactstrap"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
@@ -38,7 +39,7 @@ class EditForm extends React.Component {
         '/',
         '/'
       ],
-      filebrowserImageUploadUrl: `http://localhost:3000/api/v1/campaigns/${this.props.campaign.id}/upload`,
+      filebrowserImageUploadUrl: `${API_URL}/api/v1/campaigns/${this.props.campaign.id}/upload`,
     }
 
     CKEditor.editorUrl = "https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import API_URL from "../config"
 import { connect } from "react-redux"
 import { Row, Col, Button, Modal, ModalBody, ModalFooter, Alert } from "reactstrap"
 import { sendToSegment } from "../redux/actions"
@@ -25,7 +26,7 @@ const Preview = props => {
       },
     }
     fetch(
-      `http://localhost:3000/api/v1/campaigns/${props.id}/send_test`, options)
+      `${API_URL}/api/v1/campaigns/${props.id}/send_test`, options)
       .then(() => {
         toggleAlert()
       })

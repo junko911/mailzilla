@@ -79,7 +79,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: mod5_final_project_backend_production
-  username: mod5_final_project_backend
-  password: <%= ENV['MOD5_FINAL_PROJECT_BACKEND_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

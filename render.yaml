@@ -6,7 +6,17 @@ databases:
 
 services:
   - type: web
-    name: mailzilla
+    name: mailzilla-frontend
+    runtime: static
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://mailzilla-api.onrender.com
+
+  - type: web
+    name: mailzilla-api
     runtime: ruby
     plan: free
     buildCommand: bundle install && bundle exec rake db:migrate
@@ -20,7 +30,11 @@ services:
           property: connectionString
       - key: RAILS_ENV
         value: production
+      - key: RAILS_LOG_TO_STDOUT
+        value: "1"
       - key: RAILS_MASTER_KEY
         sync: false
       - key: SENDGRID_API_KEY
+        sync: false
+      - key: SECRET_KEY_BASE
         sync: false
