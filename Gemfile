@@ -5,7 +5,7 @@ ruby '3.3.7'
 
 gem 'rails', '~> 7.0'
 gem 'pg', '>= 1.0'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 gem 'mustache'
 gem 'groupdate'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
