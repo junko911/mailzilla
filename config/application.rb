@@ -19,7 +19,7 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 
 Bundler.require(*Rails.groups)
-Dotenv::Railtie.load
+Dotenv::Rails.load
 
 module Mod5FinalProjectBackend
   class Application < Rails::Application
