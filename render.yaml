@@ -6,16 +6,6 @@ databases:
 
 services:
   - type: web
-    name: mailzilla-frontend
-    runtime: static
-    rootDir: client
-    buildCommand: npm install && npm run build
-    staticPublishPath: build
-    envVars:
-      - key: REACT_APP_API_URL
-        value: https://mailzilla-api.onrender.com
-
-  - type: web
     name: mailzilla-api
     runtime: ruby
     plan: free
