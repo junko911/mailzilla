@@ -69,7 +69,18 @@ class Api::V1::CampaignsController < ApplicationController
   end
 
   def send_test
-    @campaign.send_test
+    email = params.permit(:email)[:email].to_s.strip
+    if email.blank?
+      render json: { errors: ["Enter an email address"] }, status: :unprocessable_entity
+      return
+    end
+
+    unless email.match?(URI::MailTo::EMAIL_REGEXP)
+      render json: { errors: ["Invalid email address"] }, status: :unprocessable_entity
+      return
+    end
+
+    @campaign.send_test(to_email: email)
     render json: @campaign
   end
 

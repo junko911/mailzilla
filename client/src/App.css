@@ -192,20 +192,145 @@ div.stats .pagination { display: none; }
 .campaign-detail-header-actions {
   display: flex;
   flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+/* Preview page — actions column, edges line up */
+.preview-header-actions {
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  max-width: 440px;
+  margin-left: auto;
+}
+
+.preview-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+.preview-toolbar-quick {
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  justify-content: flex-end;
+}
+
+.preview-send-test-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  width: 100%;
+  max-width: none;
+}
+
+.preview-send-test-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.preview-send-test-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.preview-send-test-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.preview-send-test-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.preview-send-test-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 38px;
+  border-radius: 8px;
+  border-color: #e2e8f0;
+  font-size: 14px;
+}
+
+.preview-send-test-submit {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  height: 38px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-send-test-error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+/* preview-toolbar stays column: Send test card always below Edit / Send to segment */
+
+@media (max-width: 767px) {
+  .preview-header-actions {
+    margin-left: 0;
+    max-width: none;
+  }
 }
 
 @media (max-width: 576px) {
-  .campaign-detail-header-actions {
+  .campaign-detail-header-actions:not(.preview-header-actions) {
     width: 100%;
     flex-direction: column;
     align-items: stretch;
   }
 
-  .campaign-detail-header-actions .btn {
+  .campaign-detail-header-actions:not(.preview-header-actions) > .btn {
     width: 100%;
     margin-left: 0 !important;
+  }
+
+  .preview-header-actions {
+    flex-wrap: wrap;
+  }
+
+  .preview-toolbar-quick .btn {
+    flex: 1 1 auto;
+    min-width: calc(50% - 4px);
+  }
+
+  .preview-send-test-row {
+    flex-wrap: wrap;
+  }
+
+  .preview-send-test-submit {
+    flex: 1 1 auto;
+    min-width: 96px;
   }
 }
 

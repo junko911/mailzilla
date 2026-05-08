@@ -13,6 +13,7 @@
     "ckeditor4-react": "^1.2.0",
     "mdbreact": "^4.27.0",
     "moment": "^2.29.1",
+    "process": "^0.11.10",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
