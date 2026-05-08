@@ -25,9 +25,9 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+workers ENV.fetch("WEB_CONCURRENCY") { 0 }
 
-preload_app!
+preload_app! if ENV.fetch("WEB_CONCURRENCY") { 0 }.to_i > 0
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart

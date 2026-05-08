@@ -63,7 +63,7 @@ class Login extends React.Component {
             </AvForm>
             <div style={{ marginTop: "16px", textAlign: "center" }}>
               <Button color="success" outline onClick={this.demoLogin} style={{ width: "100%" }}>
-                🚀 Try Demo
+                <span role="img" aria-label="rocket">🚀</span> Try Demo
               </Button>
               <small style={{ color: "#888", display: "block", marginTop: "6px" }}>
                 demo@mailzilla.com / demo1234

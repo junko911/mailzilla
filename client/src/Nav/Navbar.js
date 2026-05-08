@@ -12,14 +12,13 @@ const NavBar = props => {
   return (
     <div className="nav-bar">
       <Navbar
-        color="dark"
-        dark
+        color="light"
+        light
         expand="md"
-        style={{ height: "100px" }}
       >
-        <NavbarBrand href="/" style={{ fontSize: "30px", paddingTop: "8px", paddingLeft: "100px", paddingRight: "50px" }}>
-          <img src={"/paper-plane.png"} width="40" height="40" className="d-inline-block align-top" alt="" loading="lazy" />
-          <span>&nbsp;&nbsp;</span><strong>MailZilla</strong>
+        <NavbarBrand href="/">
+          <img src={"/paper-plane.png"} width="28" height="28" className="d-inline-block align-middle" alt="" loading="lazy" />
+          <span style={{ marginLeft: "8px" }}>MailZilla</span>
         </NavbarBrand>
         {props.currentUser ?
           <>
