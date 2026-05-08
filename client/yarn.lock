@@ -3059,10 +3059,10 @@ ckeditor4-react@^1.2.0:
     load-script "^1.0.0"
     prop-types "^15.6.2"
 
-ckeditor4@^4.15.0, ckeditor4@4.25.1:
-  version "4.25.1"
-  resolved "https://registry.npmjs.org/ckeditor4/-/ckeditor4-4.25.1.tgz"
-  integrity sha512-azUTe02NzSDfMX1UGWDdkhEdTdB/Ivn9uPyIRpygkCc4jmP/l8KOiK1nCfhSAb3KofD7gl+K+oee1WG0MZnwuQ==
+ckeditor4@^4.15.0, ckeditor4@4.22.1:
+  version "4.22.1"
+  resolved "https://registry.npmjs.org/ckeditor4/-/ckeditor4-4.22.1.tgz"
+  integrity sha512-Yj4vTHX5YxHwc48gNqUqTm+KLkRr9tuyb4O2VIABu4oKHWRNVIdLdy6vUNe/XNx+RiTavMejfA1MVOU/MxLjqQ==
 
 class-utils@^0.3.5:
   version "0.3.6"

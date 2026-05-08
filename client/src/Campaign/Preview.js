@@ -13,8 +13,6 @@ const Preview = props => {
   const [alert, setAlert] = useState(false)
   const toggleAlert = () => setAlert(!alert)
 
-  const alertDisplay = alert ? "block" : "none"
-
   const sendTest = () => {
     const token = localStorage.getItem("token")
     const options = {
@@ -46,10 +44,10 @@ const Preview = props => {
           <div className="title campaign-detail-header">
             <div className="campaign-detail-header-text">
               <h1>Preview</h1>
-              <small style={{ display: "block", marginTop: "6px", color: "#64748b" }}>
-                <strong style={{ color: "#475569" }}>Subject:</strong>{" "}
-                {foundCampaign.subject || "—"}
-              </small>
+              <p className="preview-subject-line">
+                <span className="preview-subject-label">Subject</span>
+                <span className="preview-subject-value">{foundCampaign.subject || "—"}</span>
+              </p>
             </div>
             <div className="campaign-detail-header-actions">
               {foundCampaign.status === "draft" ? (
@@ -70,10 +68,12 @@ const Preview = props => {
               </Button>
             </div>
           </div>
-          <Alert color="success" style={{ display: alertDisplay }}>
-            The campaign has been sent!
-          </Alert>
-          <div className="main">
+          {alert ? (
+            <Alert color="success" className="preview-sent-alert" toggle={toggleAlert}>
+              The campaign has been sent!
+            </Alert>
+          ) : null}
+          <div className="main preview-page-card">
             <div className="campaign-field-label">Email preview</div>
             <div className="preview-email-shell">
               {foundCampaign.content ? (

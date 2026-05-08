@@ -196,6 +196,55 @@ div.stats .pagination { display: none; }
   align-items: center;
 }
 
+@media (max-width: 576px) {
+  .campaign-detail-header-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .campaign-detail-header-actions .btn {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+}
+
+/* Preview page header */
+.preview-subject-line {
+  margin: 10px 0 0 0;
+  max-width: 52rem;
+}
+
+.preview-subject-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.preview-subject-value {
+  display: block;
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.preview-sent-alert {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 1px 4px rgba(16, 185, 129, 0.2);
+}
+
+.main.preview-page-card {
+  padding-top: 28px;
+  padding-bottom: 40px;
+}
+
 .campaign-field-label {
   font-size: 11px;
   text-transform: uppercase;
@@ -221,21 +270,26 @@ div.stats .pagination { display: none; }
 
 /* ── Campaign preview ── */
 .preview-email-shell {
-  margin-top: 10px;
+  margin-top: 12px;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   background: #f1f5f9;
-  padding: 20px;
-  min-height: 480px;
+  padding: clamp(16px, 3vw, 24px);
+  min-height: 320px;
+  max-height: min(78vh, 920px);
+  display: flex;
+  flex-direction: column;
 }
 
 .preview-email-body {
+  flex: 1 1 auto;
+  min-height: 0;
   background: #ffffff;
   border-radius: 10px;
-  min-height: 440px;
-  padding: 24px;
+  padding: clamp(16px, 2.5vw, 28px);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .preview-email-body--empty {
@@ -245,6 +299,7 @@ div.stats .pagination { display: none; }
   color: #64748b;
   font-size: 15px;
   text-align: center;
+  padding: 48px 24px;
 }
 
 .title h2 { margin: 0; font-size: 22px; font-weight: 700; }
@@ -370,3 +425,60 @@ div.home-content span { font-size: 48px; font-weight: 800; letter-spacing: -1px;
 
 /* ── Redirect btn ── */
 .redirect-btn { margin-bottom: 10px; width: auto; }
+
+/* ── Campaign edit ── */
+.edit-form {
+  display: block;
+}
+
+.edit-page-subtitle {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.45;
+  max-width: 36rem;
+}
+
+.edit-hints {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+  border: 1px solid #c7d2fe;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #4338ca;
+  line-height: 1.55;
+}
+
+.edit-hints ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.edit-hints li {
+  margin-bottom: 6px;
+}
+
+.edit-hints li:last-child {
+  margin-bottom: 0;
+}
+
+.edit-hints code {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: rgba(79, 70, 229, 0.12);
+  border-radius: 6px;
+  color: #3730a3;
+  font-weight: 500;
+}
+
+.main.edit-page-card {
+  padding-top: 28px;
+  padding-bottom: 36px;
+}
+
+.edit-form-editor-wrap .cke {
+  border-radius: 10px;
+  overflow: hidden;
+  border-color: #e2e8f0 !important;
+}

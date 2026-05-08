@@ -1,6 +1,6 @@
 import React from "react"
 import API_URL from "../config"
-import { Row, Col, Button, Form, FormGroup } from "reactstrap"
+import { Button, Form, FormGroup } from "reactstrap"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import { updateCampaign } from "../redux/actions"
@@ -8,7 +8,7 @@ import CKEditor from "ckeditor4-react"
 
 class EditForm extends React.Component {
   state = {
-    content: this.props.campaign.content
+    content: this.props.campaign ? this.props.campaign.content : ""
   }
 
   submitHandler = e => {
@@ -42,39 +42,56 @@ class EditForm extends React.Component {
       filebrowserImageUploadUrl: `${API_URL}/api/v1/campaigns/${this.props.campaign.id}/upload`,
     }
 
-    CKEditor.editorUrl = "https://cdn.ckeditor.com/4.25.1-lts/full/ckeditor.js"
+    CKEditor.editorUrl = "https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"
+
+    const { campaign } = this.props
+    if (!campaign) {
+      return <div className="loader" />
+    }
 
     return (
-      <>
-        <h1 className="title">{this.props.campaign.name}</h1>
-        <p style={{ marginBottom: "0" }}><small>*Use <i>{"{{name}}"}</i> markup to personalize email per contact</small></p>
-        <p><small>*Use <i>{"{{unsubscribe}}"}</i> markup to allow user to unsubscribe from your campaigns</small></p>
-        <Form onSubmit={this.submitHandler}>
-          <Row>
-            <Col>
-              <FormGroup>
-                <CKEditor
-                  data={this.props.campaign.content}
-                  config={editorConfiguration}
-                  onChange={e => {
-                    this.setState({
-                      content: e.editor.getData(),
-                    })
-                  }}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs="3">
-              <Button color="success" className="redirect-btn">Save</Button>
-            </Col>
-            <Col xs="3">
-              <Button color="secondary" className="redirect-btn" href={`/campaigns/${this.props.campaign.id}/preview`}>Go back to preview</Button>
-            </Col>
-          </Row>
-        </Form>
-      </>
+      <Form id="campaign-edit-form" onSubmit={this.submitHandler} className="edit-form">
+        <div className="title campaign-detail-header">
+          <div className="campaign-detail-header-text">
+            <h1>{campaign.name}</h1>
+            <p className="edit-page-subtitle">Compose and format your email below.</p>
+          </div>
+          <div className="campaign-detail-header-actions">
+            <Button color="success" type="submit">
+              Save
+            </Button>
+            <Button color="secondary" outline href={`/campaigns/${campaign.id}/preview`}>
+              Back to preview
+            </Button>
+          </div>
+        </div>
+
+        <div className="edit-hints" role="note">
+          <ul>
+            <li>
+              Use <code>{"{{name}}"}</code> to personalize with each contact&apos;s name.
+            </li>
+            <li>
+              Use <code>{"{{unsubscribe}}"}</code> so recipients can opt out of campaigns.
+            </li>
+          </ul>
+        </div>
+
+        <div className="main edit-page-card">
+          <div className="campaign-field-label">Email body</div>
+          <FormGroup className="edit-form-editor-wrap mb-0">
+            <CKEditor
+              data={campaign.content}
+              config={editorConfiguration}
+              onChange={e => {
+                this.setState({
+                  content: e.editor.getData(),
+                })
+              }}
+            />
+          </FormGroup>
+        </div>
+      </Form>
     )
   }
 }

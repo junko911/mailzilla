@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "availity-reactstrap-validation": "^2.6.1",
     "bootstrap": "^4.5.2",
-    "ckeditor4": "4.25.1",
+    "ckeditor4": "4.22.1",
     "ckeditor4-react": "^1.2.0",
     "mdbreact": "^4.27.0",
     "moment": "^2.29.1",
