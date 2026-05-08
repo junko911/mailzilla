@@ -1,4 +1,6 @@
 class Campaign < ApplicationRecord
+  SendGridDeliveryError = Class.new(StandardError)
+
   enum status: %i(draft sending sent)
 
   belongs_to :user
@@ -62,31 +64,60 @@ class Campaign < ApplicationRecord
   def send_test(to_email:)
     fromAddress = SendGrid::Email.new(email: ENV["EMAIL_FROM"], name: user.name)
     body = SendGrid::Content.new(type: "text/html", value: content)
-    sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
     to = SendGrid::Email.new(email: to_email)
     mail = SendGrid::Mail.new(fromAddress, subject, to, body)
     mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
-    sg.client.mail._("send").post(request_body: mail.to_json)
+    post_sendgrid_mail(mail)
   end
 
   def send_to_segment
-    if status === "draft"
-      fromAddress = SendGrid::Email.new(email: ENV["EMAIL_FROM"], name: user.name)
-      sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+    return unless draft?
 
-      segment.contacts.each { |contact|
-        value = Mustache.render(content, name: contact.name)
-        body = SendGrid::Content.new(type: "text/html", value: value)
-        campaign_contact = campaign_contacts.create(contact: contact)
-        to = SendGrid::Email.new(email: contact.email)
-        mail = SendGrid::Mail.new(fromAddress, subject, to, body)
-        mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
-        mail.add_custom_arg(SendGrid::CustomArg.new(key: "campaign_contact_id", value: campaign_contact.id))
-        sg.client.mail._("send").post(request_body: mail.to_json)
-      }
+    fromAddress = SendGrid::Email.new(email: ENV["EMAIL_FROM"], name: user.name)
 
-      update(status: :sent)
-      update(sent_at: Time.current)
+    segment.contacts.each do |contact|
+      value = Mustache.render(content, name: contact.name)
+      body = SendGrid::Content.new(type: "text/html", value: value)
+      campaign_contact = campaign_contacts.create(contact: contact)
+      to = SendGrid::Email.new(email: contact.email)
+      mail = SendGrid::Mail.new(fromAddress, subject, to, body)
+      mail.reply_to = SendGrid::Email.new(email: from, name: user.name)
+      mail.add_custom_arg(SendGrid::CustomArg.new(key: "campaign_contact_id", value: campaign_contact.id))
+      post_sendgrid_mail(mail)
     end
+
+    update(status: :sent)
+    update(sent_at: Time.current)
+  end
+
+  private
+
+  def post_sendgrid_mail(mail)
+    api_key = ENV["SENDGRID_API_KEY"].to_s.strip
+    raise SendGridDeliveryError, "SENDGRID_API_KEY missing on server" if api_key.empty?
+
+    if ENV["EMAIL_FROM"].to_s.strip.empty?
+      raise SendGridDeliveryError, "EMAIL_FROM missing on server"
+    end
+
+    sg = SendGrid::API.new(api_key: api_key)
+    response = sg.client.mail._("send").post(request_body: mail.to_json)
+    code = response.status_code.to_i
+    return if code >= 200 && code < 300
+
+    Rails.logger.error("[SendGrid] send failed HTTP #{code} body=#{response.body}")
+    raise SendGridDeliveryError, format_sendgrid_error_body(response.body)
+  end
+
+  def format_sendgrid_error_body(body)
+    data = JSON.parse(body)
+    errs = data["errors"]
+    return body.to_s[0, 500] unless errs.is_a?(Array)
+
+    errs.map { |e|
+      e.is_a?(Hash) ? (e["message"].presence || e.inspect) : e.to_s
+    }.compact.join("; ")
+  rescue JSON::ParserError
+    body.to_s[0, 500]
   end
 end

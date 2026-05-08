@@ -82,11 +82,15 @@ class Api::V1::CampaignsController < ApplicationController
 
     @campaign.send_test(to_email: email)
     render json: @campaign
+  rescue Campaign::SendGridDeliveryError => e
+    render json: { errors: [e.message] }, status: :bad_gateway
   end
 
   def send_to_segment
     @campaign.send_to_segment
     render json: @campaign
+  rescue Campaign::SendGridDeliveryError => e
+    render json: { errors: [e.message] }, status: :bad_gateway
   end
 
   private
