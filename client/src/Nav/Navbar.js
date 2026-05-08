@@ -24,10 +24,10 @@ const NavBar = props => {
           <>
             <Nav horizontal="center">
               <NavItem>
-                <NavLink href="/campaigns"><i className="fas fa-envelope-open-text"></i>Campaigns</NavLink>
+                <NavLink href="/campaigns"><i className="fas fa-envelope-open-text mr-2"></i>Campaigns</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/contacts"><i className="fas fa-users"></i>Contacts</NavLink>
+                <NavLink href="/contacts"><i className="fas fa-users mr-2"></i>Contacts</NavLink>
               </NavItem>
             </Nav>
             <Nav className="ml-auto auth">

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import API_URL from "../config"
 import { connect } from "react-redux"
-import { Row, Col, Button, Modal, ModalBody, ModalFooter, Alert } from "reactstrap"
+import { Button, Modal, ModalBody, ModalFooter, Alert } from "reactstrap"
 import { sendToSegment } from "../redux/actions"
 
 const Preview = props => {
@@ -43,82 +43,67 @@ const Preview = props => {
     <>
       {foundCampaign ? (
         <>
-          <h1 className="title">Preview</h1>
+          <div className="title campaign-detail-header">
+            <div className="campaign-detail-header-text">
+              <h1>Preview</h1>
+              <small style={{ display: "block", marginTop: "6px", color: "#64748b" }}>
+                <strong style={{ color: "#475569" }}>Subject:</strong>{" "}
+                {foundCampaign.subject || "—"}
+              </small>
+            </div>
+            <div className="campaign-detail-header-actions">
+              {foundCampaign.status === "draft" ? (
+                <>
+                  <Button color="success" href={`/campaigns/${foundCampaign.id}/edit`}>
+                    Edit
+                  </Button>
+                  <Button color="primary" onClick={sendTest}>
+                    Send test to myself
+                  </Button>
+                  <Button color="danger" onClick={toggleModal}>
+                    Send to segment
+                  </Button>
+                </>
+              ) : null}
+              <Button color="secondary" outline href={`/campaigns/${props.id}`}>
+                Back to campaign details
+              </Button>
+            </div>
+          </div>
           <Alert color="success" style={{ display: alertDisplay }}>
             The campaign has been sent!
           </Alert>
           <div className="main">
-            <h4>Subject: {foundCampaign.subject}</h4>
-            <Row>
-              <Col xs="9">
-                {foundCampaign.content ?
-                  <div
-                    dangerouslySetInnerHTML={{ __html: foundCampaign.content }}
-                    style={{ border: "1px solid #ced4da", minHeight: "500px" }}
-                  ></div>
-                  :
-                  <div style={{ border: "1px solid #ced4da", minHeight: "500px" }}>No content</div>
-                }
-              </Col>
-              <Col xs="3">
-                <div>
-                  {foundCampaign.status === "draft" ?
-                    <>
-                      <Button
-                        color="success"
-                        className="redirect-btn"
-                        href={`/campaigns/${foundCampaign.id}/edit`}
-                      >
-                        Edit
-                  </Button>
-                      <Button
-                        color="primary"
-                        onClick={sendTest}
-                        className="redirect-btn"
-                      >
-                        Send test to myself
-                  </Button>
-                      <Button
-                        color="danger"
-                        className="redirect-btn"
-                        onClick={toggleModal}
-                      >
-                        Send to segment
-                  </Button>
-                    </>
-                    : null
-                  }
-                  <Button
-                    color="secondary"
-                    className="redirect-btn"
-                    href={`/campaigns/${props.id}`}
-                  >
-                    Go back to campaign details
-                  </Button>
+            <div className="campaign-field-label">Email preview</div>
+            <div className="preview-email-shell">
+              {foundCampaign.content ? (
+                <div
+                  className="preview-email-body"
+                  dangerouslySetInnerHTML={{ __html: foundCampaign.content }}
+                />
+              ) : (
+                <div className="preview-email-body preview-email-body--empty">
+                  No content yet. Use <strong>Edit</strong> to add your message.
                 </div>
-                <div>
-                  <Modal isOpen={modal} toggle={toggleModal}>
-                    <ModalBody>
-                      <h4>Are you sure?</h4>
-                      <p>You are going to send this campaign to {foundCampaign.num_of_contacts} contacts.</p>
-                      <ModalFooter>
-                        <Button
-                          color="primary"
-                          size="sm"
-                          onClick={sendToSegment}
-                        >
-                          Yes
-                        </Button>
-                        <Button color="secondary" size="sm" onClick={toggleModal}>
-                          Cancel
-                        </Button>
-                      </ModalFooter>
-                    </ModalBody>
-                  </Modal>
-                </div>
-              </Col>
-            </Row>
+              )}
+            </div>
           </div>
+          <Modal isOpen={modal} toggle={toggleModal}>
+            <ModalBody>
+              <h4 className="mb-3">Are you sure?</h4>
+              <p className="mb-0">
+                You are going to send this campaign to {foundCampaign.num_of_contacts} contacts.
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" size="sm" onClick={sendToSegment}>
+                Yes
+              </Button>
+              <Button color="secondary" size="sm" onClick={toggleModal}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
         </>
       ) : null}
     </>

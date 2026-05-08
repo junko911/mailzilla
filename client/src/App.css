@@ -166,6 +166,87 @@ div.stats .pagination { display: none; }
   justify-content: space-between;
 }
 
+.title.campaign-detail-header {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.campaign-detail-header-text {
+  flex: 1;
+  min-width: min(100%, 280px);
+}
+
+.campaign-detail-header-text h1 {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.campaign-detail-header-text small {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.campaign-detail-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.campaign-field-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.campaign-detail-row {
+  padding: 18px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.campaign-detail-row:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.campaign-detail-row:first-of-type {
+  padding-top: 0;
+}
+
+/* ── Campaign preview ── */
+.preview-email-shell {
+  margin-top: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f1f5f9;
+  padding: 20px;
+  min-height: 480px;
+}
+
+.preview-email-body {
+  background: #ffffff;
+  border-radius: 10px;
+  min-height: 440px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow: auto;
+}
+
+.preview-email-body--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 15px;
+  text-align: center;
+}
+
 .title h2 { margin: 0; font-size: 22px; font-weight: 700; }
 
 div.title .btn {

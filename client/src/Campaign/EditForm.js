@@ -42,7 +42,7 @@ class EditForm extends React.Component {
       filebrowserImageUploadUrl: `${API_URL}/api/v1/campaigns/${this.props.campaign.id}/upload`,
     }
 
-    CKEditor.editorUrl = "https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"
+    CKEditor.editorUrl = "https://cdn.ckeditor.com/4.25.1-lts/full/ckeditor.js"
 
     return (
       <>

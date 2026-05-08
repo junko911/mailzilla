@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "availity-reactstrap-validation": "^2.6.1",
     "bootstrap": "^4.5.2",
+    "ckeditor4": "4.25.1",
     "ckeditor4-react": "^1.2.0",
     "mdbreact": "^4.27.0",
     "moment": "^2.29.1",
@@ -22,7 +23,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
-import { Button } from 'reactstrap'
+import { Button, Badge } from 'reactstrap'
 import moment from 'moment'
+
+const statusBadgeColor = status => {
+  switch (status) {
+    case 'sent': return 'success'
+    case 'sending': return 'info'
+    case 'draft': return 'secondary'
+    default: return 'secondary'
+  }
+}
 
 const CampaignTable = props => {
 
@@ -48,7 +57,11 @@ const CampaignTable = props => {
           name: campaign.name,
           segment: campaign.segment.name,
           numOfContacts: campaign.num_of_contacts,
-          status: campaign.status,
+          status: (
+            <Badge color={statusBadgeColor(campaign.status)} pill>
+              {campaign.status.replace(/^\w/, c => c.toUpperCase())}
+            </Badge>
+          ),
           createdAt: moment(campaign.created_at).format('lll'),
           details: <Button color="info" href={`/campaigns/${campaign.id}`}>Details</Button>
         }

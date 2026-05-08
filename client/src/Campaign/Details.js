@@ -5,6 +5,15 @@ import Stats from './Stats'
 import { updateCampaign, createSegment } from "../redux/actions";
 import { connect } from "react-redux"
 
+const statusBadgeColor = status => {
+  switch (status) {
+    case 'sent': return 'success'
+    case 'sending': return 'info'
+    case 'draft': return 'secondary'
+    default: return 'secondary'
+  }
+}
+
 const Details = props => {
 
   const [nameForm, setNameForm] = useState(false)
@@ -57,7 +66,8 @@ const Details = props => {
     })
   }
 
-  const subjectFormHandler = () => {
+  const subjectFormHandler = e => {
+    if (e && e.preventDefault) e.preventDefault()
     props.editHandler(props.campaign.id, "subject", subject).then(() => {
       setSubjectForm(false)
     })
@@ -67,104 +77,109 @@ const Details = props => {
     <>
       {props.campaign ?
         <>
-          <div className="title">
-            <h1 style={{ display: nameForm ? "none" : "block" }}>{props.campaign.name} <Badge pill>{props.campaign.status[0].toUpperCase() + props.campaign.status.slice(1)}</Badge></h1>
-            {props.campaign.status === "draft" ?
-              <>
-                <Form onSubmit={e => nameFormHandler(e)}>
-                  <FormGroup style={{ display: nameForm ? "block" : "none", width: "300px" }}>
-                    <Input type="text" value={campaignName} onChange={e => setCampaignName(e.target.value)} />
-                    <Button color="primary" size="sm" style={{ width: "100px", float: "none", marginTop: "10px" }}>Save</Button>
-                    <span className="edit" style={{ textDecoration: "underline", marginLeft: "20px" }} onClick={() => setNameForm(false)}>Cancel</span>
-                  </FormGroup>
-                </Form>
-                <span className="edit" style={{ display: nameForm ? "none" : "block" }} onClick={() => setNameForm(true)}>Edit name</span>
-                <small>Created <strong>{moment(props.campaign.created_at).format('lll')}</strong></small>
-              </>
-              :
-              <small>Sent <strong>{moment(props.campaign.sent_at).format('lll')}</strong></small>
-            }
-            <Button
-              color="primary"
-              style={{ marginRight: "220px" }}
-              href={`/campaigns/${props.campaign.id}/preview`}
-            >
-              Preview
-              </Button>
-            <Button
-              color="secondary"
-              href={`/campaigns`}
-            >
-              Go back to campaigns
-              </Button>
+          <div className="title campaign-detail-header">
+            <div className="campaign-detail-header-text">
+              <h1 style={{ display: nameForm ? "none" : "block" }}>
+                {props.campaign.name}{' '}
+                <Badge pill color={statusBadgeColor(props.campaign.status)}>
+                  {props.campaign.status.replace(/^\w/, c => c.toUpperCase())}
+                </Badge>
+              </h1>
+              {props.campaign.status === "draft" ?
+                <>
+                  <Form onSubmit={e => nameFormHandler(e)}>
+                    <FormGroup style={{ display: nameForm ? "block" : "none", maxWidth: "360px" }}>
+                      <Input type="text" value={campaignName} onChange={e => setCampaignName(e.target.value)} />
+                      <div style={{ marginTop: "10px" }}>
+                        <Button color="primary" size="sm">Save</Button>
+                        <span className="edit" style={{ textDecoration: "underline", marginLeft: "16px" }} onClick={() => setNameForm(false)} role="button" tabIndex={0}>Cancel</span>
+                      </div>
+                    </FormGroup>
+                  </Form>
+                  <span className="edit" style={{ display: nameForm ? "none" : "inline-block", marginBottom: "6px" }} onClick={() => setNameForm(true)} role="button" tabIndex={0}>Edit name</span>
+                  <div><small>Created <strong>{moment(props.campaign.created_at).format('lll')}</strong></small></div>
+                </>
+                :
+                <small>Sent <strong>{moment(props.campaign.sent_at).format('lll')}</strong></small>
+              }
+            </div>
+            <div className="campaign-detail-header-actions">
+              <Button color="primary" href={`/campaigns/${props.campaign.id}/preview`}>Preview</Button>
+              <Button color="secondary" outline href={`/campaigns`}>Back to campaigns</Button>
+            </div>
           </div>
           <div className="main">
-            <div style={{ margin: "0 20px", lineHeight: "45px" }}>
-              <Row style={{ borderBottom: "1px solid #dedddc" }}>
-                <Col xs="4">
-                  <h4>&nbsp;&nbsp;Segment</h4></Col>
-                <Col xs="6">
-                  <div style={{ display: dropdownDisplay ? "none" : "block" }}>{props.campaign.segment.name}</div>
-                  <Form style={{ display: dropdownDisplay ? "block" : "none" }}>
-                    <FormGroup>
-                      <Label for="segment">Select a segment</Label>
-                      <Input type="select" name="segment_id" id="segment" onChange={dropDownHandler}>
-                        <option></option>
-                        <option value="create">Create a new segment</option>
-                        {genSegmentOptions()}
-                      </Input>
-                      <Label for="segmentForm" style={{ display: segmentForm ? "block" : "none", marginTop: "10px" }}>Enter segment name</Label>
-                      <Input type="text" style={{ display: segmentForm ? "block" : "none" }} id="segmentForm" value={segmentName} onChange={e => setSegmentName(e.target.value)} />
-                      <Button color="primary" size="sm" style={{ display: segmentForm ? "inline" : "none", marginTop: "10px" }} onClick={createSegment}>Create</Button>
-                      <Button color="secondary" size="sm" style={{ display: dropdownDisplay ? "inline" : "none", marginTop: "10px", marginLeft: segmentForm ? "10px" : "0px" }} onClick={() => { setDropdownDisplay(false); setSegmentForm(false) }}>Cancel</Button>
-                    </FormGroup>
-                  </Form>
-                </Col>
-                <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm" style={{ display: dropdownDisplay ? "none" : "block" }} onClick={() => setDropdownDisplay(true)}>Change segment</Button> : null}
-                </Col>
-              </Row>
-              <Row style={{ borderBottom: "1px solid #dedddc" }}>
-                <Col xs="4">
-                  <h4 style={{ display: "inline" }}>&nbsp;&nbsp;From</h4></Col>
-                <Col xs="6">
-                  <Form style={{ marginTop: "10px", display: fromForm ? "block" : "none" }}>
-                    <FormGroup style={{ width: "300px" }}>
-                      <Input type="text" value={from} onChange={e => setFrom(e.target.value)} />
-                      <Button color="primary" size="sm" style={{ marginTop: "10px" }} onClick={fromFormHandler}>Save</Button>
-                      <Button color="secondary" size="sm" style={{ display: fromForm ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => setFromForm(false)}>Cancel</Button>
-                    </FormGroup>
-                  </Form>
-                  <div style={{ display: fromForm ? "none" : "block" }}>{props.campaign.from}</div>
-                </Col>
-                <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm" onClick={() => setFromForm(true)} style={{ display: fromForm ? "none" : "inline" }}>Change from</Button> : null}
-                </Col>
-              </Row>
-              <Row>
-                <Col xs="4">
-                  <h4 style={{ display: "inline" }}>&nbsp;&nbsp;Subject</h4></Col>
-                <Col xs="6">
-                  <Form style={{ marginTop: "10px", display: subjectForm ? "block" : "none" }} onSubmit={subjectFormHandler}>
-                    <FormGroup style={{ width: "300px" }}>
-                      <Input type="text" value={subject} onChange={e => setSubject(e.target.value)} />
-                      <Button color="primary" size="sm" style={{ marginTop: "10px" }} onClick={subjectFormHandler}>Save</Button>
-                      <Button color="secondary" size="sm" style={{ display: subjectForm ? "inline" : "none", marginTop: "10px", marginLeft: "10px" }} onClick={() => setSubjectForm(false)}>Cancel</Button>
-                    </FormGroup>
-                  </Form>
-                  <div style={{ display: subjectForm ? "none" : "block" }}>{props.campaign.subject}</div>
-                </Col>
-                <Col xs="2">
-                  {props.campaign.status === "draft" ? <Button size="sm" style={{ display: subjectForm ? "none" : "inline" }} onClick={() => setSubjectForm(true)} >Change subject</Button> : null}
-                </Col>
-              </Row>
+            <Row className="campaign-detail-row align-items-start">
+              <Col md="3" sm="12">
+                <div className="campaign-field-label">Segment</div>
+              </Col>
+              <Col md="6" sm="12">
+                <div style={{ display: dropdownDisplay ? "none" : "block", lineHeight: 1.5 }}>{props.campaign.segment.name}</div>
+                <Form style={{ display: dropdownDisplay ? "block" : "none" }}>
+                  <FormGroup>
+                    <Label for="segment">Select a segment</Label>
+                    <Input type="select" name="segment_id" id="segment" onChange={dropDownHandler}>
+                      <option></option>
+                      <option value="create">Create a new segment</option>
+                      {genSegmentOptions()}
+                    </Input>
+                    <Label for="segmentForm" style={{ display: segmentForm ? "block" : "none", marginTop: "10px" }}>Enter segment name</Label>
+                    <Input type="text" style={{ display: segmentForm ? "block" : "none" }} id="segmentForm" value={segmentName} onChange={e => setSegmentName(e.target.value)} />
+                    <Button color="primary" size="sm" style={{ display: segmentForm ? "inline" : "none", marginTop: "10px" }} onClick={createSegment}>Create</Button>
+                    <Button color="secondary" size="sm" style={{ display: dropdownDisplay ? "inline" : "none", marginTop: "10px", marginLeft: segmentForm ? "10px" : "0px" }} onClick={() => { setDropdownDisplay(false); setSegmentForm(false) }}>Cancel</Button>
+                  </FormGroup>
+                </Form>
+              </Col>
+              <Col md="3" sm="12" className="text-md-right mt-2 mt-md-0">
+                {props.campaign.status === "draft" ? <Button size="sm" color="link" className="p-0" style={{ display: dropdownDisplay ? "none" : "inline-block" }} onClick={() => setDropdownDisplay(true)}>Change</Button> : null}
+              </Col>
+            </Row>
+            <Row className="campaign-detail-row align-items-start">
+              <Col md="3" sm="12">
+                <div className="campaign-field-label">From</div>
+              </Col>
+              <Col md="6" sm="12">
+                <Form style={{ display: fromForm ? "block" : "none" }}>
+                  <FormGroup style={{ maxWidth: "360px" }}>
+                    <Input type="text" value={from} onChange={e => setFrom(e.target.value)} />
+                    <div style={{ marginTop: "10px" }}>
+                      <Button color="primary" size="sm" onClick={fromFormHandler}>Save</Button>
+                      <Button color="secondary" size="sm" style={{ marginLeft: "8px" }} onClick={() => setFromForm(false)}>Cancel</Button>
+                    </div>
+                  </FormGroup>
+                </Form>
+                <div style={{ display: fromForm ? "none" : "block", lineHeight: 1.5 }}>{props.campaign.from}</div>
+              </Col>
+              <Col md="3" sm="12" className="text-md-right mt-2 mt-md-0">
+                {props.campaign.status === "draft" ? <Button size="sm" color="link" className="p-0" onClick={() => setFromForm(true)} style={{ display: fromForm ? "none" : "inline-block" }}>Change</Button> : null}
+              </Col>
+            </Row>
+            <Row className="campaign-detail-row align-items-start">
+              <Col md="3" sm="12">
+                <div className="campaign-field-label">Subject</div>
+              </Col>
+              <Col md="6" sm="12">
+                <Form style={{ display: subjectForm ? "block" : "none" }} onSubmit={subjectFormHandler}>
+                  <FormGroup style={{ maxWidth: "480px" }}>
+                    <Input type="text" value={subject} onChange={e => setSubject(e.target.value)} />
+                    <div style={{ marginTop: "10px" }}>
+                      <Button color="primary" size="sm" type="submit">Save</Button>
+                      <Button color="secondary" size="sm" style={{ marginLeft: "8px" }} type="button" onClick={() => setSubjectForm(false)}>Cancel</Button>
+                    </div>
+                  </FormGroup>
+                </Form>
+                <div style={{ display: subjectForm ? "none" : "block", lineHeight: 1.5 }}>{props.campaign.subject}</div>
+              </Col>
+              <Col md="3" sm="12" className="text-md-right mt-2 mt-md-0">
+                {props.campaign.status === "draft" ? <Button size="sm" color="link" className="p-0" style={{ display: subjectForm ? "none" : "inline-block" }} onClick={() => setSubjectForm(true)}>Change</Button> : null}
+              </Col>
+            </Row>
           </div>
-        </div>
           {props.campaign.status === "sent" ?
-        <Stats campaign={props.campaign} />
-        : null
-      }
-    </>
+            <Stats campaign={props.campaign} />
+            : null
+          }
+        </>
         : null}
     </>
   )

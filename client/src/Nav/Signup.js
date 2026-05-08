@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Alert } from 'reactstrap'
-import { signup } from '../redux/actions'
+import { signup, login } from '../redux/actions'
 import { connect } from 'react-redux'
 import { AvForm, AvField } from 'availity-reactstrap-validation'
 
@@ -16,6 +16,10 @@ class SignUp extends React.Component {
 
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  demoLogin = () => {
+    this.props.demoHandler({ email: "demo@mailzilla.com", password: "demo1234" })
   }
 
   submitHandler = e => {
@@ -76,6 +80,14 @@ class SignUp extends React.Component {
               />
               <Button color="primary">Sign up</Button>
             </AvForm>
+            <div style={{ marginTop: "16px", textAlign: "center" }}>
+              <Button color="success" outline onClick={this.demoLogin} style={{ width: "100%" }}>
+                <span role="img" aria-label="rocket">🚀</span> Try Demo
+              </Button>
+              <small style={{ color: "#888", display: "block", marginTop: "6px" }}>
+                demo@mailzilla.com / demo1234
+              </small>
+            </div>
           </div>
         </div>
       </div>
@@ -84,7 +96,10 @@ class SignUp extends React.Component {
 }
 
 const mdp = dispatch => {
-  return { submitHandler: userObj => dispatch(signup(userObj)) }
+  return {
+    submitHandler: userObj => dispatch(signup(userObj)),
+    demoHandler: userObj => dispatch(login(userObj))
+  }
 }
 
 export default connect(null, mdp)(SignUp)
