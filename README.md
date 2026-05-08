@@ -4,7 +4,7 @@
 
 Email newsletter tool built with React and Ruby on Rails.
 
-**[Live Demo](https://mailzilla-app.herokuapp.com/)** · **[Video Walkthrough](https://www.youtube.com/watch?v=lAlcbW7LLvw&feature=youtu.be)**
+**[Live Demo](https://mailzilla.vercel.app/)**
 
 ---
 
