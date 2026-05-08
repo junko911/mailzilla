@@ -9,7 +9,7 @@ services:
     name: mailzilla-api
     runtime: ruby
     plan: free
-    buildCommand: bundle install && bundle exec rake db:migrate
+    buildCommand: bundle install && bundle exec rake db:migrate && bundle exec rake db:seed
     startCommand: bundle exec puma -C config/puma.rb
     envVars:
       - key: RAILS_SKIP_ASSET_COMPILATION

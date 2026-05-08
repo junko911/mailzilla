@@ -17,6 +17,10 @@ class Login extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  demoLogin = () => {
+    this.props.submitHandler({ email: "demo@mailzilla.com", password: "demo1234" })
+  }
+
   submitHandler = e => {
     this.props.submitHandler(this.state).then(data => {
       if (data) {
@@ -57,6 +61,14 @@ class Login extends React.Component {
               />
               <Button color="primary">Log in</Button>
             </AvForm>
+            <div style={{ marginTop: "16px", textAlign: "center" }}>
+              <Button color="success" outline onClick={this.demoLogin} style={{ width: "100%" }}>
+                🚀 Try Demo
+              </Button>
+              <small style={{ color: "#888", display: "block", marginTop: "6px" }}>
+                demo@mailzilla.com / demo1234
+              </small>
+            </div>
           </div>
         </div>
       </div>
